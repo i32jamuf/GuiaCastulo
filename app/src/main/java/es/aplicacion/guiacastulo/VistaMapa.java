@@ -11,7 +11,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class VistaMapa extends FragmentActivity {
 
 
-    private int flager;
+    private int b;
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
         // Esto es un cambio de mapa de castulo
     @Override
