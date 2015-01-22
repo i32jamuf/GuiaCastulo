@@ -10,6 +10,7 @@
     <string name="title_activity_list_recorridos">ListRecorridos</string>
     <string name="title_activity_descripcion_recorridos">DescripcionRecorridos</string>
     <string name="title_activity_vista_mapa">Map</string>
+    <string name="db_ok">terminado</string>
     <string name="title_activity_preference">PreferenceActivity</string>
 
 </resources>
