@@ -64,12 +64,12 @@ public class PantallaCarga extends ActionBarActivity {
             @Override
             public void onFinish() {
 
-                Toast.makeText(getApplicationContext(), getString(R.string.db_ok), Toast.LENGTH_LONG).show();
+
                 progreso+=	paso;
                 mProgressBar.setProgress(progreso);
                 mProgressBar.setVisibility(View.INVISIBLE);
-                Intent i = new Intent ("es.aplicacion.guiacastulo.MainActivity");
-                startActivityForResult(i, WELCOME);
+                Intent intent= new Intent(PantallaCarga.this, MainActivity.class);
+                startActivity(intent);
 
             }
         };
@@ -77,22 +77,6 @@ public class PantallaCarga extends ActionBarActivity {
         mCountDownTimer.start();
 
     }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode==WELCOME)
-            // volvemos a la pantalla de bienvenida desde la pantalla principal,
-            // la cerramos (no tiene sentido permanecer aquÃ­):
-            finish();
-        else
-            super.onActivityResult(requestCode, resultCode, data);
-    }
-
-
-
-
-
 
 
 

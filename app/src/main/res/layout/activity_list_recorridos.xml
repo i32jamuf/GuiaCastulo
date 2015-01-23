@@ -4,9 +4,21 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="es.aplicacion.guiacastulo.ListRecorridos">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    tools:context="es.aplicacion.guiacastulo.ListRecorridos"
+    android:background="#ff97fdff">
 
+
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:textColor="#000000"
+        android:textSize="20dip"
+        android:id="@+id/listrecorridos"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:clickable="true"
+        android:backgroundTint="#ffff74bd"
+        android:background="#ff95ceff" />
 </RelativeLayout>

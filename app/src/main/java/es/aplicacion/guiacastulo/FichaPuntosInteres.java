@@ -4,14 +4,26 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class FichaPuntosInteres extends ActionBarActivity {
+
+
+    TextView seleccionado;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ficha_puntos_interes);
+        Bundle bundle = this.getIntent().getExtras();
+        long position = bundle.getLong("ID_FICHA");
+
+        seleccionado = (TextView)findViewById(R.id.seleccionado);
+
+        seleccionado.setText("Has seleccionado: " + position);
     }
 
 
