@@ -12,7 +12,7 @@ import android.util.Log;
 import java.util.LinkedList;
 import java.util.List;
 
-import es.aplicacion.guiacastulo.Utils;
+import es.aplicacion.guiacastulo.Utilidades.Utils;
 import es.aplicacion.guiacastulo.db.model.Marcador;
 import es.aplicacion.guiacastulo.db.model.PuntoInteres;
 import es.aplicacion.guiacastulo.db.model.Recorrido;
