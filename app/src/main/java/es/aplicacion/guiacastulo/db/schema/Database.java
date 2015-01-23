@@ -622,6 +622,6 @@ public boolean addPuntosInteres(List<PuntoInteres> lstPuntosInteres) {
         return filas;
     }
     //TODO informacion
-
+// ESto es copia de JAVI
 
 }
