@@ -3,10 +3,13 @@ package es.aplicacion.guiacastulo.db.model;
 /**
  * Created by Enmanuel on 21/01/2015.
  */
-public class Recorridos {
+public class Recorrido {
     private long id;
     private String nombre;
     private String descripcion;
+    //TODO tipo de distancia y tiempo
+    private String distancia;
+    private String duracion;
     private String [] uri_imagen;
     private String [] uri_video;
     private String [] uri_audio;
@@ -33,6 +36,20 @@ public class Recorridos {
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    /**
+     * Inicializa descripcion del recorrido.
+     */
+    public void setDuracion(String tiempo) {
+        this.duracion = tiempo;
+    }
+
+    /**
+     * Inicializa descripcion del recorrido.
+     */
+    public void setDistancia(String distancia) {
+        this.distancia = distancia;
     }
 
     /**
@@ -88,6 +105,21 @@ public class Recorridos {
     }
 
     /**
+     * Obtiene la duracion del recorrido
+     * @return
+     */
+    public String getDuracion() {
+        return duracion;
+    }
+
+    /**
+     * Obtiene la distancia del recorrido
+     * @return
+     */
+    public String getDistancia() {
+        return distancia;
+    }
+    /**
      * Obtiene la/s direccion donde esta guardada la imagen.
      *
      * @return String uri_imagen.
@@ -119,6 +151,7 @@ public class Recorridos {
      */
     public String toString() {
         return "Id PoI: " + id + "\nNombre: " + nombre + "\nDescrición: " + descripcion+
+                 "\nDuracion (horas): " + duracion+ "\nDistancia (km): " + distancia+
                 "\nUriImagen: "+uri_imagen.toString()+
                 "\nUriVideo: "+uri_video.toString()+
                 "\nUriAudio: "+uri_audio.toString();

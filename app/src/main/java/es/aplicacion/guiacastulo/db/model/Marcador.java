@@ -5,14 +5,15 @@ import android.location.Location;
 /**
  * Created by Enmanuel on 21/01/2015.
  */
-public class Marcadores {
+public class Marcador {
     private long id;
     private long [] id_recorridos;
     private long [] id_puntos_interes;
     private String nombre;
     private String descripcion;
-    private String uri_imagen;
-    private Location location;
+    private String [] uri_imagen;
+    private double latitud;
+    private double longitud;
 
 
     // setters
@@ -56,15 +57,21 @@ public class Marcadores {
     /**
      * Inicializa la direccion donde esta alojada la imagen del marcador.
      */
-    public void setUriImagen(String uri_imagen) {
+    public void setUriImagen(String [] uri_imagen) {
         this.uri_imagen = uri_imagen;
+    }
+    /**
+     * Inicializa la latitud del marcador.
+     */
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
     }
 
     /**
-     * Inicializa la localizacion {@link android.location.Location} del marcador.
+     * Inicializa la longitud del marcador.
      */
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
     }
 
 
@@ -122,17 +129,25 @@ public class Marcadores {
      *
      * @return String uri_imagen.
      */
-    public String getUriImagen() {
+    public String [] getUriImagen() {
         return uri_imagen;
     }
 
     /**
-     * Obtiene la localizacion (coordenadas) del marcador.
+     * Obtiene la latitud del marcador.
      *
      * @return location.
      */
-    public Location getLocation() {
-        return location;
+    public double getLatitud() {
+        return latitud;
+    }
+    /**
+     * Obtiene la latitud del marcador.
+     *
+     * @return location.
+     */
+    public double getLongitud() {
+        return longitud;
     }
 
     /**
@@ -140,11 +155,11 @@ public class Marcadores {
      * @return
      */
     public String toString() {
-        return "Id Marcador: " + id + "\n" + "\nIds Recorridos: " + id_recorridos.toString()
+        return "Id Marcador: " + id + "\n" + "\nIds Recorrido: " + id_recorridos.toString()
                 + "\nIds PoI: " + id_puntos_interes.toString()
                 + "\nNombre: " + nombre + "\nDescrición: " + descripcion+
                 "\nUriImagen: "+uri_imagen+
-                "\nLocalización: " +location.toString();
+                "\nCoordenadas: " +latitud+" , "+longitud;
 
     }
 }

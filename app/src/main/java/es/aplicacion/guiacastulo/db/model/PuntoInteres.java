@@ -5,14 +5,15 @@ import android.location.Location;
 /**
  * Created by Enmanuel on 21/01/2015.
  */
-public class PuntosInteres {
+public class PuntoInteres {
     private long id;
     private String nombre;
     private String descripcion;
     private String [] uri_imagen;
     private String [] uri_video;
     private String [] uri_audio;
-    private Location location;
+    private double latitud;
+    private double longitud;
 
 
     // setters
@@ -60,12 +61,18 @@ public class PuntosInteres {
     }
 
     /**
-     * Inicializa la localizacion {@link android.location.Location} del punto de interes.
+     * Inicializa la latitud del punto de interes.
      */
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
     }
 
+    /**
+     * Inicializa la longitud del punto de interes.
+     */
+    public void setLongitud(double longitud) {
+        this.longitud = longitud;
+    }
 
 
     // getters
@@ -123,12 +130,20 @@ public class PuntosInteres {
         return uri_audio;
     }
     /**
-     * Obtiene la localizacion (coordenadas) del punto de interes.
+     * Obtiene la latitud del punto de interes.
      *
      * @return location.
      */
-    public Location getLocation() {
-        return location;
+    public double getLatitud() {
+        return latitud;
+    }
+    /**
+     * Obtiene la latitud del punto de interes.
+     *
+     * @return location.
+     */
+    public double getLongitud() {
+        return longitud;
     }
 
     /**
@@ -140,6 +155,6 @@ public class PuntosInteres {
                 "\nUriImagen: "+uri_imagen.toString()+
                 "\nUriVideo: "+uri_video.toString()+
                 "\nUriAudio: "+uri_audio.toString()+
-                "\nLocalización: " +location.toString();
+                "\nCoordenadas: " +latitud+" , "+longitud;
     }
 }

@@ -20,7 +20,6 @@ public class ColumnasPuntosInteres {
 
     public static final String CREAR_TABLA = "CREATE TABLE " + NOMBRE_TABLA
             + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + NOMBRE + " TEXT, " + DESCRIPCION + " TEXT, " + VIDEO + " TEXT, "
-            + AUDIO + " TEXT, "+ IMAGEN + " TEXT, "+ LATITUD + " REAL, "
-            + LONGITUD + " REAL "+ ");";
+            + NOMBRE + " TEXT, " + DESCRIPCION + " TEXT, "+ IMAGEN + " TEXT, " + VIDEO + " TEXT, "
+            + AUDIO + " TEXT, "+ LATITUD + " REAL, "+ LONGITUD + " REAL "+ ");";
 }
