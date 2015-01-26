@@ -13,6 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import es.aplicacion.guiacastulo.Utilidades.Utils;
+import es.aplicacion.guiacastulo.db.model.Informacion;
 import es.aplicacion.guiacastulo.db.model.Marcador;
 import es.aplicacion.guiacastulo.db.model.PuntoInteres;
 import es.aplicacion.guiacastulo.db.model.Recorrido;
@@ -622,6 +623,117 @@ public boolean addPuntosInteres(List<PuntoInteres> lstPuntosInteres) {
         return filas;
     }
     //TODO informacion
-// ESto es copia de JAVI
+
+    public boolean addInformacion(Informacion informacion) {
+        if (informacion.equals(null))
+            return false;
+
+        ContentValues cv = new ContentValues();
+        db.beginTransaction();
+
+        try {
+                cv.put(ColumnasInformacion.HORARIO, informacion.getHorario());
+                cv.put(ColumnasInformacion.TELEFONO, informacion.getTelefono());
+                cv.put(ColumnasInformacion.DIRECCION, informacion.getDireccion());
+                cv.put(ColumnasInformacion.WEB, informacion.getWeb());
+                cv.put(ColumnasInformacion.MAS_INFO, informacion.getMasInfo());
+                db.insert(ColumnasMarcadores.NOMBRE_TABLA, null, cv);
+
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        return true;
+    }
+
+    /**
+     * Obtenemos de la base de datos la informacion de contacto
+     * @param infoID
+     * @return {@Informacion}
+     */
+    public Informacion getInformacion(long infoID) {
+        Informacion informacion = new Informacion();
+        db.beginTransaction();
+        try {
+            Cursor c = db.query(ColumnasInformacion.NOMBRE_TABLA, new String[] {
+                    ColumnasInformacion.KEY_ID,
+                    ColumnasInformacion.HORARIO,
+                    ColumnasInformacion.TELEFONO,
+                    ColumnasInformacion.DIRECCION,
+                    ColumnasInformacion.WEB,
+                    ColumnasInformacion.MAS_INFO,
+            }, ColumnasInformacion.KEY_ID + " = " + infoID, null, null, null, null, null);
+
+            c.moveToFirst();
+            //rellenamos el objeto PuntoInteres
+            informacion.setId(c.getLong(0));
+            informacion.setHorario(c.getString(1));
+            informacion.setTelefono(c.getString(2));
+            informacion.setDireccion(c.getString(3));
+            informacion.setWeb(c.getString(4));
+            informacion.setMasInfo(c.getString(5));
+
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        return informacion;
+    }
+
+    /**
+     * Elimina la informacion de contacto de la base de datos.
+     *
+     * @param infoId
+     * @return el numero de filas afectadas.
+     */
+    public int deleteInfo(long infoId) {
+        int filas=0;
+        db.beginTransaction();
+        try{
+            filas = db.delete(ColumnasInformacion.NOMBRE_TABLA,
+                    ColumnasInformacion.KEY_ID + " = " + infoId, null);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        return filas;
+    }
+
+    /**
+     * Edita la Informacion de contacto de la base de datos
+     * @param informacion
+     * @return
+     */
+    public int editInformacion(Informacion informacion) {
+        int filas;
+        ContentValues cv = new ContentValues();
+
+        if (informacion.getHorario() != null)
+            cv.put(ColumnasInformacion.HORARIO, informacion.getHorario());
+
+        if (informacion.getTelefono() != null)
+            cv.put(ColumnasInformacion.TELEFONO, informacion.getTelefono());
+
+        if (informacion.getDireccion() != null)
+            cv.put(ColumnasInformacion.DIRECCION, informacion.getDireccion());
+
+        if (informacion.getWeb() != null)
+            cv.put(ColumnasInformacion.WEB, informacion.getWeb());
+
+        if (informacion.getMasInfo() != null)
+            cv.put(ColumnasInformacion.MAS_INFO, informacion.getMasInfo());
+
+        db.beginTransaction();
+
+        try{
+            filas= db.update(ColumnasInformacion.NOMBRE_TABLA, cv,
+                    ColumnasInformacion.KEY_ID + " = " + informacion.getId(), null);
+
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        return filas;
+    }
 
 }
