@@ -1,5 +1,6 @@
 package es.aplicacion.guiacastulo;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -24,6 +25,10 @@ public class DescripcionRecorridos extends ActionBarActivity {
         seleccionado= (TextView)findViewById(R.id.seleccionado);
 
         seleccionado.setText("Has seleccionado: " + position);
+
+        Intent intent= new Intent(DescripcionRecorridos.this, VistaMapa.class);
+        startActivity(intent);
+
 
     }
 

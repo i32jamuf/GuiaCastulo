@@ -11,8 +11,8 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import es.aplicacion.guiacastulo.Utilidades.Utils.ItemRecorrido;
-import es.aplicacion.guiacastulo.Utilidades.Utils.ItemRecorridoAdapter;
+import es.aplicacion.guiacastulo.Utilidades.ItemRecorrido;
+import es.aplicacion.guiacastulo.Utilidades.ItemRecorridoAdapter;
 
 
 public class ListPuntosInteres extends Activity {
