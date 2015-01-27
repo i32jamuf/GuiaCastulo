@@ -11,11 +11,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Medium Text"
         android:id="@+id/seleccionado"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="153dp"
         android:layout_marginEnd="153dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imagenrecorrido"
+        android:src="@drawable/recorridos"
+        android:layout_marginTop="69dp"
+        android:layout_below="@+id/seleccionado"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Listar Puntos de Interés"
+        android:id="@+id/button"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_toStartOf="@+id/button2"
+        android:layout_toLeftOf="@+id/button2"
+        android:layout_alignTop="@+id/button2"
+        android:onClick="bpuntosinteresClick"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mapa del Recorrido"
+        android:id="@+id/button2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/imagenrecorrido"
+        android:layout_marginTop="163dp"
+        android:onClick="bmapaClick"/>
+
+
 </RelativeLayout>

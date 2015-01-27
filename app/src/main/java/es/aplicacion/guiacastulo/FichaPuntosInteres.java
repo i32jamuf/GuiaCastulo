@@ -21,9 +21,7 @@ public class FichaPuntosInteres extends ActionBarActivity {
         Bundle bundle = this.getIntent().getExtras();
         long position = bundle.getLong("ID_FICHA");
 
-        seleccionado = (TextView)findViewById(R.id.seleccionado);
 
-        seleccionado.setText("Has seleccionado: " + position);
     }
 
 

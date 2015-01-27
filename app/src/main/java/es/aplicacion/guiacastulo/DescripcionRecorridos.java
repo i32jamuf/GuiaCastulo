@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 
@@ -13,27 +14,48 @@ public class DescripcionRecorridos extends ActionBarActivity {
 
     TextView seleccionado;
 
-
+    long position=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_descripcion_recorridos);
 
         Bundle bundle = this.getIntent().getExtras();
-        long position = bundle.getLong("ID_LISTA");
+        position = bundle.getLong("ID_LISTA");
+        String nombre = bundle.getString("NOMBRE");
 
         seleccionado= (TextView)findViewById(R.id.seleccionado);
+        seleccionado.setText(nombre);
 
-        seleccionado.setText("Has seleccionado: " + position);
+        // Para probar que funciona la posicion
+       //seleccionado= (TextView)findViewById(R.id.seleccionado);
 
-        Intent intent= new Intent(DescripcionRecorridos.this, VistaMapa.class);
-        startActivity(intent);
+       //seleccionado.setText("Has seleccionado: " + position + " Nombre seleccionado: "+ nombre);
+
+       // Intent intent= new Intent(DescripcionRecorridos.this, VistaMapa.class);
+       // startActivity(intent);
 
 
     }
 
+//*** Modificar la lista puntos de interes
+  public void bpuntosinteresClick(View view) {
 
-    @Override
+   seleccionado.setText("Has seleccionado: Puntos de interes" );
+      finish();
+
+    //    Intent intent = new Intent(DescripcionRecorridos.this, ListPuntosInteres.class);
+      //  startActivity(intent);
+
+    }
+
+    //Llamada a la clase mapa al presionar el boton de Mapa
+    public void bmapaClick(View view) {
+        Intent intent = new Intent(DescripcionRecorridos.this, VistaMapa.class);
+        startActivity(intent);
+
+    }
+        @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_descripcion_recorridos, menu);
@@ -50,6 +72,7 @@ public class DescripcionRecorridos extends ActionBarActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+
         }
 
         return super.onOptionsItemSelected(item);

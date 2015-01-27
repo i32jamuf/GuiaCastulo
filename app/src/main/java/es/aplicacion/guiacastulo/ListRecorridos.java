@@ -46,6 +46,7 @@ public class ListRecorridos extends Activity  {
             Intent intent = new Intent(getApplication(), DescripcionRecorridos.class);
             Bundle b = new Bundle();
             b.putLong("ID_LISTA",position);
+            b.putString("NOMBRE",obtenerItems().get(position).getTitulo());
             intent.putExtras(b);
             startActivity(intent);
 
