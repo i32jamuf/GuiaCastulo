@@ -36,7 +36,10 @@
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbarSize="@dimen/abc_action_bar_default_height_material"
+        >
 
 
         <TextView
@@ -45,6 +48,8 @@
             android:text="Los orígenes del asentamiento se remontan al Neolítico Final, periodo en el que se desarrollaron sociedades aldeanas ligadas a una economía agraria incipiente (Cultura de los Silos) y que se constatan en los estratos arqueológicos inferiores de la ciudad iberorromana. Los momentos previos al Neolítico se documentan en los alrededores de la meseta, pudiendo adscribirse al Paleolítico Medio.  No será hasta el II milenio a. C., durante la Edad del Bronce Medio, cuando el espacio de Cástulo aparece como un centro destacado en toda la región de Sierra Morena, ligado a la explotación minera de sus ricos filones y a la actividad metalúrgica del cobre, el plomo y la plata. Las investigaciones recientes sobre los orígenes de la metalurgia en las estribaciones meridionales de Sierra Morena han revalorizado el papel de Cástulo como centro capital de la región desde un momento temprano, en el que se detectan contactos culturales con las comunidades metalúrgicas del sureste (cultura argárica), a la vez que se producen cambios importantes en la organización social, relacionados con la especialización de la actividad minera.  El Bronce Final está bien documentado en el territorio de Cástulo, a través del poblado de La Muela. Éste se extiende desde la ladera suroriental del cerro del mismo nombre hasta la margen derecha del río Guadalimar, coincidiendo con la línea del ferrocarril, y constituye un espacio abierto al río en el que se localizan diferentes lugares de habitación entre los que destaca el denominado templo-palacio de La Muela, edificio de los siglos VIII-VI a. C. que podría identificarse con un palacio aristocrático, lo que nos habla ya de una gran complejidad social.[cita requerida] Esta etapa del Bronce Final muestra a Cástulo como un centro avanzado en la periferia de la denominada clásicamente como cultura tartésica, que ejerce como receptor primario de los intereses mineros griegos y fenicios en el Alto Guadalquivir."
             android:ellipsize="marquee"
             android:id="@+id/infotext"
+            android:textColor="#111111"
+            android:typeface="sans"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
     </ScrollView>

@@ -31,14 +31,6 @@ public class FichaPuntosInteres extends Activity {
         Gallery gallery = (Gallery)findViewById(R.id.gallery);
         gallery.setAdapter(new ImageAdapter(this));
 
-
-
-
-
-
-
-
-
     }
 
 
