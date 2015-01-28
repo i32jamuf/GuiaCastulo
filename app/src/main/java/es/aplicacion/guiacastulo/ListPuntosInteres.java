@@ -36,7 +36,7 @@ public class ListPuntosInteres extends Activity {
 
     private ArrayList<ItemRecorrido> obtenerItems() {
         ArrayList<ItemRecorrido> items = new ArrayList<ItemRecorrido>();
-// Cambiar por acceso a la base de datos
+// Cambiar por acceso a la base de datos de android
         items.add(new ItemRecorrido(1, "Terma árabe", "Localizacion Norte", "drawable/patatas"));
         items.add(new ItemRecorrido(2, "Mosaico", "Localizacion Sur", "drawable/naranjas"));
         items.add(new ItemRecorrido(3, "Cardo máximo","Localizacion Este", "drawable/lechuga"));
