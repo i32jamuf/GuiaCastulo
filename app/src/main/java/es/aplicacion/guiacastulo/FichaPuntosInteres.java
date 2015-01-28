@@ -6,8 +6,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-
-public class FichaPuntosInteres extends ActionBarActivity {
+import android.app.Activity;
+import android.widget.Gallery;
+import android.widget.Toast;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.view.View;
+public class FichaPuntosInteres extends Activity {
 
 
     TextView seleccionado;
@@ -20,6 +25,18 @@ public class FichaPuntosInteres extends ActionBarActivity {
         setContentView(R.layout.activity_ficha_puntos_interes);
         Bundle bundle = this.getIntent().getExtras();
         long position = bundle.getLong("ID_FICHA");
+
+
+        // Galeria de imagenes
+        Gallery gallery = (Gallery)findViewById(R.id.gallery);
+        gallery.setAdapter(new ImageAdapter(this));
+
+
+
+
+
+
+
 
 
     }
