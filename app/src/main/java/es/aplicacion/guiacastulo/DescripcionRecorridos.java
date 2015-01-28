@@ -38,20 +38,14 @@ public class DescripcionRecorridos extends ActionBarActivity {
 
     }
 
-//*** Modificar la lista puntos de interes
-  public void bpuntosinteresClick(View view) {
 
-   seleccionado.setText("Has seleccionado: Puntos de interes" );
-      finish();
-
-    //    Intent intent = new Intent(DescripcionRecorridos.this, ListPuntosInteres.class);
-      //  startActivity(intent);
-
-    }
 
     //Llamada a la clase mapa al presionar el boton de Mapa
     public void bmapaClick(View view) {
         Intent intent = new Intent(DescripcionRecorridos.this, VistaMapa.class);
+        Bundle b = new Bundle();
+        b.putLong("ID_RECORRIDO",position);
+        intent.putExtras(b);
         startActivity(intent);
 
     }
