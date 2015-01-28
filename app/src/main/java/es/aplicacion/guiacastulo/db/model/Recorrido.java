@@ -1,5 +1,7 @@
 package es.aplicacion.guiacastulo.db.model;
 
+import es.aplicacion.guiacastulo.Utilidades.Utils;
+
 /**
  * Created by Enmanuel on 21/01/2015.
  */
@@ -10,6 +12,7 @@ public class Recorrido {
     //TODO tipo de distancia y tiempo
     private String distancia;
     private String duracion;
+    private long [] id_marcadores;
     private String [] uri_imagen;
     private String [] uri_video;
     private String [] uri_audio;
@@ -73,12 +76,17 @@ public class Recorrido {
         this.uri_audio = uri_audio;
     }
 
-
+    /**
+     * Inicializa Ids de los marcadores contenidos en este recorrido.
+     */
+    public void setIdsMarcadores(long [] id_marcadores) {
+        this.id_marcadores = id_marcadores;
+    }
 
     // getters
 
     /**
-     * Obtiene la Id del punto de interes.
+     * Obtiene la Id del recorrido.
      *
      * @return id
      */
@@ -146,14 +154,25 @@ public class Recorrido {
     }
 
     /**
+     * Obtiene Ids de los marcadores contenidos en este recorrido.
+     *
+     * @return long [] id_marcadores.
+     */
+    public long [] getId_marcadores() {
+        return id_marcadores;
+    }
+
+    /**
      * Recorrido -> To String
      * @return
      */
     public String toString() {
-        return "Id PoI: " + id + "\nNombre: " + nombre + "\nDescrición: " + descripcion+
+        return "\nId Recorrido: " + id + "\nNombre: " + nombre + "\nDescrición: " + descripcion+
                  "\nDuracion (horas): " + duracion+ "\nDistancia (km): " + distancia+
-                "\nUriImagen: "+uri_imagen.toString()+
-                "\nUriVideo: "+uri_video.toString()+
-                "\nUriAudio: "+uri_audio.toString();
+                "\nIds marcadores: " + Utils.crearStringComas(id_marcadores)
+                +
+                "\nUriImagen: "+ Utils.crearStringComas(uri_imagen)+
+                "\nUriVideo: "+Utils.crearStringComas(uri_video)+
+                "\nUriAudio: "+Utils.crearStringComas(uri_audio);
     }
 }

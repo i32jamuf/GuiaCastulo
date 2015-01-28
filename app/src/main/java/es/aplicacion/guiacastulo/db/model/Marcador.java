@@ -2,13 +2,14 @@ package es.aplicacion.guiacastulo.db.model;
 
 import android.location.Location;
 
+import es.aplicacion.guiacastulo.Utilidades.Utils;
+
 /**
  * Created by Enmanuel on 21/01/2015.
  */
 public class Marcador {
     private long id;
-    private long [] id_recorridos;
-    private long [] id_puntos_interes;
+    private long [] ids_puntos_interes;
     private String nombre;
     private String descripcion;
     private String [] uri_imagen;
@@ -25,19 +26,12 @@ public class Marcador {
         this.id = marcadorId;
     }
 
-    /**
-     * Inicializa Ids de los recorridos que usan este marcador.
-     */
-    public void setIdsRecorridos(long [] id_recorridos) {
-
-        this.id_recorridos = id_recorridos;
-    }
 
     /**
      * Inicializa Ids de los puntos de interes contenidos en este marcador.
      */
     public void setIdsPoI(long [] id_puntos_interes) {
-        this.id_puntos_interes = id_puntos_interes;
+        this.ids_puntos_interes = id_puntos_interes;
     }
 
     /**
@@ -87,15 +81,6 @@ public class Marcador {
         return id;
     }
 
-    /**
-     * Obtiene Ids de los recorridos que usan este marcador.
-     *
-     * @return long [] id_recorridos.
-     */
-    public long [] getId_recorridos() {
-        return id_recorridos;
-    }
-
 
     /**
      * Obtiene Ids de los puntos de interes contenidos en este marcador.
@@ -103,7 +88,7 @@ public class Marcador {
      * @return long [] id_puntos_interes.
      */
     public long [] getId_puntos_interes() {
-        return id_puntos_interes;
+        return ids_puntos_interes;
     }
 
     /**
@@ -155,10 +140,9 @@ public class Marcador {
      * @return
      */
     public String toString() {
-        return "Id Marcador: " + id + "\n" + "\nIds Recorrido: " + id_recorridos.toString()
-                + "\nIds PoI: " + id_puntos_interes.toString()
+        return "\nId Marcador: " + id + "\n" + "\nIds PoI: " + Utils.crearStringComas(ids_puntos_interes)
                 + "\nNombre: " + nombre + "\nDescrición: " + descripcion+
-                "\nUriImagen: "+uri_imagen+
+                "\nUriImagen: "+Utils.crearStringComas(uri_imagen)+
                 "\nCoordenadas: " +latitud+" , "+longitud;
 
     }
