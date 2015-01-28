@@ -40,6 +40,7 @@ public class ItemRecorrido {
             this.id = id;
         }
 
+    //TODO falla aunque uses el constructor que no necesita rutaImagen
         public String getRutaImagen() {
             return rutaImagen;
         }

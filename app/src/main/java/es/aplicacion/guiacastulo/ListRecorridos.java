@@ -10,19 +10,27 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import es.aplicacion.guiacastulo.db.model.Recorrido;
+import es.aplicacion.guiacastulo.db.schema.Database;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import es.aplicacion.guiacastulo.Utilidades.ItemRecorrido;
 import es.aplicacion.guiacastulo.Utilidades.ItemRecorridoAdapter;
 
 
 public class ListRecorridos extends Activity  {
-
+    Database database = new Database(this);
+    List<Recorrido> recorridos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_recorridos);
+
+        database.open();
+       recorridos = database.getAllRecorridos();
 
 // Se crea la lista de recorridos
         ListView lv = (ListView)findViewById(R.id.listrecorridos);
@@ -45,31 +53,25 @@ public class ListRecorridos extends Activity  {
 
             Intent intent = new Intent(getApplication(), DescripcionRecorridos.class);
             Bundle b = new Bundle();
-            b.putLong("ID_LISTA",position);
-            b.putString("NOMBRE",obtenerItems().get(position).getTitulo());
+            b.putLong("ID_LISTA",obtenerItems().get(position).getId());
             intent.putExtras(b);
             startActivity(intent);
-
         }
     };
 
-
-
-
     private ArrayList<ItemRecorrido> obtenerItems() {
         ArrayList<ItemRecorrido> items = new ArrayList<ItemRecorrido>();
-
+/**
         items.add(new ItemRecorrido (1, "Recorrido árabe", "3 horas y 20 minutos", "drawable/patatas"));
         items.add(new ItemRecorrido(2, "Recorrido musulmán", "4 horas", "drawable/naranjas"));
         items.add(new ItemRecorrido(3, "Recorrido romano", "2 horas y 30 minutos", "drawable/lechuga"));
 
-
-
-
-
+*/
+       for(Recorrido recorrido : recorridos){
+            items.add(new ItemRecorrido(recorrido.getId(),recorrido.getNombre(),recorrido.getDuracion(),"drawable/patatas"));
+        }
         return items;
     }
-
 
 
     @Override

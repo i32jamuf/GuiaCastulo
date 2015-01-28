@@ -38,7 +38,7 @@ public class VistaMapa extends FragmentActivity  {
 
     //Para que aparezca la actionBAR hay que heredar de la clase ActionBarActivity
 
-    long position=0;
+
     private CameraUpdate mCamera;
     private GoogleMap mMap;
     TextView infomarcador;
@@ -53,8 +53,6 @@ public class VistaMapa extends FragmentActivity  {
         super.onCreate(savedInstanceState);
         // setupActionBar();
         setContentView(R.layout.activity_vista_mapa);
-        Bundle bundle = this.getIntent().getExtras();
-        position = bundle.getLong("ID_RECORRIDO");
         setUpMapIfNeeded();
     }
 
@@ -111,16 +109,16 @@ public class VistaMapa extends FragmentActivity  {
                 .snippet("Posicion Norte")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
-
         mMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
 
             @Override
             public void onInfoWindowClick(Marker arg0) {
                 // TODO Auto-generated method stub
-               // Log.d("AL presionar el marcador torre punica",);
+                Log.d("AL presionar el marcador torre punica","infowindowclick");
                 Intent intent = new Intent(VistaMapa.this,FichaPuntosInteres.class);
                 Bundle b = new Bundle();
-                b.putLong("ID_FICHA",position);
+
+                b.putLong("ID_MARCADOR",Long.valueOf(arg0.getId()));
                 intent.putExtras(b);
                 startActivity(intent);
 

@@ -25,7 +25,7 @@ public class PreferenceActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preference);
-        llenarDB(3,3);
+        llenarDB(3,3,3);
         leerDb();
     }
 
@@ -53,27 +53,28 @@ public class PreferenceActivity extends ActionBarActivity {
     }
 
 
-    private void llenarDB(int n_mark, int n_pois) {
+    private void llenarDB(int n_recor,int n_mark, int n_pois) {
         database = new Database(getApplicationContext());
         database.open();
 
        // crearInfo("Calle los pinchos", "Tlf: 98733221, Fax: 99882", "9:40-17:30", "www.castulo.es", "Visitas concertadas");
 
-
+    for(int k =0;k < n_recor;k++) {
         long[] id_markers = new long[n_mark];
         for (int j = 0; j < n_mark; j++) {
             long[] id_pois = new long[n_pois];
             for (int i = 0; i < n_pois; i++) {
                 //creamos tantos puntos de interes por marcador como diga n_pois
-                id_pois[i] = crearPoI("casa_" + i + "mar_" + j, "grande_" + i + "mar_" + j,
-                        1.05 + i, 2.05 + i, "uri_imagen_" + i + "mar_" + j, "uri_audio_" + i + "mar_" + j,
-                        "uri_video_" + i + "mar_" + j);
+                id_pois[i] = crearPoI("casa_" + i + "mar_" + j+"rec_"+k, "grande_" + i + "mar_" + j+"rec_"+k,
+                        1.05 + i, 2.05 + i, "uri_imagen_" + i + "mar_" + j+"rec_"+k, "uri_audio_" + i + "mar_" + j+"rec_"+k,
+                        "uri_video_" + i + "mar_" + j+"rec_"+k);
             }
             //creamos tantos marcadores como diga n_mark
-            id_markers[j] = crearMarcador("marcador_" + j, "descrp_" + j,0.34+j,0.56+j, id_pois, "uri_image_" + j);
+            id_markers[j] = crearMarcador("marcador_" + j+"rec_"+k, "descrp_" + j+"rec_"+k, 0.34 + j, 0.56 + j, id_pois, "uri_image_" + j+"rec_"+k);
         }
-        crearRecorrido("Recorrido 1", "descripcion 1", "20 min", "200 metros", "Uri_imagen_recorrido_1",
+        crearRecorrido("Recorrido_"+k, "descripcion_"+k, "20 min"+k, "200 metros"+k, "Uri_imagen_recorrido_"+k,
                 id_markers);
+    }
     }
 
 
