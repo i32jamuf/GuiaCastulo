@@ -2,6 +2,8 @@ package es.aplicacion.guiacastulo.db.model;
 
 import android.location.Location;
 
+import es.aplicacion.guiacastulo.Utilidades.Utils;
+
 /**
  * Created by Enmanuel on 21/01/2015.
  */
@@ -151,10 +153,10 @@ public class PuntoInteres {
      * @return
      */
     public String toString() {
-        return "Id PoI: " + id + "\nNombre: " + nombre + "\nDescrición: " + descripcion+
-                "\nUriImagen: "+uri_imagen.toString()+
-                "\nUriVideo: "+uri_video.toString()+
-                "\nUriAudio: "+uri_audio.toString()+
+        return "\nId PoI: " + id + "\nNombre: " + nombre + "\nDescrición: " + descripcion+
+                "\nUriImagen: "+Utils.crearStringComas(uri_imagen)+
+                "\nUriVideo: "+Utils.crearStringComas(uri_video)+
+                "\nUriAudio: "+ Utils.crearStringComas(uri_audio)+
                 "\nCoordenadas: " +latitud+" , "+longitud;
     }
 }

@@ -40,6 +40,8 @@ public class Utils {
      * @return
      */
     public static String crearStringComas(String [] URIs){
+        if(URIs==null)
+            return "";
         String result = "";
         boolean first = true;
         for(String string : URIs) {
@@ -60,6 +62,7 @@ public class Utils {
      * @return
      */
    public static String [] separarStringComasAString(String comas){
+
        return comas.split(",");
        //String[] results = comas.split(",");
        //return results;
@@ -82,4 +85,5 @@ public class Utils {
 
         return IDs;
     }
+
 }

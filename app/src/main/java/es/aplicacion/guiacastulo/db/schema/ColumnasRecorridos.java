@@ -8,6 +8,7 @@ public class ColumnasRecorridos {
 
     // Columnas
     public static final String KEY_ID = "_id";
+    public static final String ID_MARCADORES = "id_marcadores";
     public static final String NOMBRE = "nombre";
     public static final String DESCRIPCION = "descripcion";
     public static final String IMAGEN = "imagen";
@@ -19,7 +20,7 @@ public class ColumnasRecorridos {
 
 
     public static final String CREAR_TABLA = "CREATE TABLE " + NOMBRE_TABLA
-            + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ ID_MARCADORES + " TEXT, "
             + NOMBRE + " TEXT, " + DESCRIPCION + " TEXT, " + IMAGEN + " TEXT, "+ VIDEO + " TEXT, "
             + AUDIO + " TEXT, " + DURACION + " REAL, "+ DISTANCIA + " REAL "+ ");";
 }

@@ -15,6 +15,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import java.util.LinkedList;
+import java.util.List;
+
+import es.aplicacion.guiacastulo.Utilidades.Utils;
+import es.aplicacion.guiacastulo.db.model.Informacion;
+import es.aplicacion.guiacastulo.db.model.Marcador;
+import es.aplicacion.guiacastulo.db.model.PuntoInteres;
+import es.aplicacion.guiacastulo.db.model.Recorrido;
+import es.aplicacion.guiacastulo.db.schema.Database;
+
+
 public class PantallaCarga extends ActionBarActivity {
 
     final int WELCOME		= 25;
@@ -23,6 +34,7 @@ public class PantallaCarga extends ActionBarActivity {
     ProgressBar mProgressBar;
     public int progreso=0;
     int paso = 500;
+
 
 
     @Override
@@ -39,10 +51,17 @@ public class PantallaCarga extends ActionBarActivity {
         super.onResume();
 
 
+
+
+
         cuentaAtras(4000);
 
 
     }
+
+
+
+
 
     private void cuentaAtras(long milisegundos){
         CountDownTimer mCountDownTimer;
