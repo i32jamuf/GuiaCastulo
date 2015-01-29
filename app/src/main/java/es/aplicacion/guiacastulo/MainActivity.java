@@ -47,7 +47,7 @@ public class MainActivity extends ActionBarActivity {
 }
 
     public void bptointeresClick(View view){
-        Intent intent= new Intent(MainActivity.this, ListPuntosInteres.class);
+        Intent intent= new Intent(MainActivity.this, VistaMapaAllPoIs.class);
         startActivity(intent);
 
     }

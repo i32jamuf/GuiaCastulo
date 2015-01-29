@@ -85,6 +85,13 @@
                 android:value="es.aplicacion.guiacastulo.DescripcionRecorridos" />
         </activity>
         <activity
+            android:name=".VistaMapaAllPoIs"
+            android:label="@string/title_activity_vista_mapa" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="es.aplicacion.guiacastulo.MainActivity" />
+        </activity>
+        <activity
             android:name=".PreferenceActivity"
             android:label="@string/title_activity_preference" >
         </activity>
