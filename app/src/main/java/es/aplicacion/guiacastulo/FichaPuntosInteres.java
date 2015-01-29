@@ -126,7 +126,7 @@ public class FichaPuntosInteres extends Activity {
         for(int k=0;k<imagesID.length;k++){
             Log.d("Ficha PoI galley","imagesID " + imagesID[k]);
         }
-
+//cargar imagen
         gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
