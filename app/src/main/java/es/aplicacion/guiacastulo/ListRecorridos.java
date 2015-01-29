@@ -51,9 +51,9 @@ public class ListRecorridos extends Activity  {
         public void onItemClick(AdapterView parent, View v, int position,
                                 long id) {
 
-            Intent intent = new Intent(getApplication(), DescripcionRecorridos.class);
+            Intent intent = new Intent(ListRecorridos.this, DescripcionRecorridos.class);
             Bundle b = new Bundle();
-            b.putLong("ID_LISTA",obtenerItems().get(position).getId());
+            b.putLong("ID_RECORRIDO",obtenerItems().get(position).getId());
             intent.putExtras(b);
             startActivity(intent);
         }

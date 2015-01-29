@@ -12,24 +12,35 @@ import android.widget.Toast;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.view.View;
+
+import es.aplicacion.guiacastulo.db.model.Marcador;
+import es.aplicacion.guiacastulo.db.model.PuntoInteres;
+import es.aplicacion.guiacastulo.db.schema.Database;
+
 public class FichaPuntosInteres extends Activity {
 
 
     TextView seleccionado;
-
-
+    Database database = new Database(this);
+    Marcador marcador =new Marcador();
+    PuntoInteres PoI =new PuntoInteres();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ficha_puntos_interes);
         Bundle bundle = this.getIntent().getExtras();
-        long position = bundle.getLong("ID_FICHA");
-
+        long id_marcador = bundle.getLong("ID_MARCADOR");
+        database.open();
+        marcador=database.getMarcador(id_marcador);
+        //TODO sacar todos los puntos de interes y mostrar su informacion, no solo el primero
+        PoI=database.getPuntoInteres(marcador.getId_puntos_interes()[0]);
 
         // Galeria de imagenes
         Gallery gallery = (Gallery)findViewById(R.id.gallery);
         gallery.setAdapter(new ImageAdapter(this));
+        TextView infoText =(TextView) findViewById(R.id.infotext);
+        infoText.setText(PoI.toString());
 
     }
 

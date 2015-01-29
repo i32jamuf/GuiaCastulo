@@ -597,7 +597,7 @@ public boolean addPuntosInteres(List<PuntoInteres> lstPuntosInteres) {
             }, ColumnasPuntosInteres.KEY_ID + " = " + markID, null, null, null, null, null);
 
             c.moveToFirst();
-            //rellenamos el objeto PuntoInteres
+            //rellenamos el objeto Marcador
             marcador.setId(c.getLong(0));
             marcador.setNombre(c.getString(1));
             marcador.setDescripcion(c.getString(2));

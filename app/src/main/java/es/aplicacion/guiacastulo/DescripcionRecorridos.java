@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import es.aplicacion.guiacastulo.Utilidades.Utils;
 import es.aplicacion.guiacastulo.db.model.Recorrido;
 import es.aplicacion.guiacastulo.db.schema.Database;
 
@@ -18,19 +19,18 @@ public class DescripcionRecorridos extends ActionBarActivity {
     TextView seleccionado;
     Database database= new Database (this);
     long id_recorrido=0;
+    Recorrido recorrido=new Recorrido();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_descripcion_recorridos);
 
         Bundle bundle = this.getIntent().getExtras();
-        id_recorrido = bundle.getLong("ID_LISTA");
-        String nombre = bundle.getString("NOMBRE");
+        id_recorrido = bundle.getLong("ID_RECORRIDO");
         database.open();
-        Recorrido recorrido=database.getRecorrido(id_recorrido);
+        recorrido=database.getRecorrido(id_recorrido);
         seleccionado= (TextView)findViewById(R.id.seleccionado);
-        seleccionado.setText("Nombre: "+recorrido.getNombre()+"\nDescripcion "+recorrido.getDescripcion()
-                +"\nDuracion "+recorrido.getDuracion()+"\nDistancia "+recorrido.getDistancia());
+        seleccionado.setText(recorrido.toString());
 
         // Para probar que funciona la posicion
        //seleccionado= (TextView)findViewById(R.id.seleccionado);
@@ -49,7 +49,7 @@ public class DescripcionRecorridos extends ActionBarActivity {
     public void bmapaClick(View view) {
         Intent intent = new Intent(DescripcionRecorridos.this, VistaMapa.class);
         Bundle b = new Bundle();
-        b.putLong("ID_RECORRIDO",id_recorrido);
+        b.putString("IDS_MARCADORES", Utils.crearStringComas(recorrido.getId_marcadores()));
         intent.putExtras(b);
         startActivity(intent);
 

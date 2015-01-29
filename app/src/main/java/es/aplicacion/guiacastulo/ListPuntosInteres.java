@@ -48,15 +48,13 @@ public class ListPuntosInteres extends Activity {
         public void onItemClick(AdapterView parent, View v, int position,
                                 long id) {
 
-            Intent intent = new Intent(getApplication(), FichaPuntosInteres.class);
+            Intent intent = new Intent(ListPuntosInteres.this, FichaPuntosInteres.class);
             Bundle b = new Bundle();
             b.putLong("ID_FICHA",position);
             intent.putExtras(b);
             startActivity(intent);
-
         }
     };
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

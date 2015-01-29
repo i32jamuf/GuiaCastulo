@@ -32,6 +32,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+
+import es.aplicacion.guiacastulo.Utilidades.Utils;
+import es.aplicacion.guiacastulo.db.model.Marcador;
+import es.aplicacion.guiacastulo.db.schema.Database;
+
 public class VistaMapa extends FragmentActivity  {
 
 
@@ -46,18 +54,27 @@ public class VistaMapa extends FragmentActivity  {
 
     static final LatLng MOSAICO = new LatLng(38.034786, -3.624908);
     static final LatLng TORREPUNICA = new LatLng(38.038711, -3.627992);
-
-
+    Database database= new Database (this);
+    LinkedList<Marcador> markers= new LinkedList<Marcador>();
+    HashMap<String, Long> markerMap = new HashMap<String, Long>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // setupActionBar();
         setContentView(R.layout.activity_vista_mapa);
+        Bundle bundle = this.getIntent().getExtras();
+        //sacamos las ids de los marcadores que tiene este recorrido
+        long [] ids_marcadores = Utils.separarStringComasALong(bundle.getString("IDS_MARCADORES"));
+
+        database.open();
+        //sacamos esos marcadores y los metemos en una lista
+        for(int i=0; i<ids_marcadores.length;i++){
+            Marcador marker = new Marcador();
+            marker= database.getMarcador(ids_marcadores[i]);
+            markers.add(marker);
+        }
         setUpMapIfNeeded();
     }
-
-
-
 
         private void setUpMapIfNeeded() {
             // Do a null check to confirm that we have not already instantiated the map.
@@ -75,9 +92,6 @@ public class VistaMapa extends FragmentActivity  {
         }
 
     private void setUpMap() {
-
-
-
 
         mMap.setInfoWindowAdapter(new InfoWindowAdapter() {
             @Override
@@ -97,6 +111,32 @@ public class VistaMapa extends FragmentActivity  {
                 return myContentView;
             }
         });
+
+        //pintamos los marcadores al inicializar el mapa
+int i=0;
+for(Marcador marcador : markers){
+  if(i==0){
+      mCamera = CameraUpdateFactory.newLatLngZoom(new LatLng(marcador.getLatitud(), marcador.getLongitud()), 5);
+      mMap.animateCamera(mCamera);
+      i++;
+  }
+
+    //ponemos los marcadores en el mapa de google y mapeamos el id del marcador de google con
+    // el id del marcador en la abse de datos
+    /**
+   markerMap.put(mMap.addMarker(new MarkerOptions()
+            .position(new LatLng(mark.getLatitud(),mark.getLongitud()))
+            .title(mark.getNombre())
+            .snippet(mark.getDescripcion())).getId(),mark.getId());
+**/
+    Marker marker =mMap.addMarker(new MarkerOptions()
+            .position(new LatLng(marcador.getLatitud(),marcador.getLongitud()))
+            .title(marcador.getNombre())
+            .snippet(marcador.getDescripcion()));
+    markerMap.put(marker.getId(),marcador.getId());
+    Log.d("VistaMapa","Mapeo G: "+marker.getId()+" M: "+marcador.getId());
+}
+        /**
         Marker torrepunica = mMap.addMarker(new MarkerOptions()
                 .position(TORREPUNICA)
                 .title("Torre Púnica")
@@ -109,16 +149,21 @@ public class VistaMapa extends FragmentActivity  {
                 .snippet("Posicion Norte")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
+        **/
+
+
+
         mMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
 
+
             @Override
-            public void onInfoWindowClick(Marker arg0) {
+            public void onInfoWindowClick(Marker marker) {
                 // TODO Auto-generated method stub
-                Log.d("AL presionar el marcador torre punica","infowindowclick");
+                Log.d("VistaMapa","onInfoWindowClick G: "+marker.getId()+" M: "+markerMap.get(marker.getId()));
                 Intent intent = new Intent(VistaMapa.this,FichaPuntosInteres.class);
                 Bundle b = new Bundle();
-
-                b.putLong("ID_MARCADOR",Long.valueOf(arg0.getId()));
+                //sacamos el valor, mapeado con este marcador de google, del id de la base de datos
+                b.putLong("ID_MARCADOR",markerMap.get(marker.getId()));
                 intent.putExtras(b);
                 startActivity(intent);
 
@@ -126,12 +171,6 @@ public class VistaMapa extends FragmentActivity  {
         });
 
 
-
-
-
-
-        mCamera = CameraUpdateFactory.newLatLngZoom(new LatLng(38.03602777, -3.6233333), 14);
-        mMap.animateCamera(mCamera);
 
 
 
