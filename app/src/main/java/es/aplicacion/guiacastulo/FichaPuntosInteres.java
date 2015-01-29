@@ -140,7 +140,6 @@ public class FichaPuntosInteres extends Activity {
                 intent.putExtras(b);
                 startActivity(intent);
 
-
         }
         });
 
