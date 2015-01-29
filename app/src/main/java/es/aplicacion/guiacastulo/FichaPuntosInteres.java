@@ -1,12 +1,15 @@
 package es.aplicacion.guiacastulo;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import android.app.Activity;
@@ -18,6 +21,7 @@ import android.view.View;
 
 import java.util.LinkedList;
 
+import es.aplicacion.guiacastulo.Utilidades.ImageDialog;
 import es.aplicacion.guiacastulo.db.model.Marcador;
 import es.aplicacion.guiacastulo.db.model.PuntoInteres;
 import es.aplicacion.guiacastulo.db.schema.Database;
@@ -114,8 +118,32 @@ public class FichaPuntosInteres extends Activity {
     }
 
     private void cargarGallery(PuntoInteres PoI){
+
         Gallery gallery = (Gallery)findViewById(R.id.gallery);
-        gallery.setAdapter(new ImageAdapter(this));
+        ImageAdapter imgAdapter = new ImageAdapter(this);
+        gallery.setAdapter(imgAdapter);
+        final Integer[] imagesID = imgAdapter.getImgIds();
+        for(int k=0;k<imagesID.length;k++){
+            Log.d("Ficha PoI galley","imagesID " + imagesID[k]);
+        }
+
+        gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.d("Ficha PoI","Foto " + (i+1));
+                for(int j=0;j<imagesID.length;j++){
+                    Log.d("Ficha PoI onclick","imagesID " + imagesID[j]);
+                }
+                Intent intent= new Intent(FichaPuntosInteres.this, ImageDialog.class);
+                Bundle b = new Bundle();
+                b.putInt("ID_IMG",imagesID[i]);
+                intent.putExtras(b);
+                startActivity(intent);
+
+
+        }
+        });
+
 
     }
 

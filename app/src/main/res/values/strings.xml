@@ -12,5 +12,6 @@
     <string name="title_activity_vista_mapa">Map</string>
     <string name="db_ok">terminado</string>
     <string name="title_activity_preference">PreferenceActivity</string>
+    <string name="title_activity_image_dialog">ImageDialog</string>
 
 </resources>

@@ -35,21 +35,17 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
 
     public void brecorridoClick(View view){
     Intent intent= new Intent(MainActivity.this, ListRecorridos.class);
     startActivity(intent);
-
 }
 
     public void bptointeresClick(View view){
         Intent intent= new Intent(MainActivity.this, VistaMapaAllPoIs.class);
         startActivity(intent);
-
     }
 
     public void bajustesClick(View view){

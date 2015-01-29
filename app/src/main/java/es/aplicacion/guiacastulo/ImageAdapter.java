@@ -38,6 +38,9 @@ public class ImageAdapter extends BaseAdapter {
         attr.recycle();
     }
 
+    public Integer [] getImgIds() {
+        return mImageIds;
+    }
     public int getCount() {
         return mImageIds.length;
     }
