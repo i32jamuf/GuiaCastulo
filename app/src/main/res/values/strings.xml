@@ -13,5 +13,7 @@
     <string name="db_ok">terminado</string>
     <string name="title_activity_preference">PreferenceActivity</string>
     <string name="title_activity_image_dialog">ImageDialog</string>
-
+    <string name="botonRecorridos">Recorridos</string>
+    <string name="botonAjustes">Ajustes</string>
+    <string name="botonMapa">Points of interest</string>
 </resources>

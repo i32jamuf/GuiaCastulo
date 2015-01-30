@@ -12,6 +12,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"/>
 
+
+
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -67,6 +69,7 @@
             android:id="@+id/infotext"
             android:textColor="#111111"
             android:typeface="sans"
+            android:text="La ciudad iberorromana de Cástulo se encuentra localizada en el Alto Guadalquivir, en la provincia de Jaén, en las estribaciones de Sierra Morena, configurándose como nexo de unión con la meseta peninsular. Plinio el Viejo la utiliza como marca para definir parte de las dimensiones de Hispania.3 4 Se emplaza en una de las terrazas de la margen derecha del río Guadalimar, habiéndose estudiado vestigios del asentamiento tanto en las laderas como en una meseta amurallada ubicada en los cerros de Plaza de Armas y de La Muela, a unos 300 msnm, controlando un ámbito visual extenso que domina la vega del río."
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
     </ScrollView>

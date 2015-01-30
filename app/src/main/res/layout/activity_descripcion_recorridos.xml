@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="es.aplicacion.guiacastulo.DescripcionRecorridos">
+    tools:context="es.aplicacion.guiacastulo.DescripcionRecorridos"
+    android:background="@drawable/fondo">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -18,7 +19,9 @@
         android:text="Mapa del Recorrido"
         android:layout_gravity="center"
         android:id="@+id/button2"
-        android:onClick="bmapaClick" />
+        android:onClick="bmapaClick"
+        android:background="@drawable/red_button"
+        style="@style/button_text"/>
 
     <TextView
     android:layout_width="wrap_content"

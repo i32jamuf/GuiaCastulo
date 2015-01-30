@@ -45,7 +45,15 @@
         <activity
             android:name=".FichaPuntosInteres"
             android:label="@string/title_activity_ficha_puntos_interes"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".ListPuntosInteres" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="es.aplicacion.guiacastulo.MainActivity" />
+        </activity>
+        <activity
+            android:name=".FichaPuntosInteres2"
+            android:label="@string/title_activity_ficha_puntos_interes"
+            android:parentActivityName=".ListPuntosInteres" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="es.aplicacion.guiacastulo.MainActivity" />
