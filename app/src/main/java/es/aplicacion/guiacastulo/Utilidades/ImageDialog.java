@@ -21,6 +21,7 @@ import es.aplicacion.guiacastulo.R;
             Bundle bundle = this.getIntent().getExtras();
             int id_img = bundle.getInt("ID_IMG");
             mDialog = (ImageView)findViewById(R.id.your_image);
+
             mDialog.setImageResource(id_img);
             mDialog.setClickable(true);
             //finish the activity (dismiss the image dialog) if the user clicks
