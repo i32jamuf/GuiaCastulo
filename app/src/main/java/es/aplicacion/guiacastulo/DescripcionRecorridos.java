@@ -29,7 +29,7 @@ public class DescripcionRecorridos extends ActionBarActivity {
         id_recorrido = bundle.getLong("ID_RECORRIDO");
         database.open();
         recorrido=database.getRecorrido(id_recorrido);
-        seleccionado= (TextView)findViewById(R.id.seleccionado);
+        seleccionado= (TextView)findViewById(R.id.infotext);
         seleccionado.setText(recorrido.toString());
 
         // Para probar que funciona la posicion
