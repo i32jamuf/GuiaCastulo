@@ -2,17 +2,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+
     tools:context=".MainActivity"
     android:background="@drawable/fondo"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:text="Este es layout normal"
+        android:text="Esta es la pantalla 320 tumbao"
         android:textColor="#ffffff"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
 
     <ImageButton
         android:layout_width="100dp"
@@ -23,21 +25,18 @@
         android:scaleType="centerInside"
         android:background="@null"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="47dp" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/botonAjustes"
+        android:text="Ajustes"
         android:id="@+id/textView1"
         android:singleLine="false"
         android:textColor="#ffffff"
-        android:layout_centerHorizontal="true"
-
         android:textSize="@dimen/abc_text_size_large_material"
         android:layout_below="@+id/bajustes"
-        />
+        android:layout_centerHorizontal="true" />
 
 
     <ImageButton

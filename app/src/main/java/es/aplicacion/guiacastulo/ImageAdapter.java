@@ -26,7 +26,7 @@ public class ImageAdapter extends BaseAdapter {
             R.drawable.image_3,
             R.drawable.image_4,
             R.drawable.image_5,
-            R.drawable.image_6,
+           R.drawable.image_6,
             R.drawable.image_7
     };
 

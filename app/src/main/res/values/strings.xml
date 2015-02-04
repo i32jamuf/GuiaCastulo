@@ -15,5 +15,5 @@
     <string name="title_activity_image_dialog">ImageDialog</string>
     <string name="botonRecorridos">Recorridos</string>
     <string name="botonAjustes">Ajustes</string>
-    <string name="botonMapa">Points of interest</string>
+    <string name="botonMapa">Puntos de Interés</string>
 </resources>
