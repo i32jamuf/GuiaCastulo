@@ -7,12 +7,14 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.location.Location;
 import android.util.Log;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import es.aplicacion.guiacastulo.Utilidades.Utils;
+import es.aplicacion.guiacastulo.db.model.Coordenada;
 import es.aplicacion.guiacastulo.db.model.Informacion;
 import es.aplicacion.guiacastulo.db.model.Marcador;
 import es.aplicacion.guiacastulo.db.model.PuntoInteres;
@@ -74,6 +76,7 @@ public class Database {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
+            db.execSQL(ColumnasCoordenada.CREAR_TABLA);
             db.execSQL(ColumnasMarcadores.CREAR_TABLA);
             db.execSQL(ColumnasPuntosInteres.CREAR_TABLA);
             db.execSQL(ColumnasRecorridos.CREAR_TABLA);
@@ -107,32 +110,32 @@ public class Database {
      * @param lstPuntosInteres
      * @return
      */
-public boolean addPuntosInteres(List<PuntoInteres> lstPuntosInteres) {
-    if (lstPuntosInteres.isEmpty())
-        return false;
+    public boolean addPuntosInteres(List<PuntoInteres> lstPuntosInteres) {
+        if (lstPuntosInteres.isEmpty())
+            return false;
 
-    ContentValues cv = new ContentValues();
-    db.beginTransaction();
+        ContentValues cv = new ContentValues();
+        db.beginTransaction();
 
-    try {
-        for (PuntoInteres pOI : lstPuntosInteres) {
-            cv.put(ColumnasPuntosInteres.NOMBRE, pOI.getNombre());
-            cv.put(ColumnasPuntosInteres.DESCRIPCION, pOI.getDescripcion());
-            cv.put(ColumnasPuntosInteres.LATITUD, pOI.getLatitud());
-            cv.put(ColumnasPuntosInteres.LONGITUD, pOI.getLongitud());
-            //El contenido de las columnas son una sucesion de URIs separadas por comas
-            cv.put(ColumnasPuntosInteres.AUDIO, Utils.crearStringComas(pOI.getUriAudio()));
-            cv.put(ColumnasPuntosInteres.VIDEO, Utils.crearStringComas(pOI.getUriVideo()));
-            cv.put(ColumnasPuntosInteres.IMAGEN, Utils.crearStringComas(pOI.getUriImagen()));
+        try {
+            for (PuntoInteres pOI : lstPuntosInteres) {
+                cv.put(ColumnasPuntosInteres.NOMBRE, pOI.getNombre());
+                cv.put(ColumnasPuntosInteres.DESCRIPCION, pOI.getDescripcion());
+                cv.put(ColumnasPuntosInteres.LATITUD, pOI.getLatitud());
+                cv.put(ColumnasPuntosInteres.LONGITUD, pOI.getLongitud());
+                //El contenido de las columnas son una sucesion de URIs separadas por comas
+                cv.put(ColumnasPuntosInteres.AUDIO, (pOI.getUriAudio()));
+                cv.put(ColumnasPuntosInteres.VIDEO, (pOI.getUriVideo()));
+                cv.put(ColumnasPuntosInteres.IMAGEN, Utils.crearStringComas(pOI.getUriImagen()));
 
-            pOI.setId(db.insert(ColumnasPuntosInteres.NOMBRE_TABLA, null, cv));
+                pOI.setId(db.insert(ColumnasPuntosInteres.NOMBRE_TABLA, null, cv));
+            }
+
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
         }
-
-        db.setTransactionSuccessful();
-    } finally {
-        db.endTransaction();
-    }
-    return true;
+        return true;
     }
 
     /**
@@ -150,16 +153,16 @@ public boolean addPuntosInteres(List<PuntoInteres> lstPuntosInteres) {
 
         try {
 
-                cv.put(ColumnasPuntosInteres.NOMBRE, pOI.getNombre());
-                cv.put(ColumnasPuntosInteres.DESCRIPCION, pOI.getDescripcion());
-                cv.put(ColumnasPuntosInteres.LATITUD, pOI.getLatitud());
-                cv.put(ColumnasPuntosInteres.LONGITUD, pOI.getLongitud());
-                //El contenido de las columnas son una sucesion de URIs separadas por comas
-                cv.put(ColumnasPuntosInteres.AUDIO, Utils.crearStringComas(pOI.getUriAudio()));
-                cv.put(ColumnasPuntosInteres.VIDEO, Utils.crearStringComas(pOI.getUriVideo()));
-                cv.put(ColumnasPuntosInteres.IMAGEN, Utils.crearStringComas(pOI.getUriImagen()));
+            cv.put(ColumnasPuntosInteres.NOMBRE, pOI.getNombre());
+            cv.put(ColumnasPuntosInteres.DESCRIPCION, pOI.getDescripcion());
+            cv.put(ColumnasPuntosInteres.LATITUD, pOI.getLatitud());
+            cv.put(ColumnasPuntosInteres.LONGITUD, pOI.getLongitud());
+            //El contenido de las columnas son una sucesion de URIs separadas por comas
+            cv.put(ColumnasPuntosInteres.AUDIO, (pOI.getUriAudio()));
+            cv.put(ColumnasPuntosInteres.VIDEO, (pOI.getUriVideo()));
+            cv.put(ColumnasPuntosInteres.IMAGEN, Utils.crearStringComas(pOI.getUriImagen()));
 
-                id=db.insert(ColumnasPuntosInteres.NOMBRE_TABLA, null, cv);
+            id=db.insert(ColumnasPuntosInteres.NOMBRE_TABLA, null, cv);
 
             db.setTransactionSuccessful();
         } finally {
@@ -196,8 +199,8 @@ public boolean addPuntosInteres(List<PuntoInteres> lstPuntosInteres) {
             pOI.setLongitud(c.getDouble(4));
             //separamos cada URI delimitada por comas y las ponemos en cada una de las posiciones del array
             pOI.setUriImagen(Utils.separarStringComasAString(c.getString(5)));
-            pOI.setUriVideo(Utils.separarStringComasAString(c.getString(6)));
-            pOI.setUriAudio(Utils.separarStringComasAString(c.getString(7)));
+            pOI.setUriVideo((c.getString(6)));
+            pOI.setUriAudio((c.getString(7)));
 
 
             db.setTransactionSuccessful();
@@ -218,14 +221,14 @@ public boolean addPuntosInteres(List<PuntoInteres> lstPuntosInteres) {
         db.beginTransaction();
         try{
             Cursor c = db.query(ColumnasPuntosInteres.NOMBRE_TABLA, new String[] {
-                ColumnasPuntosInteres.KEY_ID,
-                ColumnasPuntosInteres.NOMBRE,
-                ColumnasPuntosInteres.DESCRIPCION,
-                ColumnasPuntosInteres.LATITUD,
-                ColumnasPuntosInteres.LONGITUD,
-                ColumnasPuntosInteres.IMAGEN,
-                ColumnasPuntosInteres.VIDEO,
-                ColumnasPuntosInteres.AUDIO}, null, null, null, null, null);
+                    ColumnasPuntosInteres.KEY_ID,
+                    ColumnasPuntosInteres.NOMBRE,
+                    ColumnasPuntosInteres.DESCRIPCION,
+                    ColumnasPuntosInteres.LATITUD,
+                    ColumnasPuntosInteres.LONGITUD,
+                    ColumnasPuntosInteres.IMAGEN,
+                    ColumnasPuntosInteres.VIDEO,
+                    ColumnasPuntosInteres.AUDIO}, null, null, null, null, null);
             c.moveToFirst();
             c.moveToPrevious();
 
@@ -239,8 +242,8 @@ public boolean addPuntosInteres(List<PuntoInteres> lstPuntosInteres) {
                 pOI.setLongitud(c.getDouble(4));
                 //separamos cada URI delimitada por comas y las ponemos en cada una de las posiciones del array
                 pOI.setUriImagen(Utils.separarStringComasAString(c.getString(5)));
-                pOI.setUriVideo(Utils.separarStringComasAString(c.getString(6)));
-                pOI.setUriAudio(Utils.separarStringComasAString(c.getString(7)));
+                pOI.setUriVideo((c.getString(6)));
+                pOI.setUriAudio((c.getString(7)));
                 allPuntosInteres.add(pOI);
             }
             db.setTransactionSuccessful();
@@ -292,13 +295,13 @@ public boolean addPuntosInteres(List<PuntoInteres> lstPuntosInteres) {
         if (PoI.getUriImagen() != null)
             cv.put(ColumnasPuntosInteres.IMAGEN, Utils.crearStringComas(PoI.getUriImagen()));
         if (PoI.getUriVideo() != null)
-            cv.put(ColumnasPuntosInteres.VIDEO, Utils.crearStringComas(PoI.getUriVideo()));
+            cv.put(ColumnasPuntosInteres.VIDEO, (PoI.getUriVideo()));
         if (PoI.getUriAudio() != null)
-            cv.put(ColumnasPuntosInteres.AUDIO, Utils.crearStringComas(PoI.getUriAudio()));
+            cv.put(ColumnasPuntosInteres.AUDIO, (PoI.getUriAudio()));
 
         db.beginTransaction();
         try{
-             filas= db.update(ColumnasPuntosInteres.NOMBRE_TABLA, cv,
+            filas= db.update(ColumnasPuntosInteres.NOMBRE_TABLA, cv,
                     ColumnasPuntosInteres.KEY_ID + " = " + PoI.getId(), null);
 
             db.setTransactionSuccessful();
@@ -330,8 +333,8 @@ public boolean addPuntosInteres(List<PuntoInteres> lstPuntosInteres) {
                 cv.put(ColumnasRecorridos.DISTANCIA,recorrido.getDistancia());
                 cv.put(ColumnasRecorridos.DURACION, recorrido.getDuracion());
                 //El contenido de las columnas son una sucesion de URIs separadas por comas
-                cv.put(ColumnasRecorridos.AUDIO, Utils.crearStringComas(recorrido.getUriAudio()));
-                cv.put(ColumnasRecorridos.VIDEO, Utils.crearStringComas(recorrido.getUriVideo()));
+                cv.put(ColumnasRecorridos.AUDIO, (recorrido.getUriAudio()));
+                cv.put(ColumnasRecorridos.VIDEO, (recorrido.getUriVideo()));
                 cv.put(ColumnasRecorridos.IMAGEN, Utils.crearStringComas(recorrido.getUriImagen()));
                 cv.put(ColumnasRecorridos.ID_MARCADORES, Utils.crearStringComas(recorrido.getId_marcadores()));
                 recorrido.setId(db.insert(ColumnasRecorridos.NOMBRE_TABLA, null, cv));
@@ -359,16 +362,16 @@ public boolean addPuntosInteres(List<PuntoInteres> lstPuntosInteres) {
 
         try {
 
-                cv.put(ColumnasRecorridos.NOMBRE, recorrido.getNombre());
-                cv.put(ColumnasRecorridos.DESCRIPCION, recorrido.getDescripcion());
-                cv.put(ColumnasRecorridos.DISTANCIA,recorrido.getDistancia());
-                cv.put(ColumnasRecorridos.DURACION, recorrido.getDuracion());
-                //El contenido de las columnas son una sucesion de URIs separadas por comas
-                cv.put(ColumnasRecorridos.AUDIO, Utils.crearStringComas(recorrido.getUriAudio()));
-                cv.put(ColumnasRecorridos.VIDEO, Utils.crearStringComas(recorrido.getUriVideo()));
-                cv.put(ColumnasRecorridos.IMAGEN, Utils.crearStringComas(recorrido.getUriImagen()));
-                cv.put(ColumnasRecorridos.ID_MARCADORES, Utils.crearStringComas(recorrido.getId_marcadores()));
-                id=db.insert(ColumnasRecorridos.NOMBRE_TABLA, null, cv);
+            cv.put(ColumnasRecorridos.NOMBRE, recorrido.getNombre());
+            cv.put(ColumnasRecorridos.DESCRIPCION, recorrido.getDescripcion());
+            cv.put(ColumnasRecorridos.DISTANCIA,recorrido.getDistancia());
+            cv.put(ColumnasRecorridos.DURACION, recorrido.getDuracion());
+            //El contenido de las columnas son una sucesion de URIs separadas por comas
+            cv.put(ColumnasRecorridos.AUDIO, (recorrido.getUriAudio()));
+            cv.put(ColumnasRecorridos.VIDEO, (recorrido.getUriVideo()));
+            cv.put(ColumnasRecorridos.IMAGEN, Utils.crearStringComas(recorrido.getUriImagen()));
+            cv.put(ColumnasRecorridos.ID_MARCADORES, Utils.crearStringComas(recorrido.getId_marcadores()));
+            id=db.insert(ColumnasRecorridos.NOMBRE_TABLA, null, cv);
 
             db.setTransactionSuccessful();
         } finally {
@@ -407,8 +410,8 @@ public boolean addPuntosInteres(List<PuntoInteres> lstPuntosInteres) {
             recorrido.setDuracion(c.getString(4));
             //separamos cada URI delimitada por comas y las ponemos en cada una de las posiciones del array
             recorrido.setUriImagen(Utils.separarStringComasAString(c.getString(5)));
-            recorrido.setUriVideo(Utils.separarStringComasAString(c.getString(6)));
-            recorrido.setUriAudio(Utils.separarStringComasAString(c.getString(7)));
+            recorrido.setUriVideo((c.getString(6)));
+            recorrido.setUriAudio((c.getString(7)));
             recorrido.setIdsMarcadores(Utils.separarStringComasALong(c.getString(8)));
 
 
@@ -452,8 +455,8 @@ public boolean addPuntosInteres(List<PuntoInteres> lstPuntosInteres) {
                 recorrido.setDuracion(c.getString(4));
                 //separamos cada URI delimitada por comas y las ponemos en cada una de las posiciones del array
                 recorrido.setUriImagen(Utils.separarStringComasAString(c.getString(5)));
-                recorrido.setUriVideo(Utils.separarStringComasAString(c.getString(6)));
-                recorrido.setUriAudio(Utils.separarStringComasAString(c.getString(7)));
+                recorrido.setUriVideo((c.getString(6)));
+                recorrido.setUriAudio((c.getString(7)));
                 recorrido.setIdsMarcadores(Utils.separarStringComasALong(c.getString(8)));
                 allRecorridos.add(recorrido);
             }
@@ -506,9 +509,9 @@ public boolean addPuntosInteres(List<PuntoInteres> lstPuntosInteres) {
         if (recorrido.getUriImagen() != null)
             cv.put(ColumnasRecorridos.IMAGEN, Utils.crearStringComas(recorrido.getUriImagen()));
         if (recorrido.getUriVideo() != null)
-            cv.put(ColumnasRecorridos.VIDEO, Utils.crearStringComas(recorrido.getUriVideo()));
+            cv.put(ColumnasRecorridos.VIDEO, (recorrido.getUriVideo()));
         if (recorrido.getUriAudio() != null)
-            cv.put(ColumnasRecorridos.AUDIO, Utils.crearStringComas(recorrido.getUriAudio()));
+            cv.put(ColumnasRecorridos.AUDIO, (recorrido.getUriAudio()));
         if(recorrido.getId_marcadores() != null)
             cv.put(ColumnasRecorridos.ID_MARCADORES, Utils.crearStringComas(recorrido.getId_marcadores()));
 
@@ -536,14 +539,14 @@ public boolean addPuntosInteres(List<PuntoInteres> lstPuntosInteres) {
 
         try {
 
-                cv.put(ColumnasMarcadores.NOMBRE, marcador.getNombre());
-                cv.put(ColumnasMarcadores.DESCRIPCION, marcador.getDescripcion());
-                cv.put(ColumnasMarcadores.ID_PUNTOS_INTERES, Utils.crearStringComas(marcador.getId_puntos_interes()));
-                cv.put(ColumnasMarcadores.LATITUD, marcador.getLatitud());
-                cv.put(ColumnasMarcadores.LONGITUD, marcador.getLongitud());
-                //El contenido de las columnas son una sucesion de URIs separadas por comas
-                cv.put(ColumnasMarcadores.IMAGEN, Utils.crearStringComas(marcador.getUriImagen()));
-               id= db.insert(ColumnasMarcadores.NOMBRE_TABLA, null, cv);
+            cv.put(ColumnasMarcadores.NOMBRE, marcador.getNombre());
+            cv.put(ColumnasMarcadores.DESCRIPCION, marcador.getDescripcion());
+            cv.put(ColumnasMarcadores.ID_PUNTOS_INTERES, Utils.crearStringComas(marcador.getId_puntos_interes()));
+            cv.put(ColumnasMarcadores.LATITUD, marcador.getLatitud());
+            cv.put(ColumnasMarcadores.LONGITUD, marcador.getLongitud());
+            //El contenido de las columnas son una sucesion de URIs separadas por comas
+            cv.put(ColumnasMarcadores.IMAGEN, Utils.crearStringComas(marcador.getUriImagen()));
+            id= db.insert(ColumnasMarcadores.NOMBRE_TABLA, null, cv);
 
 
             db.setTransactionSuccessful();
@@ -722,12 +725,12 @@ public boolean addPuntosInteres(List<PuntoInteres> lstPuntosInteres) {
         db.beginTransaction();
 
         try {
-                cv.put(ColumnasInformacion.HORARIO, informacion.getHorario());
-                cv.put(ColumnasInformacion.TELEFONO, informacion.getTelefono());
-                cv.put(ColumnasInformacion.DIRECCION, informacion.getDireccion());
-                cv.put(ColumnasInformacion.WEB, informacion.getWeb());
-                cv.put(ColumnasInformacion.MAS_INFO, informacion.getMasInfo());
-                id= db.insert(ColumnasInformacion.NOMBRE_TABLA, null, cv);
+            cv.put(ColumnasInformacion.HORARIO, informacion.getHorario());
+            cv.put(ColumnasInformacion.TELEFONO, informacion.getTelefono());
+            cv.put(ColumnasInformacion.DIRECCION, informacion.getDireccion());
+            cv.put(ColumnasInformacion.WEB, informacion.getWeb());
+            cv.put(ColumnasInformacion.MAS_INFO, informacion.getMasInfo());
+            id= db.insert(ColumnasInformacion.NOMBRE_TABLA, null, cv);
 
             db.setTransactionSuccessful();
         } finally {
@@ -819,6 +822,86 @@ public boolean addPuntosInteres(List<PuntoInteres> lstPuntosInteres) {
             filas= db.update(ColumnasInformacion.NOMBRE_TABLA, cv,
                     ColumnasInformacion.KEY_ID + " = " + informacion.getId(), null);
 
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        return filas;
+    }
+
+    /**
+     * Guarda en la base de datos una lista de coordenadas asociadas a un recorrido
+     * @param coords
+     * @param recorrID
+     * @return
+     */
+    public boolean setCoords(List<Coordenada> coords, long recorrID) {
+
+        if (coords.isEmpty())
+            return false;
+
+        ContentValues cv = new ContentValues();
+        cv.put(ColumnasCoordenada.ID_RECORRIDO, recorrID);
+
+        db.beginTransaction();
+        try {
+            for (Coordenada g : coords) {
+                cv.put(ColumnasCoordenada.LATITUD, g.getLatitud());
+                cv.put(ColumnasCoordenada.LONGITUD, g.getLongitud());
+                g.setId(db.insert(ColumnasCoordenada.NOMBRE_TABLA, null, cv));
+            }
+
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        return true;
+    }
+
+    /**
+     * Obtiene de la base de datos una lista de coordenadas asociadas a un recorrido
+     * @param recorrID
+     * @return
+     */
+
+    public List<Coordenada> getCoords(long recorrID) {
+        LinkedList<Coordenada> coords = new LinkedList<Coordenada>();
+        db.beginTransaction();
+        try {
+            Cursor c = db.query(ColumnasCoordenada.NOMBRE_TABLA, new String[] {ColumnasCoordenada.LATITUD, ColumnasCoordenada.LONGITUD,
+                    ColumnasCoordenada.KEY_ID }, ColumnasCoordenada.ID_RECORRIDO
+                    + " = " + recorrID , null, null, null, null, null);
+            c.moveToFirst();
+            c.moveToPrevious();
+            // guardamos los valores segun hicimos el query
+            while (c.moveToNext()) {
+                Coordenada g = new Coordenada();
+                g.setLatitud(c.getDouble(0));
+                g.setLongitud(c.getDouble(1));
+                g.setId(c.getLong(2));
+                g.setIdRecorrido(recorrID);
+                coords.add(g);
+            }
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        return coords;
+    }
+
+
+    /**
+     * Elimina todas las coordenadas asociadas a un recorrido
+     * @param recorrID
+     * @return
+     */
+    public int deleteCoords(long recorrID) {
+        int filas=0;
+        db.beginTransaction();
+        try {
+            filas=db
+                    .delete(ColumnasCoordenada.NOMBRE_TABLA,
+                            ColumnasCoordenada.ID_RECORRIDO + " = " + recorrID, null);
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();

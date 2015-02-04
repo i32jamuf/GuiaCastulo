@@ -1,36 +1,26 @@
 package es.aplicacion.guiacastulo;
 
-import android.app.Activity;
 import android.content.Intent;
-
-
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.view.View;
 
 
-public class MainActivity extends Activity {
-
-
-    Button btnidioma;
+public class MainActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-
         return true;
     }
 
@@ -49,9 +39,9 @@ public class MainActivity extends Activity {
     }
 
     public void brecorridoClick(View view){
-    Intent intent= new Intent(MainActivity.this, ListRecorridos.class);
-    startActivity(intent);
-}
+        Intent intent= new Intent(MainActivity.this, ListRecorridos.class);
+        startActivity(intent);
+    }
 
     public void bptointeresClick(View view){
         Intent intent= new Intent(MainActivity.this, VistaMapaAllPoIs.class);

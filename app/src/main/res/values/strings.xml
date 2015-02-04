@@ -16,4 +16,6 @@
     <string name="botonRecorridos">Recorridos</string>
     <string name="botonAjustes">Ajustes</string>
     <string name="botonMapa">Puntos de Interés</string>
+    <string name="title_activity_video">Video</string>
+
 </resources>

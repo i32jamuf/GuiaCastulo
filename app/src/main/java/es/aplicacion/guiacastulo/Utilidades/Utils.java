@@ -1,5 +1,10 @@
 package es.aplicacion.guiacastulo.Utilidades;
 
+import android.os.Environment;
+import android.util.Log;
+
+import java.io.File;
+
 /**
  * Created by Enmanuel on 22/01/2015.
  */
@@ -61,12 +66,12 @@ public class Utils {
      * @param comas
      * @return
      */
-   public static String [] separarStringComasAString(String comas){
+    public static String [] separarStringComasAString(String comas){
 
-       return comas.split(",");
-       //String[] results = comas.split(",");
-       //return results;
-   }
+        return comas.split(",");
+        //String[] results = comas.split(",");
+        //return results;
+    }
 
     /**
      * Devuelve un array de String, desde un String separado por comas.
@@ -86,4 +91,20 @@ public class Utils {
         return IDs;
     }
 
+    /**
+     * Crea un directorio, si no existe, en la unidad de almacenamiento externa
+     *
+     * @param path
+     */
+    public static void crearDirSiNoExiste(String path) {
+
+        File file = new File(Environment.getExternalStorageDirectory(), path);
+        if (!file.exists()) {
+            if (!file.mkdirs()) {
+                Log.e("GuiaCastulo", "Problem creating Image folder");
+            }
+        }
+    }
+
 }
+

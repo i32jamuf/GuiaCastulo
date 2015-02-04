@@ -10,6 +10,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import es.aplicacion.guiacastulo.Utilidades.Utils;
 import es.aplicacion.guiacastulo.db.model.Recorrido;
 import es.aplicacion.guiacastulo.db.schema.Database;
 import java.util.ArrayList;
@@ -30,14 +31,14 @@ public class ListRecorridos extends Activity  {
         setContentView(R.layout.activity_list_recorridos);
 
         database.open();
-       recorridos = database.getAllRecorridos();
+        recorridos = database.getAllRecorridos();
 
 // Se crea la lista de recorridos
         ListView lv = (ListView)findViewById(R.id.listrecorridos);
 // Se cargan los items de los recorridos
         ArrayList<ItemRecorrido> itemsRecorrido = obtenerItems();
 
-    // Se asocian los items al adaptador
+        // Se asocian los items al adaptador
 
         ItemRecorridoAdapter adapter = new ItemRecorridoAdapter(this, itemsRecorrido);
 
@@ -62,13 +63,13 @@ public class ListRecorridos extends Activity  {
     private ArrayList<ItemRecorrido> obtenerItems() {
         ArrayList<ItemRecorrido> items = new ArrayList<ItemRecorrido>();
 /**
-        items.add(new ItemRecorrido (1, "Recorrido árabe", "3 horas y 20 minutos", "drawable/patatas"));
-        items.add(new ItemRecorrido(2, "Recorrido musulmán", "4 horas", "drawable/naranjas"));
-        items.add(new ItemRecorrido(3, "Recorrido romano", "2 horas y 30 minutos", "drawable/lechuga"));
+ items.add(new ItemRecorrido (1, "Recorrido árabe", "3 horas y 20 minutos", "drawable/patatas"));
+ items.add(new ItemRecorrido(2, "Recorrido musulmán", "4 horas", "drawable/naranjas"));
+ items.add(new ItemRecorrido(3, "Recorrido romano", "2 horas y 30 minutos", "drawable/lechuga"));
 
-*/
-       for(Recorrido recorrido : recorridos){
-            items.add(new ItemRecorrido(recorrido.getId(),recorrido.getNombre(),recorrido.getDuracion(),"drawable/patatas"));
+ */
+        for(Recorrido recorrido : recorridos){
+            items.add(new ItemRecorrido(recorrido.getId(),recorrido.getNombre(),recorrido.getDuracion(), Utils.crearStringComas(recorrido.getUriImagen())));
         }
         return items;
     }
@@ -92,10 +93,6 @@ public class ListRecorridos extends Activity  {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
-    
-
 }

@@ -3,6 +3,10 @@ package es.aplicacion.guiacastulo;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
+import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -37,6 +41,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import es.aplicacion.guiacastulo.Utilidades.Utils;
+
 import es.aplicacion.guiacastulo.db.model.Marcador;
 import es.aplicacion.guiacastulo.db.schema.Database;
 
@@ -53,7 +58,9 @@ public class VistaMapaAllPoIs extends FragmentActivity  {
     final int RQS_GooglePlayServices = 1;
     List<Marcador> markers;
     Database database= new Database (this);
-    HashMap<String, Long> markerMap = new HashMap<String, Long>();
+    HashMap<String, Marcador> markerMap = new HashMap<String, Marcador>();
+    private int thumbWidth=200;
+    private int thumbHeight=200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +104,10 @@ public class VistaMapaAllPoIs extends FragmentActivity  {
                 TextView tvSnippet = ((TextView) myContentView
                         .findViewById(R.id.subtitulo));
                 tvSnippet.setText(marker.getSnippet());
+                ImageView image = (ImageView) myContentView.findViewById(R.id.imagen_marcador);
+                Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(Utils.crearStringComas(markerMap.get(marker.getId()).getUriImagen())), thumbWidth, thumbHeight);
+                image.setImageBitmap(ThumbImage);
+                //  image.setImageURI(Uri.parse(Utils.crearStringComas(markerMap.get(marker.getId()).getUriImagen())));
                 return myContentView;
             }
         });
@@ -105,17 +116,18 @@ public class VistaMapaAllPoIs extends FragmentActivity  {
         int i=0;
         for(Marcador marcador : markers){
             if(i==0){
-                mCamera = CameraUpdateFactory.newLatLngZoom(new LatLng(marcador.getLatitud(), marcador.getLongitud()), 5);
+                mCamera = CameraUpdateFactory.newLatLngZoom(new LatLng(marcador.getLatitud(), marcador.getLongitud()), 15);
                 mMap.animateCamera(mCamera);
                 i++;
             }
             //ponemos los marcadores en el mapa de google y mapeamos el id del marcador de google con
             // el id del marcador en la abse de datos
 
-             markerMap.put(mMap.addMarker(new MarkerOptions()
-             .position(new LatLng(marcador.getLatitud(),marcador.getLongitud()))
-             .title(marcador.getNombre())
-             .snippet(marcador.getDescripcion())).getId(),marcador.getId());
+            Marker marker =mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(marcador.getLatitud(),marcador.getLongitud()))
+                    .title(marcador.getNombre())
+                    .snippet(marcador.getDescripcion()));
+            markerMap.put(marker.getId(),marcador);
         }
 
         mMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
@@ -124,11 +136,11 @@ public class VistaMapaAllPoIs extends FragmentActivity  {
             @Override
             public void onInfoWindowClick(Marker marker) {
 
-            //    Log.d("VistaMapa","onInfoWindowClick G: "+marker.getId()+" M: "+markerMap.get(marker.getId()));
+                //    Log.d("VistaMapa","onInfoWindowClick G: "+marker.getId()+" M: "+markerMap.get(marker.getId()));
                 Intent intent = new Intent(VistaMapaAllPoIs.this,FichaPuntosInteres.class);
                 Bundle b = new Bundle();
                 //sacamos el valor, mapeado con este marcador de google, del id de la base de datos
-                b.putLong("ID_MARCADOR",markerMap.get(marker.getId()));
+                b.putLong("ID_MARCADOR",markerMap.get(marker.getId()).getId());
                 intent.putExtras(b);
                 startActivity(intent);
             }
@@ -149,7 +161,7 @@ public class VistaMapaAllPoIs extends FragmentActivity  {
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
 
         if (resultCode == ConnectionResult.SUCCESS){
-          //  Toast.makeText(getApplicationContext(),"isGooglePlayServicesAvailable SUCCESS",Toast.LENGTH_LONG).show();
+            //  Toast.makeText(getApplicationContext(),"isGooglePlayServicesAvailable SUCCESS",Toast.LENGTH_LONG).show();
         }else{
             GooglePlayServicesUtil.getErrorDialog(resultCode, this, RQS_GooglePlayServices);
         }

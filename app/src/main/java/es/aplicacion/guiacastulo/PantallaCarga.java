@@ -29,18 +29,20 @@ import es.aplicacion.guiacastulo.db.schema.Database;
 public class PantallaCarga extends ActionBarActivity {
 
     final int WELCOME		= 25;
-
     TextView linea_ayuda;
     ProgressBar mProgressBar;
     public int progreso=0;
     int paso = 500;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_carga);
+
+        // Creamos por primera vez las carpetas donde importar y exportar
+        Utils.crearDirSiNoExiste("/GuiaCastulo/Imagenes/");
+        Utils.crearDirSiNoExiste("/GuiaCastulo/Videos/");
+        Utils.crearDirSiNoExiste("/GuiaCastulo/Audios/");
 
         mProgressBar=(ProgressBar) findViewById(R.id.progressbar);
         linea_ayuda = (TextView) findViewById(R.id.linea_ayuda);
@@ -49,19 +51,8 @@ public class PantallaCarga extends ActionBarActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-
-
-
-
         cuentaAtras(4000);
-
-
     }
-
-
-
-
 
     private void cuentaAtras(long milisegundos){
         CountDownTimer mCountDownTimer;
@@ -77,28 +68,22 @@ public class PantallaCarga extends ActionBarActivity {
                 Log.v("Log_tag", "Tick of Progress" + progreso + millisUntilFinished);
                 progreso+=paso;
                 mProgressBar.setProgress(progreso);
-
             }
 
             @Override
             public void onFinish() {
-
 
                 progreso+=	paso;
                 mProgressBar.setProgress(progreso);
                 mProgressBar.setVisibility(View.INVISIBLE);
                 Intent intent= new Intent(PantallaCarga.this, MainActivity.class);
                 startActivity(intent);
-
             }
         };
 
         mCountDownTimer.start();
 
     }
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

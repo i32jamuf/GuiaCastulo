@@ -1,33 +1,61 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="es.aplicacion.guiacastulo.DescripcionRecorridos"
-    android:background="@drawable/fondo">
+    android:id="@+id/root"
+    tools:context="es.aplicacion.guiacastulo.FichaPuntosInteres">
 
-    <ImageView
-        android:layout_width="wrap_content"
+    <Gallery xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/gallery"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imagenrecorrido"
-        android:src="@drawable/recorridos"
-        android:layout_gravity="center" />
+        android:orientation="horizontal"
+        android:gravity="center">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Audio"
+            android:id="@+id/b_audio"
+            android:onClick="onButtonAudioClicked"/>
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Video"
+            android:id="@+id/b_video"
+            android:onClick="onButtonVideoClicked"/>
+    </LinearLayout>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mapa del Recorrido"
-        android:layout_gravity="center"
-        android:id="@+id/button2"
+        android:text="Ir al recorrido"
+        android:id="@+id/b_mapa"
         android:onClick="bmapaClick"
-        android:background="@drawable/red_button"
-        style="@style/button_text"/>
+        android:layout_gravity="center_horizontal" />
 
-    <TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:textColor="#ffffff"
-    android:textAppearance="?android:attr/textAppearanceMedium"
-    android:id="@+id/infotext"/>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbarSize="@dimen/abc_action_bar_default_height_material"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:id="@+id/infotext"
+            android:textColor="#111111"
+            android:typeface="sans"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </ScrollView>
 
 </LinearLayout>

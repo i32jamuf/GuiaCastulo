@@ -14,8 +14,8 @@ public class Recorrido {
     private String duracion;
     private long [] id_marcadores;
     private String [] uri_imagen;
-    private String [] uri_video;
-    private String [] uri_audio;
+    private String uri_video;
+    private String uri_audio;
 
 
     // setters
@@ -65,14 +65,14 @@ public class Recorrido {
     /**
      * Inicializa la direccion donde esta alojado el video del punto de interes.
      */
-    public void setUriVideo(String [] uri_video) {
+    public void setUriVideo(String uri_video) {
         this.uri_video = uri_video;
     }
 
     /**
      * Inicializa la direccion donde esta alojado el audio del punto de interes.
      */
-    public void setUriAudio(String [] uri_audio) {
+    public void setUriAudio(String uri_audio) {
         this.uri_audio = uri_audio;
     }
 
@@ -141,7 +141,7 @@ public class Recorrido {
      *
      * @return String uri_imagen.
      */
-    public String [] getUriVideo() {
+    public String getUriVideo() {
         return uri_video;
     }
     /**
@@ -149,7 +149,7 @@ public class Recorrido {
      *
      * @return String uri_imagen.
      */
-    public String [] getUriAudio() {
+    public String getUriAudio() {
         return uri_audio;
     }
 
@@ -168,11 +168,11 @@ public class Recorrido {
      */
     public String toString() {
         return "\nId Recorrido: " + id + "\nNombre: " + nombre + "\nDescrición: " + descripcion+
-                 "\nDuracion (horas): " + duracion+ "\nDistancia (km): " + distancia+
+                "\nDuracion (horas): " + duracion+ "\nDistancia (km): " + distancia+
                 "\nIds marcadores: " + Utils.crearStringComas(id_marcadores)
                 +
                 "\nUriImagen: "+ Utils.crearStringComas(uri_imagen)+
-                "\nUriVideo: "+Utils.crearStringComas(uri_video)+
-                "\nUriAudio: "+Utils.crearStringComas(uri_audio);
+                "\nUriVideo: "+(uri_video)+
+                "\nUriAudio: "+(uri_audio);
     }
 }

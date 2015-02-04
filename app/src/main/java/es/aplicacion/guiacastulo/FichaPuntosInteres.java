@@ -1,32 +1,36 @@
+
 package es.aplicacion.guiacastulo;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
+import android.view.MotionEvent;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
 
 import android.app.Activity;
 import android.widget.Gallery;
-import android.widget.Toast;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.view.View;
 
 import java.util.LinkedList;
 
+import es.aplicacion.guiacastulo.Utilidades.ImageAdapter;
 import es.aplicacion.guiacastulo.Utilidades.ImageDialog;
+import es.aplicacion.guiacastulo.Utilidades.Video;
 import es.aplicacion.guiacastulo.db.model.Marcador;
 import es.aplicacion.guiacastulo.db.model.PuntoInteres;
 import es.aplicacion.guiacastulo.db.schema.Database;
 
-public class FichaPuntosInteres extends Activity {
+public class FichaPuntosInteres extends Activity implements
+        MediaController.MediaPlayerControl,
+        MediaPlayer.OnBufferingUpdateListener{
 
 
     TextView seleccionado;
@@ -37,6 +41,9 @@ public class FichaPuntosInteres extends Activity {
     Button b_anterior;
     Button b_siguiente;
     int n_PoI=0;
+    MediaController mController;
+    MediaPlayer mPlayer;
+    int bufferPercent = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +58,8 @@ public class FichaPuntosInteres extends Activity {
         //llenamos una lista de PoIs con todos los que tiene este marcador
         for(int i=0;i<ids_PoIs.length;i++ ){
 
-           // PuntoInteres poi=database.getPuntoInteres(ids_PoIs[i]);
-          //  Log.d("Ficha_PoI",poi.toString());
+            // PuntoInteres poi=database.getPuntoInteres(ids_PoIs[i]);
+            //  Log.d("Ficha_PoI",poi.toString());
             PoIsMarker.add(database.getPuntoInteres(ids_PoIs[i]));
 
         }
@@ -62,15 +69,32 @@ public class FichaPuntosInteres extends Activity {
         b_anterior.setVisibility(View.INVISIBLE);
         //si es el unico PoI ocultamos el boton siguiente
         if(PoIsMarker.size()==1)
-        b_siguiente.setVisibility(View.INVISIBLE);
+            b_siguiente.setVisibility(View.INVISIBLE);
 
         cargarGallery(PoIsMarker.get(n_PoI));
         cargarDescripcion(PoIsMarker.get(n_PoI));
-        cargarAudio(PoIsMarker.get(n_PoI));
-        cargarVideo(PoIsMarker.get(n_PoI));
+        mController = new MediaController(this);
+        mController.setAnchorView(findViewById(R.id.root));
+
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPlayer = new MediaPlayer();
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        mPlayer.release();
+        // mPlayer = null;
     }
 
-
+    @Override
+    public void onStop() {
+        super.onPause();
+        mPlayer.release();
+        // mPlayer = null;
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -95,55 +119,78 @@ public class FichaPuntosInteres extends Activity {
 
     public void onButtonSiguienteClicked(View view){
         n_PoI++;
+        mPlayer.stop();
+        mPlayer.release();
+        mPlayer = new MediaPlayer();
         cargarGallery(PoIsMarker.get(n_PoI));
         cargarDescripcion(PoIsMarker.get(n_PoI));
-        cargarAudio(PoIsMarker.get(n_PoI));
-        cargarVideo(PoIsMarker.get(n_PoI));
         b_anterior.setVisibility(View.VISIBLE);
         //en el ultimo PoI no mostramos siguiente
         if(n_PoI==PoIsMarker.size()-1)
-        b_siguiente.setVisibility(View.GONE);
+            b_siguiente.setVisibility(View.GONE);
 
     }
     public void onButtonAnteriorClicked(View view){
         n_PoI--;
+
+        mPlayer.stop();
+        mPlayer.release();
+        mPlayer = new MediaPlayer();
         cargarGallery(PoIsMarker.get(n_PoI));
         cargarDescripcion(PoIsMarker.get(n_PoI));
-        cargarAudio(PoIsMarker.get(n_PoI));
-        cargarVideo(PoIsMarker.get(n_PoI));
         b_siguiente.setVisibility(View.VISIBLE);
         //en el primer PoI no mostramos anterior
         if(n_PoI==0)
-        b_anterior.setVisibility(View.GONE);
+            b_anterior.setVisibility(View.GONE);
     }
 
+    public void onButtonVideoClicked(View view){
+        cargarVideo();
+
+    }
+    public void onButtonAudioClicked(View view){
+        cargarAudio(PoIsMarker.get(n_PoI));
+
+    }
+
+    //TODO rehacer y comentar codigo
     private void cargarGallery(PuntoInteres PoI){
 
         Gallery gallery = (Gallery)findViewById(R.id.gallery);
-        ImageAdapter imgAdapter = new ImageAdapter(this);
-        gallery.setAdapter(imgAdapter);
-        final Integer[] imagesID = imgAdapter.getImgIds();
-        for(int k=0;k<imagesID.length;k++){
-            Log.d("Ficha PoI galley","imagesID " + imagesID[k]);
+        // ImageAdapter imgAdapter = new ImageAdapter(this);
+        final LinkedList<String> uris= new LinkedList<String>();
+        // String [] stringUris =new String[PoIsMarker.get(n_PoI).getUriImagen().length];
+        // System.arraycopy( PoIsMarker.get(n_PoI).getUriImagen(), 0,stringUris, 0, PoIsMarker.get(n_PoI).getUriImagen().length );
+        for(int i=0;i<PoI.getUriImagen().length;i++){
+            // Uri uri = Uri.parse(PoI.getUriImagen()[i]);
+
+            uris.add(PoI.getUriImagen()[i]);
         }
+
+        final ImageAdapter imgAdapter = new ImageAdapter(this,uris);
+        gallery.setAdapter(imgAdapter);
+        //  final Integer[] imagesID = imgAdapter.getImgIds();
+
+        //  final List<Uri> uris_img= imgAdapter.getImgIds();
+        //  for(int k=0;k<imagesID.length;k++){
+        //     Log.d("Ficha PoI galley","imagesID " + imagesID[k]);
+        // }
 //cargar imagen
         gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.d("Ficha PoI","Foto " + (i+1));
-                for(int j=0;j<imagesID.length;j++){
-                    Log.d("Ficha PoI onclick","imagesID " + imagesID[j]);
-                }
+                //  for(int j=0;j<uris_img.size();j++){
+                //     Log.d("Ficha PoI onclick","imagesID " + uris_img.get(j));
+                // }
                 Intent intent= new Intent(FichaPuntosInteres.this, ImageDialog.class);
                 Bundle b = new Bundle();
-                b.putInt("ID_IMG",imagesID[i]);
+
+                b.putString("ID_IMG",imgAdapter.getImgUris().get(i).toString());
                 intent.putExtras(b);
                 startActivity(intent);
-
-        }
+            }
         });
-
-
     }
 
     private void cargarDescripcion(PuntoInteres PoI){
@@ -152,9 +199,84 @@ public class FichaPuntosInteres extends Activity {
     }
     private void cargarAudio(PuntoInteres PoI){
 
-    }
-    private void cargarVideo(PuntoInteres PoI){
+        //si no se esta reproduciendo el audio, carga uno nuevo
+        if(!mPlayer.isPlaying()){
+//Set the audio data source
+            try {
+                mPlayer.setDataSource(this,
+                        Uri.parse(Environment.getExternalStorageDirectory().toString()+"/GuiaCastulo/Audios/audio_01.mp3"));
+                // Uri.parse(PoI.getUriAudio()));
+                mPlayer.prepare();
+                mPlayer.start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
+            mController.setMediaPlayer(this);
+            mController.setEnabled(true);
+
+
+        }
+        mController.show();
+    }
+    private void cargarVideo(){
+        Intent  tostart = new Intent(FichaPuntosInteres.this, Video.class);
+        startActivity(tostart);
     }
 
+    //al pulsar la pantalla muestra los controles de audio
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        mController.show();
+        return super.onTouchEvent(event);
+    }
+//MediaPlayerControl Methods
+
+    @Override
+    public int getBufferPercentage() {
+        return bufferPercent;
+    }
+    @Override
+    public int getCurrentPosition() {
+        return mPlayer.getCurrentPosition();
+    }
+    @Override
+    public int getDuration() {
+        return mPlayer.getDuration();
+    }
+    @Override
+    public boolean isPlaying() {
+        return mPlayer.isPlaying();
+    }
+    @Override
+    public int getAudioSessionId (){
+        return 0;
+    }
+    @Override
+    public void pause() {
+        mPlayer.pause();
+    }
+    @Override
+    public void seekTo(int pos) {
+        mPlayer.seekTo(pos);
+    }
+    @Override
+    public void start() {
+        mPlayer.start();
+    }
+    //BufferUpdateListener Methods
+    @Override
+    public void onBufferingUpdate(MediaPlayer mp, int percent) {
+        bufferPercent = percent;
+    }
+    //Android 2.0+ Target Callbacks
+    public boolean canPause() {
+        return true;
+    }
+    public boolean canSeekBackward() {
+        return true;
+    }
+    public boolean canSeekForward() {
+        return true;
+    }
 }

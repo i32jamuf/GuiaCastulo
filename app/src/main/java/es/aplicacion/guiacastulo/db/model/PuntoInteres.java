@@ -12,8 +12,8 @@ public class PuntoInteres {
     private String nombre;
     private String descripcion;
     private String [] uri_imagen;
-    private String [] uri_video;
-    private String [] uri_audio;
+    private String uri_video;
+    private String uri_audio;
     private double latitud;
     private double longitud;
 
@@ -51,14 +51,14 @@ public class PuntoInteres {
     /**
      * Inicializa la direccion donde esta alojado el video del punto de interes.
      */
-    public void setUriVideo(String [] uri_video) {
+    public void setUriVideo(String uri_video) {
         this.uri_video = uri_video;
     }
 
     /**
      * Inicializa la direccion donde esta alojado el audio del punto de interes.
      */
-    public void setUriAudio(String [] uri_audio) {
+    public void setUriAudio(String uri_audio) {
         this.uri_audio = uri_audio;
     }
 
@@ -120,7 +120,7 @@ public class PuntoInteres {
      *
      * @return String uri_imagen.
      */
-    public String [] getUriVideo() {
+    public String getUriVideo() {
         return uri_video;
     }
     /**
@@ -128,7 +128,7 @@ public class PuntoInteres {
      *
      * @return String uri_imagen.
      */
-    public String [] getUriAudio() {
+    public String getUriAudio() {
         return uri_audio;
     }
     /**
@@ -155,8 +155,8 @@ public class PuntoInteres {
     public String toString() {
         return "\nId PoI: " + id + "\nNombre: " + nombre + "\nDescrición: " + descripcion+
                 "\nUriImagen: "+Utils.crearStringComas(uri_imagen)+
-                "\nUriVideo: "+Utils.crearStringComas(uri_video)+
-                "\nUriAudio: "+ Utils.crearStringComas(uri_audio)+
+                "\nUriVideo: "+(uri_video)+
+                "\nUriAudio: "+ (uri_audio)+
                 "\nCoordenadas: " +latitud+" , "+longitud;
     }
 }

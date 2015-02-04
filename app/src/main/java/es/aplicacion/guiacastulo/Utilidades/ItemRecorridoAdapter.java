@@ -3,6 +3,10 @@ package es.aplicacion.guiacastulo.Utilidades;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +25,10 @@ import es.aplicacion.guiacastulo.R;
 public class ItemRecorridoAdapter extends BaseAdapter {
 
 
+
+    //TODO tamaños a modificar segun tamaños de pantalla
+    private int thumbWidth=200;
+    private int thumbHeight=200;
 
     protected Activity activity;
     protected ArrayList<ItemRecorrido> items;
@@ -57,8 +65,11 @@ public class ItemRecorridoAdapter extends BaseAdapter {
         ItemRecorrido item = items.get(position);
 
         ImageView image = (ImageView) vi.findViewById(R.id.imagen);
-        int imageResource = activity.getResources().getIdentifier(item.getRutaImagen(), null, activity.getPackageName());
-        image.setImageDrawable(activity.getResources().getDrawable(imageResource));
+        Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(item.getRutaImagen()), thumbWidth, thumbHeight);
+        // image.setImageURI(Uri.parse(item.getRutaImagen()));
+        // int imageResource = activity.getResources().getIdentifier(item.getRutaImagen(), null, activity.getPackageName());
+        //image.setImageDrawable(activity.getResources().getDrawable(imageResource));
+        image.setImageBitmap(ThumbImage);
 
         TextView titulo = (TextView) vi.findViewById(R.id.titulo);
         titulo.setText(item.getTitulo());

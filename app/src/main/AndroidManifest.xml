@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="es.aplicacion.guiacastulo" >
 
-
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -104,8 +102,12 @@
         </activity>
         <activity
             android:name=".Utilidades.ImageDialog"
-            android:label="@string/title_activity_image_dialog"
-            >
+            android:label="@string/title_activity_image_dialog" >
+        </activity>
+        <activity
+            android:name=".Utilidades.Video"
+            android:label="@string/title_activity_video" >
         </activity>
     </application>
+
 </manifest>
