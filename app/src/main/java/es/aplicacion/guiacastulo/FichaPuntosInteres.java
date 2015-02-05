@@ -147,12 +147,12 @@ public class FichaPuntosInteres extends Activity implements
             b_anterior.setVisibility(View.GONE);
     }
 
-    public void onButtonVideoClicked(View view){
+    public void bvideoClick(View view){
         mController.hide();
         cargarVideo();
     }
 
-    public void onButtonAudioClicked(View view){
+    public void baudioClick(View view){
         cargarAudio(PoIsMarker.get(n_PoI));
     }
 

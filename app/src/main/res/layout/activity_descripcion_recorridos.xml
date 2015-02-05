@@ -45,6 +45,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ir al recorrido"
+        style="@style/button_text"
+        android:background="@drawable/red_button"
         android:id="@+id/b_mapa"
         android:textColor="#ffffff"
         android:onClick="bmapaClick"
