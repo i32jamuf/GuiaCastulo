@@ -2,6 +2,7 @@
 package es.aplicacion.guiacastulo;
 
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -82,18 +83,20 @@ public class FichaPuntosInteres extends Activity implements
         super.onResume();
         mPlayer = new MediaPlayer();
     }
+    /**
     @Override
     public void onPause() {
         super.onPause();
         mPlayer.release();
-        // mPlayer = null;
-    }
+        mPlayer = null;
+    }**/
 
     @Override
     public void onStop() {
         super.onPause();
+        mController.hide();
         mPlayer.release();
-        // mPlayer = null;
+      //  mPlayer = null;
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -119,6 +122,7 @@ public class FichaPuntosInteres extends Activity implements
 
     public void onButtonSiguienteClicked(View view){
         n_PoI++;
+        mController.hide();
         mPlayer.stop();
         mPlayer.release();
         mPlayer = new MediaPlayer();
@@ -132,7 +136,7 @@ public class FichaPuntosInteres extends Activity implements
     }
     public void onButtonAnteriorClicked(View view){
         n_PoI--;
-
+        mController.hide();
         mPlayer.stop();
         mPlayer.release();
         mPlayer = new MediaPlayer();
@@ -145,6 +149,7 @@ public class FichaPuntosInteres extends Activity implements
     }
 
     public void onButtonVideoClicked(View view){
+        mController.hide();
         cargarVideo();
 
     }
@@ -183,6 +188,7 @@ public class FichaPuntosInteres extends Activity implements
                 //  for(int j=0;j<uris_img.size();j++){
                 //     Log.d("Ficha PoI onclick","imagesID " + uris_img.get(j));
                 // }
+                mController.hide();
                 Intent intent= new Intent(FichaPuntosInteres.this, ImageDialog.class);
                 Bundle b = new Bundle();
 
@@ -203,8 +209,9 @@ public class FichaPuntosInteres extends Activity implements
         if(!mPlayer.isPlaying()){
 //Set the audio data source
             try {
+                mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 mPlayer.setDataSource(this,
-                        Uri.parse(Environment.getExternalStorageDirectory().toString()+"/GuiaCastulo/Audios/audio_01.mp3"));
+                Uri.parse(Environment.getExternalStorageDirectory().toString()+"/GuiaCastulo/Audios/audio_01.mp3"));
                 // Uri.parse(PoI.getUriAudio()));
                 mPlayer.prepare();
                 mPlayer.start();
@@ -214,22 +221,14 @@ public class FichaPuntosInteres extends Activity implements
 
             mController.setMediaPlayer(this);
             mController.setEnabled(true);
-
-
         }
         mController.show();
     }
     private void cargarVideo(){
-        Intent  tostart = new Intent(FichaPuntosInteres.this, Video.class);
-        startActivity(tostart);
+            Intent tostart = new Intent(FichaPuntosInteres.this, Video.class);
+            startActivity(tostart);
     }
 
-    //al pulsar la pantalla muestra los controles de audio
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        mController.show();
-        return super.onTouchEvent(event);
-    }
 //MediaPlayerControl Methods
 
     @Override

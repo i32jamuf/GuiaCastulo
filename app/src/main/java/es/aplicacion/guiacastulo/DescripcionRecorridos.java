@@ -70,6 +70,7 @@ public class DescripcionRecorridos extends Activity implements
 
     //Llamada a la clase mapa al presionar el boton de Mapa
     public void bmapaClick(View view) {
+        mController.hide();
         Intent intent = new Intent(DescripcionRecorridos.this, VistaMapa.class);
         Bundle b = new Bundle();
         b.putString("IDS_MARCADORES", Utils.crearStringComas(recorrido.getId_marcadores()));
@@ -121,6 +122,7 @@ public class DescripcionRecorridos extends Activity implements
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //se inicia la activity que muestra la imagen a pantalla completa
+                mController.hide();
                 Intent intent= new Intent(DescripcionRecorridos.this, ImageDialog.class);
                 Bundle b = new Bundle();
                 b.putString("ID_IMG",imgAdapter.getImgUris().get(i).toString());
@@ -130,6 +132,14 @@ public class DescripcionRecorridos extends Activity implements
         });
     }
 
+    public void onButtonVideoClicked(View view){
+        mController.hide();
+        cargarVideo();
+
+    }
+    public void onButtonAudioClicked(View view) {
+        cargarAudio();
+    }
     /**
      * Carga la descripción del recorrido en el TextView
      * @param recorrido
@@ -172,46 +182,36 @@ public class DescripcionRecorridos extends Activity implements
         startActivity(tostart);
     }
 
-    public void onButtonVideoClicked(View view){
-        cargarVideo();
-
-    }
-    public void onButtonAudioClicked(View view){
-        cargarAudio();
-
-    }
-
+/**
     @Override
     public void onPause() {
         super.onPause();
         mPlayer.release();
         // mPlayer = null;
     }
-
+**/
     @Override
     public void onStop() {
         super.onPause();
+        mController.hide();
         mPlayer.release();
         // mPlayer = null;
     }
 
-    //si se esta reproduciendo audio al pulsar la pantalla muestra los controles
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if(mPlayer.isPlaying())
-            mController.show();
-        return super.onTouchEvent(event);
-    }
     //MediaPlayerControl Methods
 
     @Override
     public int getBufferPercentage() {
         return bufferPercent;
     }
+
     @Override
     public int getCurrentPosition() {
-        return mPlayer.getCurrentPosition();
+
+            return mPlayer.getCurrentPosition();
+
     }
+
     @Override
     public int getDuration() {
         return mPlayer.getDuration();
