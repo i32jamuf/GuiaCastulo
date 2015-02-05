@@ -2,6 +2,7 @@ package es.aplicacion.guiacastulo.Utilidades;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
@@ -15,29 +16,23 @@ import es.aplicacion.guiacastulo.R;
 
 public class Video extends Activity {
 
-    VideoView videoView;
-    MediaController controller;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
 
-        videoView = new VideoView(this);
-        // VideoView videoView = (VideoView)findViewById(R.id.video);
-        videoView.setVideoURI( Uri.parse(Environment.getExternalStorageDirectory().toString()+"/GuiaCastulo/Videos/vid_01.mp4") );
-        controller = new MediaController(this);
-        videoView.setMediaController(controller);
+        final VideoView videoView = (VideoView)findViewById(R.id.video);
+
+        MediaController mediaController = new MediaController(this);
+        mediaController.setAnchorView(videoView);
+        // Configure the video view and assign a source video.
+        videoView.setKeepScreenOn(true);
+        videoView.setVideoPath(Environment.getExternalStorageDirectory().toString()+"/GuiaCastulo/Videos/vid_01.mp4");
+        videoView.setMediaController(mediaController);
+        videoView.requestFocus();
         videoView.start();
-        setContentView(videoView);
+
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        videoView.stopPlayback();
-    }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

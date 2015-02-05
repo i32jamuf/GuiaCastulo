@@ -149,6 +149,7 @@ public class DescripcionRecorridos extends Activity implements
         infoText.setText(recorrido.toString());
     }
 
+
     private void cargarAudio() {
         //si no se esta reproduciendo el audio, carga uno nuevo
         if(!mPlayer.isPlaying()){
@@ -156,8 +157,14 @@ public class DescripcionRecorridos extends Activity implements
             try {
                 mPlayer.setDataSource(this,
                         Uri.parse(Environment.getExternalStorageDirectory().toString()+"/GuiaCastulo/Audios/audio_01.mp3"));
-                mPlayer.prepare();
-                mPlayer.start();
+                mPlayer.prepareAsync() ;
+                mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
+
+                @Override
+                public void onPrepared(MediaPlayer mp){
+                        mp.start();
+            } });
+              //  mPlayer.start();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -192,7 +199,7 @@ public class DescripcionRecorridos extends Activity implements
 **/
     @Override
     public void onStop() {
-        super.onPause();
+        super.onStop();
         mController.hide();
         mPlayer.release();
         // mPlayer = null;

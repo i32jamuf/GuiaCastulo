@@ -2,6 +2,7 @@
 package es.aplicacion.guiacastulo;
 
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -82,18 +83,20 @@ public class FichaPuntosInteres extends Activity implements
         super.onResume();
         mPlayer = new MediaPlayer();
     }
+    /**
     @Override
     public void onPause() {
         super.onPause();
         mPlayer.release();
-        // mPlayer = null;
-    }
+        mPlayer = null;
+    }**/
 
     @Override
     public void onStop() {
-        super.onPause();
+        super.onStop();
+        mController.hide();
         mPlayer.release();
-        // mPlayer = null;
+      //  mPlayer = null;
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -113,12 +116,12 @@ public class FichaPuntosInteres extends Activity implements
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     public void onButtonSiguienteClicked(View view){
         n_PoI++;
+        mController.hide();
         mPlayer.stop();
         mPlayer.release();
         mPlayer = new MediaPlayer();
@@ -128,11 +131,11 @@ public class FichaPuntosInteres extends Activity implements
         //en el ultimo PoI no mostramos siguiente
         if(n_PoI==PoIsMarker.size()-1)
             b_siguiente.setVisibility(View.GONE);
-
     }
+
     public void onButtonAnteriorClicked(View view){
         n_PoI--;
-
+        mController.hide();
         mPlayer.stop();
         mPlayer.release();
         mPlayer = new MediaPlayer();
@@ -144,14 +147,13 @@ public class FichaPuntosInteres extends Activity implements
             b_anterior.setVisibility(View.GONE);
     }
 
-    public void bvideoClick(View view){
+    public void onButtonVideoClicked(View view){
         mController.hide();
         cargarVideo();
-
     }
-    public void baudioClick(View view){
-        cargarAudio(PoIsMarker.get(n_PoI));
 
+    public void onButtonAudioClicked(View view){
+        cargarAudio(PoIsMarker.get(n_PoI));
     }
 
     //TODO rehacer y comentar codigo
@@ -164,7 +166,6 @@ public class FichaPuntosInteres extends Activity implements
         // System.arraycopy( PoIsMarker.get(n_PoI).getUriImagen(), 0,stringUris, 0, PoIsMarker.get(n_PoI).getUriImagen().length );
         for(int i=0;i<PoI.getUriImagen().length;i++){
             // Uri uri = Uri.parse(PoI.getUriImagen()[i]);
-
             uris.add(PoI.getUriImagen()[i]);
         }
 
@@ -205,33 +206,31 @@ public class FichaPuntosInteres extends Activity implements
         if(!mPlayer.isPlaying()){
 //Set the audio data source
             try {
+                mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
                 mPlayer.setDataSource(this,
-                        Uri.parse(Environment.getExternalStorageDirectory().toString()+"/GuiaCastulo/Audios/audio_01.mp3"));
+                Uri.parse(Environment.getExternalStorageDirectory().toString()+"/GuiaCastulo/Audios/audio_01.mp3"));
                 // Uri.parse(PoI.getUriAudio()));
-                mPlayer.prepare();
-                mPlayer.start();
+                //crea un nuevo hilo para cargar el audio
+                mPlayer.prepareAsync() ;
+                mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
+                    @Override
+                    public void onPrepared(MediaPlayer mp){
+                        mp.start();
+                    } });
             } catch (Exception e) {
                 e.printStackTrace();
             }
 
             mController.setMediaPlayer(this);
             mController.setEnabled(true);
-
-
         }
         mController.show();
     }
     private void cargarVideo(){
-        Intent  tostart = new Intent(FichaPuntosInteres.this, Video.class);
-        startActivity(tostart);
+            Intent tostart = new Intent(FichaPuntosInteres.this, Video.class);
+            startActivity(tostart);
     }
 
-    //al pulsar la pantalla muestra los controles de audio
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        mController.show();
-        return super.onTouchEvent(event);
-    }
 //MediaPlayerControl Methods
 
     @Override
