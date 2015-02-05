@@ -1,33 +1,31 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+
+    tools:context=".MainActivity"
     android:background="@drawable/fondo"
     android:orientation="horizontal">
 
     <TextView
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:text="Esta es la pantalla 720 tumbao"
+        android:text="Esta es la pantalla 320 tumbao"
         android:textColor="#ffffff"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
-        />
 
     <ImageButton
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/ajustes"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/imgbtajustes"
         android:onClick="bajustesClick"
         android:id="@+id/bajustes"
         android:scaleType="centerInside"
         android:background="@null"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="47dp" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -44,7 +42,7 @@
     <ImageButton
         android:layout_width="167.5dp"
         android:layout_height="125dp"
-        android:src="@drawable/botonrecorridos"
+        android:src="@drawable/imgbtrecorridos"
         android:onClick="brecorridoClick"
         android:id="@+id/brecorrido"
         android:scaleType="centerInside"
@@ -54,13 +52,11 @@
         android:layout_marginBottom="83dp"/>
 
 
-
-
     <ImageButton
         android:layout_width="167.5dp"
         android:layout_height="125dp"
         android:scaleType="centerInside"
-        android:src="@drawable/botonpuntosinteres"
+        android:src="@drawable/imgbtpuntosinteres"
         android:onClick="bptointeresClick"
         android:id="@+id/bptointeres"
         android:layout_alignTop="@+id/brecorrido"
@@ -87,7 +83,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Qué ver"
+        android:text="@string/botonquever"
         android:id="@+id/textView2"
         android:layout_below="@+id/bptointeres"
         android:layout_alignRight="@+id/bptointeres"

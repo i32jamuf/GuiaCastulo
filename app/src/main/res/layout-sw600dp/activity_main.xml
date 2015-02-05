@@ -20,7 +20,7 @@
     <ImageButton
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/ajustes"
+        android:src="@drawable/imgbtajustes"
         android:onClick="bajustesClick"
         android:id="@+id/bajustes"
         android:scaleType="centerInside"
@@ -47,7 +47,7 @@
     <ImageButton
         android:layout_width="167.5dp"
         android:layout_height="125dp"
-        android:src="@drawable/botonrecorridos"
+        android:src="@drawable/imgbtrecorridos"
         android:onClick="brecorridoClick"
         android:id="@+id/brecorrido"
         android:scaleType="centerInside"
@@ -63,7 +63,7 @@
         android:layout_width="167.5dp"
         android:layout_height="125dp"
         android:scaleType="centerInside"
-        android:src="@drawable/botonpuntosinteres"
+        android:src="@drawable/imgbtpuntosinteres"
         android:onClick="bptointeresClick"
         android:id="@+id/bptointeres"
         android:layout_alignTop="@+id/brecorrido"
@@ -90,7 +90,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Qué ver"
+        android:text="@string/botonquever"
         android:id="@+id/textView2"
         android:layout_below="@+id/bptointeres"
         android:layout_alignRight="@+id/bptointeres"

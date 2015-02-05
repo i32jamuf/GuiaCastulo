@@ -24,16 +24,16 @@
         <ImageButton
             android:layout_width="150dp"
             android:layout_height="75dp"
-            android:src="@drawable/btaudio"
-            android:onClick="onButtonAudioClicked"
+            android:src="@drawable/imgbtaudio"
+            android:onClick="baudioClick"
             android:id="@+id/b_audio"
             android:scaleType="centerInside"
             android:background="@null"/>
         <ImageButton
             android:layout_width="150dp"
             android:layout_height="75dp"
-            android:src="@drawable/btvideo"
-            android:onClick="onButtonVideoClicked"
+            android:src="@drawable/imgbtvideo"
+            android:onClick="bvideoClick"
             android:id="@+id/b_video"
             android:scaleType="centerInside"
             android:background="@null"/>

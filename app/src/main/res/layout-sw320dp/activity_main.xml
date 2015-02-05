@@ -19,7 +19,7 @@
     <ImageButton
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/ajustes"
+        android:src="@drawable/imgbtajustes"
         android:onClick="bajustesClick"
         android:id="@+id/bajustes"
         android:scaleType="centerInside"
@@ -31,7 +31,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/botonAjustes"
+        android:text="@string/botonajustes"
         android:id="@+id/textView1"
         android:singleLine="false"
         android:textColor="#ffffff"
@@ -45,7 +45,7 @@
     <ImageButton
         android:layout_width="167.5dp"
         android:layout_height="125dp"
-        android:src="@drawable/botonrecorridos"
+        android:src="@drawable/imgbtrecorridos"
         android:onClick="brecorridoClick"
         android:id="@+id/brecorrido"
         android:scaleType="centerInside"
@@ -61,7 +61,7 @@
         android:layout_width="167.5dp"
         android:layout_height="125dp"
         android:scaleType="centerInside"
-        android:src="@drawable/botonpuntosinteres"
+        android:src="@drawable/imgbtpuntosinteres"
         android:onClick="bptointeresClick"
         android:id="@+id/bptointeres"
         android:layout_alignTop="@+id/brecorrido"
@@ -74,7 +74,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recorridos"
+        android:text="@string/botonrecorridos"
         android:id="@+id/textView"
         android:layout_below="@+id/bptointeres"
         android:layout_alignParentLeft="true"
@@ -88,7 +88,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Qué ver"
+        android:text="@string/botonquever"
         android:id="@+id/textView2"
         android:layout_below="@+id/bptointeres"
         android:layout_alignRight="@+id/bptointeres"
@@ -97,15 +97,6 @@
         android:singleLine="false"
         android:textColor="#ffffff"
         android:textSize="@dimen/abc_text_size_large_material"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cambio de idioma"
-        android:id="@+id/button"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="55dp" />
 
 
 </RelativeLayout>

@@ -105,8 +105,7 @@
             android:label="@string/title_activity_image_dialog" >
         </activity>
         <activity
-            android:name=".Utilidades.Video"
-            android:label="@string/title_activity_video" >
+            android:name=".Utilidades.Video">
         </activity>
     </application>
 

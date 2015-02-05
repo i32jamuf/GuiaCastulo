@@ -1,0 +1,7 @@
+<resources>
+
+    <string name="title_activity_descripcion_recorridos">Tour Description</string>
+    <string name="botonrecorridos">Tour</string>
+    <string name="botonajustes">Réglages</string>
+    <string name="botonquever">Points of interest</string>
+</resources>

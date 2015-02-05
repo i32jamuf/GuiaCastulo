@@ -1,7 +1,16 @@
 <resources>
-
+    <string name="app_name">Castulo Guide</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_pantalla_carga">Castulo tour</string>
+    <string name="title_activity_list_puntos_interes">Points of Interest</string>
+    <string name="title_activity_ficha_puntos_interes">Interest point description</string>
+    <string name="title_activity_list_recorridos">Tours list</string>
     <string name="title_activity_descripcion_recorridos">Tour Description</string>
-    <string name="botonRecorridos">Tours</string>
-    <string name="botonAjustes">Settings</string>
-    <string name="botonMapa">Points of interest</string>
+    <string name="title_activity_vista_mapa">Map</string>
+    <string name="db_ok">terminado</string>
+    <string name="title_activity_preference">PreferenceActivity</string>
+    <string name="title_activity_image_dialog">ImageDialog</string>
+    <string name="botonrecorridos">Tours</string>
+    <string name="botonajustes">Settings</string>
+    <string name="botonquever">Points of interest</string>
 </resources>

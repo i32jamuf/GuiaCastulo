@@ -2,9 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context=".MainActivity"
+    tools:context="${relativePackage}.${activityClass}"
     android:background="@drawable/fondo"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <TextView
         android:layout_width="match_parent"
@@ -15,9 +16,9 @@
         android:layout_alignParentEnd="true" />
 
     <ImageButton
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/ajustes"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/imgbtajustes"
         android:onClick="bajustesClick"
         android:id="@+id/bajustes"
         android:scaleType="centerInside"
@@ -29,21 +30,20 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/botonAjustes"
+        android:text="@string/botonajustes"
         android:id="@+id/textView1"
         android:singleLine="false"
         android:textColor="#ffffff"
         android:layout_centerHorizontal="true"
-
         android:textSize="@dimen/abc_text_size_large_material"
         android:layout_below="@+id/bajustes"
         />
 
 
     <ImageButton
-        android:layout_width="167.5dp"
-        android:layout_height="125dp"
-        android:src="@drawable/botonrecorridos"
+        android:layout_width="120dp"
+        android:layout_height="78dp"
+        android:src="@drawable/imgbtrecorridos"
         android:onClick="brecorridoClick"
         android:id="@+id/brecorrido"
         android:scaleType="centerInside"
@@ -56,10 +56,10 @@
 
 
     <ImageButton
-        android:layout_width="167.5dp"
-        android:layout_height="125dp"
+        android:layout_width="120dp"
+        android:layout_height="78dp"
         android:scaleType="centerInside"
-        android:src="@drawable/botonpuntosinteres"
+        android:src="@drawable/imgbtpuntosinteres"
         android:onClick="bptointeresClick"
         android:id="@+id/bptointeres"
         android:layout_alignTop="@+id/brecorrido"
@@ -72,28 +72,25 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recorridos"
+        android:text="@string/botonrecorridos"
         android:id="@+id/textView"
-        android:layout_below="@+id/bptointeres"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="47dp"
         android:singleLine="false"
         android:textColor="#ffffff"
-        android:textSize="@dimen/abc_text_size_large_material" />
+        android:textSize="@dimen/abc_text_size_large_material"
+        android:layout_below="@+id/bptointeres"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Qué ver"
+        android:text="@string/botonquever"
         android:id="@+id/textView2"
-        android:layout_below="@+id/bptointeres"
-        android:layout_alignRight="@+id/bptointeres"
-        android:layout_alignEnd="@+id/bptointeres"
-        android:layout_marginRight="35dp"
         android:singleLine="false"
         android:textColor="#ffffff"
-        android:textSize="@dimen/abc_text_size_large_material"/>
+        android:textSize="@dimen/abc_text_size_large_material"
+        android:layout_below="@+id/bptointeres"
+        android:layout_alignRight="@+id/bptointeres"
+        android:layout_alignEnd="@+id/bptointeres" />
 
 </RelativeLayout>
