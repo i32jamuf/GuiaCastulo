@@ -199,7 +199,7 @@ public class DescripcionRecorridos extends Activity implements
 **/
     @Override
     public void onStop() {
-        super.onPause();
+        super.onStop();
         mController.hide();
         mPlayer.release();
         // mPlayer = null;

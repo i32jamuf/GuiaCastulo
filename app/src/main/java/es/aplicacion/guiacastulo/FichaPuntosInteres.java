@@ -93,7 +93,7 @@ public class FichaPuntosInteres extends Activity implements
 
     @Override
     public void onStop() {
-        super.onPause();
+        super.onStop();
         mController.hide();
         mPlayer.release();
       //  mPlayer = null;
@@ -116,7 +116,6 @@ public class FichaPuntosInteres extends Activity implements
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -132,8 +131,8 @@ public class FichaPuntosInteres extends Activity implements
         //en el ultimo PoI no mostramos siguiente
         if(n_PoI==PoIsMarker.size()-1)
             b_siguiente.setVisibility(View.GONE);
-
     }
+
     public void onButtonAnteriorClicked(View view){
         n_PoI--;
         mController.hide();
@@ -151,11 +150,10 @@ public class FichaPuntosInteres extends Activity implements
     public void onButtonVideoClicked(View view){
         mController.hide();
         cargarVideo();
-
     }
+
     public void onButtonAudioClicked(View view){
         cargarAudio(PoIsMarker.get(n_PoI));
-
     }
 
     //TODO rehacer y comentar codigo
@@ -168,7 +166,6 @@ public class FichaPuntosInteres extends Activity implements
         // System.arraycopy( PoIsMarker.get(n_PoI).getUriImagen(), 0,stringUris, 0, PoIsMarker.get(n_PoI).getUriImagen().length );
         for(int i=0;i<PoI.getUriImagen().length;i++){
             // Uri uri = Uri.parse(PoI.getUriImagen()[i]);
-
             uris.add(PoI.getUriImagen()[i]);
         }
 
