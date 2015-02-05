@@ -1,7 +1,9 @@
 package es.aplicacion.guiacastulo;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,40 +29,49 @@ import es.aplicacion.guiacastulo.db.model.Recorrido;
 import es.aplicacion.guiacastulo.db.schema.Database;
 
 
-public class PantallaCarga extends ActionBarActivity {
+public class PantallaCarga extends Activity {
 
     final int WELCOME		= 25;
     TextView linea_ayuda;
-    ProgressBar mProgressBar;
+
     public int progreso=0;
-    int paso = 500;
+    int paso = 50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pantalla_carga);
+        setContentView(R.layout.activity_pantalla_carga2);
+        ImageView imgView = (ImageView) findViewById(R.id.animationImage);
+        imgView.setVisibility(ImageView.VISIBLE);
+        imgView.setBackgroundResource(R.drawable.frame_animation);
+
+        AnimationDrawable frameAnimation =
+                (AnimationDrawable) imgView.getBackground();
+
+
+        frameAnimation.start();
+
+
 
         // Creamos por primera vez las carpetas donde importar y exportar
         Utils.crearDirSiNoExiste("/GuiaCastulo/Imagenes/");
         Utils.crearDirSiNoExiste("/GuiaCastulo/Videos/");
         Utils.crearDirSiNoExiste("/GuiaCastulo/Audios/");
 
-        mProgressBar=(ProgressBar) findViewById(R.id.progressbar);
-        linea_ayuda = (TextView) findViewById(R.id.linea_ayuda);
+
+
     }
 
-    @Override
+
     protected void onResume() {
         super.onResume();
         cuentaAtras(4000);
     }
 
-    private void cuentaAtras(long milisegundos){
+    private void cuentaAtras(long milisegundos) {
+
         CountDownTimer mCountDownTimer;
 
-        mProgressBar.setMax((int)milisegundos);
-
-        mProgressBar.setProgress(paso);
 
         mCountDownTimer=new CountDownTimer(milisegundos, paso) {
 
@@ -67,25 +79,23 @@ public class PantallaCarga extends ActionBarActivity {
             public void onTick(long millisUntilFinished) {
                 Log.v("Log_tag", "Tick of Progress" + progreso + millisUntilFinished);
                 progreso+=paso;
-                mProgressBar.setProgress(progreso);
+
             }
 
             @Override
             public void onFinish() {
 
                 progreso+=	paso;
-                mProgressBar.setProgress(progreso);
-                mProgressBar.setVisibility(View.INVISIBLE);
+
                 Intent intent= new Intent(PantallaCarga.this, MainActivity.class);
                 startActivity(intent);
             }
         };
-
         mCountDownTimer.start();
 
     }
 
-    @Override
+
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
        // getMenuInflater().inflate(R.menu.menu_pantalla_carga, menu);
