@@ -77,7 +77,7 @@ public class PantallaCarga extends Activity {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                Log.v("Log_tag", "Tick of Progress" + progreso + millisUntilFinished);
+              //  Log.v("Log_tag", "Tick of Progress" + progreso + millisUntilFinished);
                 progreso+=paso;
 
             }
