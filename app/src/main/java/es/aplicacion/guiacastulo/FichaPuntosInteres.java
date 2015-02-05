@@ -213,8 +213,13 @@ public class FichaPuntosInteres extends Activity implements
                 mPlayer.setDataSource(this,
                 Uri.parse(Environment.getExternalStorageDirectory().toString()+"/GuiaCastulo/Audios/audio_01.mp3"));
                 // Uri.parse(PoI.getUriAudio()));
-                mPlayer.prepare();
-                mPlayer.start();
+                //crea un nuevo hilo para cargar el audio
+                mPlayer.prepareAsync() ;
+                mPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener(){
+                    @Override
+                    public void onPrepared(MediaPlayer mp){
+                        mp.start();
+                    } });
             } catch (Exception e) {
                 e.printStackTrace();
             }
