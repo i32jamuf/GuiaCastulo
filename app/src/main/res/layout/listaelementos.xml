@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     android:stretchColumns="*">
 
-    <TableRow>
+
+<TableRow>
+    <RelativeLayout>
 
     <ImageView
         android:id="@+id/imagen"
@@ -13,36 +15,36 @@
         android:layout_alignParentLeft="true"/>
 
 
-    <RelativeLayout>
     <TextView
+        android:layout_marginLeft="5dp"
+        android:layout_centerVertical="true"
         android:id="@+id/titulo"
-        android:layout_width="wrap_content"
+        android:text="Medium Text"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Large Text"
-        style="@style/button_text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_toRightOf="@+id/imagen"
+        style="@style/button_text"/>
 
-    <TextView
-        android:id="@+id/subtitulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/titulo"
-        android:layout_centerHorizontal="true"
-        android:text="TextView"
-        style="@style/button_text"
-        android:gravity="bottom"
-        />
-    </RelativeLayout>
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/subtitulo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/titulo"
+            android:text="TextView"
+            android:layout_toRightOf="@+id/imagen"
+            style="@style/button_text"
+            android:textSize="15sp"/>
 
     <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-
-        android:src="@drawable/flecha" />
-
-    </TableRow>
+            android:layout_centerVertical="true"
+            android:id="@+id/imageView1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@null"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/imgflechalista" />
+    </RelativeLayout>
+</TableRow>
 </TableLayout>

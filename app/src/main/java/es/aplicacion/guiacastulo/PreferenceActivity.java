@@ -1,5 +1,6 @@
 package es.aplicacion.guiacastulo;
 
+import android.app.Activity;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -19,7 +20,7 @@ import es.aplicacion.guiacastulo.db.model.Recorrido;
 import es.aplicacion.guiacastulo.db.schema.Database;
 
 
-public class PreferenceActivity extends ActionBarActivity {
+public class PreferenceActivity extends Activity {
 
     Database database;
 

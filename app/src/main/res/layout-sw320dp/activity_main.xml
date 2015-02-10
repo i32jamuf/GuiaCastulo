@@ -2,18 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-
     tools:context=".MainActivity"
     android:background="@drawable/fondo"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:text="Esta es la pantalla 320"
-        android:textColor="#ffffff"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+
 
 
     <ImageButton

@@ -16,8 +16,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/iconocastulo"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:label="@string/app_name">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -27,7 +26,9 @@
         </activity>
         <activity
             android:name=".PantallaCarga"
-            android:label="@string/title_activity_pantalla_carga" >
+            android:label="@string/title_activity_pantalla_carga"
+            android:theme="@style/AppTheme">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
