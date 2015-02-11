@@ -16,10 +16,18 @@ public class PuntoInteres {
     private String uri_audio;
     private double latitud;
     private double longitud;
+    private long id_servidor;
+    private long version;
 
 
     // setters
 
+    public void setIdServidor(long id_remota) {
+        this.id_servidor = id_remota;
+    }
+    public void setVersion(long version) {
+        this.version = version;
+    }
     /**
      * Inicializa Id del punto de interes.
      */
@@ -147,6 +155,13 @@ public class PuntoInteres {
     public double getLongitud() {
         return longitud;
     }
+    public long getIdServidor() {
+        return id_servidor;
+    }
+
+    public long getVersion() {
+        return version;
+    }
 
     /**
      * PoI -> To String
@@ -157,6 +172,7 @@ public class PuntoInteres {
                 "\nUriImagen: "+Utils.crearStringComas(uri_imagen)+
                 "\nUriVideo: "+(uri_video)+
                 "\nUriAudio: "+ (uri_audio)+
-                "\nCoordenadas: " +latitud+" , "+longitud;
+                "\nCoordenadas: " +latitud+" , "+longitud+
+                "\nId servidor: " + id_servidor+  "\nVersion: "+ version;
     }
 }

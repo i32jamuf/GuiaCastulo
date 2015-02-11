@@ -16,11 +16,13 @@ public class ColumnasRecorridos {
     public static final String AUDIO = "audio";
     public static final String DURACION = "tiempo";
     public static final String DISTANCIA = "distancia";
-
+    public static final String ID_SERVIDOR = "id_servidor";
+    public static final String VERSION = "version";
 
 
     public static final String CREAR_TABLA = "CREATE TABLE " + NOMBRE_TABLA
             + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "+ ID_MARCADORES + " TEXT, "
             + NOMBRE + " TEXT, " + DESCRIPCION + " TEXT, " + IMAGEN + " TEXT, "+ VIDEO + " TEXT, "
-            + AUDIO + " TEXT, " + DURACION + " REAL, "+ DISTANCIA + " REAL "+ ");";
+            + AUDIO + " TEXT, " + DURACION + " REAL, "+ DISTANCIA + " REAL, "+ID_SERVIDOR+" INTEGER, "
+            +VERSION+" INTEGER );";
 }

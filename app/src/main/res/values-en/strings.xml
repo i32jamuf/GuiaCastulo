@@ -3,7 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_pantalla_carga">Castulo tour</string>
     <string name="title_activity_list_puntos_interes">Points of Interest</string>
-    <string name="title_activity_ficha_puntos_interes">Interest point description</string>
+    <string name="title_activity_ficha_puntos_interes">Point of Interest\'s datasheet</string>
     <string name="title_activity_list_recorridos">Tours list</string>
     <string name="title_activity_descripcion_recorridos">Tour Description</string>
     <string name="title_activity_vista_mapa">Map</string>
@@ -13,4 +13,14 @@
     <string name="botonrecorridos">Tours</string>
     <string name="botonajustes">Settings</string>
     <string name="botonquever">Points of interest</string>
+
+    <string name="ajustes_idioma">Locate settings</string>
+    <string name="idioma">Language</string>
+    <string name="idioma_summary">Changes App\'s language</string>
+    <string name="select_idioma">Choose language</string>
+    <string name="map_settings">Map settings</string>
+    <string name="map_type">Type of map</string>
+    <string name="map_summary">Change the type of map to show</string>
+    <string name="gps_on_summary">Open the nearest marker from your position. Drain more battery.</string>
+    <string name="gps_on">Enable GPS</string>
 </resources>

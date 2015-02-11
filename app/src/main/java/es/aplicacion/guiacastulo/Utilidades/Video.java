@@ -31,7 +31,6 @@ public class Video extends Activity {
         videoView.setMediaController(mediaController);
         videoView.requestFocus();
         videoView.start();
-
     }
 
     @Override

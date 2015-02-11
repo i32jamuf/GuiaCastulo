@@ -17,11 +17,13 @@ public class ColumnasMarcadores {
     public static final String IMAGEN = "imagen";
     public static final String LATITUD = "latitud";
     public static final String LONGITUD = "longitud";
-
+    public static final String ID_SERVIDOR = "id_servidor";
+    public static final String VERSION = "version";
 
 
     public static final String CREAR_TABLA = "CREATE TABLE " + NOMBRE_TABLA
             + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + NOMBRE + " TEXT, " + DESCRIPCION + " TEXT, "+ ID_PUNTOS_INTERES + " TEXT, "
-            + IMAGEN + " TEXT, "+ LATITUD + " REAL, "+ LONGITUD + " REAL "+ ");";
+            + IMAGEN + " TEXT, "+ LATITUD + " REAL, "+ LONGITUD + " REAL, "+ID_SERVIDOR+" INTEGER, "
+            +VERSION+" INTEGER );";
 }

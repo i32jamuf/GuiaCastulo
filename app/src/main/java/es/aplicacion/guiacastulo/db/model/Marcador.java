@@ -15,10 +15,18 @@ public class Marcador {
     private String [] uri_imagen;
     private double latitud;
     private double longitud;
+    private long id_servidor;
+    private long version;
 
 
     // setters
 
+    public void setIdServidor(long id_remota) {
+        this.id_servidor = id_remota;
+    }
+    public void setVersion(long version) {
+        this.version = version;
+    }
     /**
      * Inicializa Id del objeto marcador.
      */
@@ -134,6 +142,13 @@ public class Marcador {
     public double getLongitud() {
         return longitud;
     }
+    public long getIdServidor() {
+        return id_servidor;
+    }
+
+    public long getVersion() {
+        return version;
+    }
 
     /**
      * Marcador -> To String
@@ -143,7 +158,8 @@ public class Marcador {
         return "\nId Marcador: " + id + "\n" + "\nIds PoI: " + Utils.crearStringComas(ids_puntos_interes)
                 + "\nNombre: " + nombre + "\nDescrición: " + descripcion+
                 "\nUriImagen: "+Utils.crearStringComas(uri_imagen)+
-                "\nCoordenadas: " +latitud+" , "+longitud;
+                "\nCoordenadas: " +latitud+" , "+longitud+
+                "\nId servidor: " + id_servidor+  "\nVersion: "+ version;
 
     }
 }
