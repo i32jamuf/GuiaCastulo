@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/map_settings" >
+        <ListPreference
+            android:dialogTitle="Mapa"
+            android:entries="@array/mapa"
+            android:entryValues="@array/codigo_mapa"
+            android:key="map_key"
+            android:summary="@string/map_summary"
+            android:title="@string/map_type" />
+        <CheckBoxPreference
+            android:key="gps_on_key"
+            android:summary="@string/gps_on_summary"
+            android:title="@string/gps_on" />
+    </PreferenceCategory>
+</PreferenceScreen>

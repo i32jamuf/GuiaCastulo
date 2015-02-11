@@ -7,7 +7,6 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.location.Location;
 import android.util.Log;
 
 import java.util.LinkedList;
@@ -19,6 +18,7 @@ import es.aplicacion.guiacastulo.db.model.Informacion;
 import es.aplicacion.guiacastulo.db.model.Marcador;
 import es.aplicacion.guiacastulo.db.model.PuntoInteres;
 import es.aplicacion.guiacastulo.db.model.Recorrido;
+import es.aplicacion.guiacastulo.db.model.Update;
 
 /**
  * Created by Enmanuel on 21/01/2015.
@@ -76,6 +76,7 @@ public class Database {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
+            db.execSQL(ColumnasUpdates.CREAR_TABLA);
             db.execSQL(ColumnasCoordenada.CREAR_TABLA);
             db.execSQL(ColumnasMarcadores.CREAR_TABLA);
             db.execSQL(ColumnasPuntosInteres.CREAR_TABLA);
@@ -96,14 +97,13 @@ public class Database {
 
             db.execSQL("DROP TABLE IF EXISTS " + ColumnasPuntosInteres.NOMBRE_TABLA);
             db.execSQL("DROP TABLE IF EXISTS " + ColumnasRecorridos.NOMBRE_TABLA);
-            db.execSQL("DROP TABLE IF EXISTS "
-                    + ColumnasMarcadores.NOMBRE_TABLA);
-            db.execSQL("DROP TABLE IF EXISTS "
-                    + ColumnasInformacion.NOMBRE_TABLA);
+            db.execSQL("DROP TABLE IF EXISTS "+ ColumnasMarcadores.NOMBRE_TABLA);
+            db.execSQL("DROP TABLE IF EXISTS "+ ColumnasInformacion.NOMBRE_TABLA);
+            db.execSQL("DROP TABLE IF EXISTS "+ ColumnasCoordenada.NOMBRE_TABLA);
+            db.execSQL("DROP TABLE IF EXISTS "+ ColumnasUpdates.NOMBRE_TABLA);
             onCreate(db);
         }
     }
-
 
     /**
      * Añade una lista de puntos de interes a la DB
@@ -127,10 +127,10 @@ public class Database {
                 cv.put(ColumnasPuntosInteres.AUDIO, (pOI.getUriAudio()));
                 cv.put(ColumnasPuntosInteres.VIDEO, (pOI.getUriVideo()));
                 cv.put(ColumnasPuntosInteres.IMAGEN, Utils.crearStringComas(pOI.getUriImagen()));
-
+                cv.put(ColumnasPuntosInteres.ID_SERVIDOR, pOI.getIdServidor());
+                cv.put(ColumnasPuntosInteres.VERSION, pOI.getVersion());
                 pOI.setId(db.insert(ColumnasPuntosInteres.NOMBRE_TABLA, null, cv));
             }
-
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
@@ -161,7 +161,8 @@ public class Database {
             cv.put(ColumnasPuntosInteres.AUDIO, (pOI.getUriAudio()));
             cv.put(ColumnasPuntosInteres.VIDEO, (pOI.getUriVideo()));
             cv.put(ColumnasPuntosInteres.IMAGEN, Utils.crearStringComas(pOI.getUriImagen()));
-
+            cv.put(ColumnasPuntosInteres.ID_SERVIDOR, pOI.getIdServidor());
+            cv.put(ColumnasPuntosInteres.VERSION, pOI.getVersion());
             id=db.insert(ColumnasPuntosInteres.NOMBRE_TABLA, null, cv);
 
             db.setTransactionSuccessful();
@@ -187,7 +188,9 @@ public class Database {
                     ColumnasPuntosInteres.LONGITUD,
                     ColumnasPuntosInteres.IMAGEN,
                     ColumnasPuntosInteres.VIDEO,
-                    ColumnasPuntosInteres.AUDIO
+                    ColumnasPuntosInteres.AUDIO,
+                    ColumnasPuntosInteres.ID_SERVIDOR,
+                    ColumnasPuntosInteres.VERSION
             }, ColumnasPuntosInteres.KEY_ID + " = " + puntoID, null, null, null, null, null);
 
             c.moveToFirst();
@@ -201,7 +204,8 @@ public class Database {
             pOI.setUriImagen(Utils.separarStringComasAString(c.getString(5)));
             pOI.setUriVideo((c.getString(6)));
             pOI.setUriAudio((c.getString(7)));
-
+            pOI.setIdServidor(c.getLong(8));
+            pOI.setVersion(c.getLong(9));
 
             db.setTransactionSuccessful();
         } finally {
@@ -228,7 +232,9 @@ public class Database {
                     ColumnasPuntosInteres.LONGITUD,
                     ColumnasPuntosInteres.IMAGEN,
                     ColumnasPuntosInteres.VIDEO,
-                    ColumnasPuntosInteres.AUDIO}, null, null, null, null, null);
+                    ColumnasPuntosInteres.AUDIO,
+                    ColumnasPuntosInteres.ID_SERVIDOR,
+                    ColumnasPuntosInteres.VERSION}, null, null, null, null, null);
             c.moveToFirst();
             c.moveToPrevious();
 
@@ -244,6 +250,8 @@ public class Database {
                 pOI.setUriImagen(Utils.separarStringComasAString(c.getString(5)));
                 pOI.setUriVideo((c.getString(6)));
                 pOI.setUriAudio((c.getString(7)));
+                pOI.setIdServidor(c.getLong(8));
+                pOI.setVersion(c.getLong(9));
                 allPuntosInteres.add(pOI);
             }
             db.setTransactionSuccessful();
@@ -299,6 +307,9 @@ public class Database {
         if (PoI.getUriAudio() != null)
             cv.put(ColumnasPuntosInteres.AUDIO, (PoI.getUriAudio()));
 
+        cv.put(ColumnasPuntosInteres.ID_SERVIDOR, (PoI.getIdServidor()));
+        cv.put(ColumnasPuntosInteres.VERSION, (PoI.getVersion()));
+
         db.beginTransaction();
         try{
             filas= db.update(ColumnasPuntosInteres.NOMBRE_TABLA, cv,
@@ -337,6 +348,8 @@ public class Database {
                 cv.put(ColumnasRecorridos.VIDEO, (recorrido.getUriVideo()));
                 cv.put(ColumnasRecorridos.IMAGEN, Utils.crearStringComas(recorrido.getUriImagen()));
                 cv.put(ColumnasRecorridos.ID_MARCADORES, Utils.crearStringComas(recorrido.getId_marcadores()));
+                cv.put(ColumnasRecorridos.ID_SERVIDOR, recorrido.getIdServidor());
+                cv.put(ColumnasRecorridos.VERSION, recorrido.getVersion());
                 recorrido.setId(db.insert(ColumnasRecorridos.NOMBRE_TABLA, null, cv));
             }
 
@@ -371,6 +384,8 @@ public class Database {
             cv.put(ColumnasRecorridos.VIDEO, (recorrido.getUriVideo()));
             cv.put(ColumnasRecorridos.IMAGEN, Utils.crearStringComas(recorrido.getUriImagen()));
             cv.put(ColumnasRecorridos.ID_MARCADORES, Utils.crearStringComas(recorrido.getId_marcadores()));
+            cv.put(ColumnasRecorridos.ID_SERVIDOR, recorrido.getIdServidor());
+            cv.put(ColumnasRecorridos.VERSION, recorrido.getVersion());
             id=db.insert(ColumnasRecorridos.NOMBRE_TABLA, null, cv);
 
             db.setTransactionSuccessful();
@@ -398,7 +413,9 @@ public class Database {
                     ColumnasRecorridos.IMAGEN,
                     ColumnasRecorridos.VIDEO,
                     ColumnasRecorridos.AUDIO,
-                    ColumnasRecorridos.ID_MARCADORES
+                    ColumnasRecorridos.ID_MARCADORES,
+                    ColumnasRecorridos.ID_SERVIDOR,
+                    ColumnasRecorridos.VERSION
             }, ColumnasRecorridos.KEY_ID + " = " + recorrID, null, null, null, null, null);
 
             c.moveToFirst();
@@ -413,6 +430,8 @@ public class Database {
             recorrido.setUriVideo((c.getString(6)));
             recorrido.setUriAudio((c.getString(7)));
             recorrido.setIdsMarcadores(Utils.separarStringComasALong(c.getString(8)));
+            recorrido.setIdServidor(c.getLong(9));
+            recorrido.setVersion(c.getLong(10));
 
 
             db.setTransactionSuccessful();
@@ -441,7 +460,9 @@ public class Database {
                     ColumnasRecorridos.IMAGEN,
                     ColumnasRecorridos.VIDEO,
                     ColumnasRecorridos.AUDIO,
-                    ColumnasRecorridos.ID_MARCADORES}, null, null, null, null, null);
+                    ColumnasRecorridos.ID_MARCADORES,
+                    ColumnasRecorridos.ID_SERVIDOR,
+                    ColumnasRecorridos.VERSION}, null, null, null, null, null);
             c.moveToFirst();
             c.moveToPrevious();
 
@@ -458,6 +479,8 @@ public class Database {
                 recorrido.setUriVideo((c.getString(6)));
                 recorrido.setUriAudio((c.getString(7)));
                 recorrido.setIdsMarcadores(Utils.separarStringComasALong(c.getString(8)));
+                recorrido.setIdServidor(c.getLong(9));
+                recorrido.setVersion(c.getLong(10));
                 allRecorridos.add(recorrido);
             }
             db.setTransactionSuccessful();
@@ -478,7 +501,7 @@ public class Database {
         db.beginTransaction();
         try{
             filas = db.delete(ColumnasRecorridos.NOMBRE_TABLA,
-                    ColumnasPuntosInteres.KEY_ID + " = " + recorridoId, null);
+                    ColumnasRecorridos.KEY_ID + " = " + recorridoId, null);
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
@@ -515,6 +538,8 @@ public class Database {
         if(recorrido.getId_marcadores() != null)
             cv.put(ColumnasRecorridos.ID_MARCADORES, Utils.crearStringComas(recorrido.getId_marcadores()));
 
+        cv.put(ColumnasRecorridos.ID_SERVIDOR, (recorrido.getIdServidor()));
+        cv.put(ColumnasRecorridos.VERSION, (recorrido.getVersion()));
         db.beginTransaction();
         try{
             filas= db.update(ColumnasRecorridos.NOMBRE_TABLA, cv,
@@ -546,6 +571,8 @@ public class Database {
             cv.put(ColumnasMarcadores.LONGITUD, marcador.getLongitud());
             //El contenido de las columnas son una sucesion de URIs separadas por comas
             cv.put(ColumnasMarcadores.IMAGEN, Utils.crearStringComas(marcador.getUriImagen()));
+            cv.put(ColumnasMarcadores.ID_SERVIDOR, marcador.getIdServidor());
+            cv.put(ColumnasMarcadores.VERSION, marcador.getVersion());
             id= db.insert(ColumnasMarcadores.NOMBRE_TABLA, null, cv);
 
 
@@ -571,6 +598,8 @@ public class Database {
                 cv.put(ColumnasMarcadores.LONGITUD, marcador.getLongitud());
                 //El contenido de las columnas son una sucesion de URIs separadas por comas
                 cv.put(ColumnasMarcadores.IMAGEN, Utils.crearStringComas(marcador.getUriImagen()));
+                cv.put(ColumnasMarcadores.ID_SERVIDOR, marcador.getIdServidor());
+                cv.put(ColumnasMarcadores.VERSION, marcador.getVersion());
                 marcador.setId(db.insert(ColumnasMarcadores.NOMBRE_TABLA, null, cv));
             }
 
@@ -596,8 +625,10 @@ public class Database {
                     ColumnasMarcadores.LATITUD,
                     ColumnasMarcadores.LONGITUD,
                     ColumnasMarcadores.IMAGEN,
-                    ColumnasMarcadores.ID_PUNTOS_INTERES
-            }, ColumnasPuntosInteres.KEY_ID + " = " + markID, null, null, null, null, null);
+                    ColumnasMarcadores.ID_PUNTOS_INTERES,
+                    ColumnasMarcadores.ID_SERVIDOR,
+                    ColumnasMarcadores.VERSION
+            }, ColumnasMarcadores.KEY_ID + " = " + markID, null, null, null, null, null);
 
             c.moveToFirst();
             //rellenamos el objeto Marcador
@@ -609,7 +640,8 @@ public class Database {
             //separamos cada URI delimitada por comas y las ponemos en cada una de las posiciones del array
             marcador.setUriImagen(Utils.separarStringComasAString(c.getString(5)));
             marcador.setIdsPoI(Utils.separarStringComasALong(c.getString(6)));
-
+            marcador.setIdServidor(c.getLong(7));
+            marcador.setVersion(c.getLong(8));
 
             db.setTransactionSuccessful();
         } finally {
@@ -635,7 +667,9 @@ public class Database {
                     ColumnasMarcadores.LATITUD,
                     ColumnasMarcadores.LONGITUD,
                     ColumnasMarcadores.IMAGEN,
-                    ColumnasMarcadores.ID_PUNTOS_INTERES}, null, null, null, null, null);
+                    ColumnasMarcadores.ID_PUNTOS_INTERES,
+                    ColumnasMarcadores.ID_SERVIDOR,
+                    ColumnasMarcadores.VERSION}, null, null, null, null, null);
             c.moveToFirst();
             c.moveToPrevious();
 
@@ -650,6 +684,8 @@ public class Database {
                 //separamos cada URI delimitada por comas y las ponemos en cada una de las posiciones del array
                 marcador.setUriImagen(Utils.separarStringComasAString(c.getString(5)));
                 marcador.setIdsPoI(Utils.separarStringComasALong(c.getString(6)));
+                marcador.setIdServidor(c.getLong(7));
+                marcador.setVersion(c.getLong(8));
                 allMarcadores.add(marcador);
             }
             db.setTransactionSuccessful();
@@ -703,6 +739,9 @@ public class Database {
         if (marcador.getId_puntos_interes() != null)
             cv.put(ColumnasMarcadores.ID_PUNTOS_INTERES, Utils.crearStringComas(marcador.getId_puntos_interes()));
 
+        cv.put(ColumnasMarcadores.ID_SERVIDOR, marcador.getIdServidor());
+        cv.put(ColumnasMarcadores.VERSION, marcador.getVersion());
+
         db.beginTransaction();
         try{
             filas= db.update(ColumnasMarcadores.NOMBRE_TABLA, cv,
@@ -730,6 +769,8 @@ public class Database {
             cv.put(ColumnasInformacion.DIRECCION, informacion.getDireccion());
             cv.put(ColumnasInformacion.WEB, informacion.getWeb());
             cv.put(ColumnasInformacion.MAS_INFO, informacion.getMasInfo());
+            cv.put(ColumnasInformacion.ID_SERVIDOR, informacion.getIdServidor());
+            cv.put(ColumnasInformacion.VERSION, informacion.getVersion());
             id= db.insert(ColumnasInformacion.NOMBRE_TABLA, null, cv);
 
             db.setTransactionSuccessful();
@@ -755,6 +796,8 @@ public class Database {
                     ColumnasInformacion.DIRECCION,
                     ColumnasInformacion.WEB,
                     ColumnasInformacion.MAS_INFO,
+                    ColumnasInformacion.ID_SERVIDOR,
+                    ColumnasInformacion.VERSION
             }, ColumnasInformacion.KEY_ID + " = " + infoID, null, null, null, null, null);
 
             c.moveToFirst();
@@ -765,6 +808,8 @@ public class Database {
             informacion.setDireccion(c.getString(3));
             informacion.setWeb(c.getString(4));
             informacion.setMasInfo(c.getString(5));
+            informacion.setIdServidor(c.getLong(6));
+            informacion.setVersion(c.getLong(7));
 
             db.setTransactionSuccessful();
         } finally {
@@ -816,6 +861,9 @@ public class Database {
         if (informacion.getMasInfo() != null)
             cv.put(ColumnasInformacion.MAS_INFO, informacion.getMasInfo());
 
+        cv.put(ColumnasInformacion.ID_SERVIDOR, informacion.getIdServidor());
+        cv.put(ColumnasInformacion.VERSION, informacion.getVersion());
+
         db.beginTransaction();
 
         try{
@@ -848,6 +896,9 @@ public class Database {
             for (Coordenada g : coords) {
                 cv.put(ColumnasCoordenada.LATITUD, g.getLatitud());
                 cv.put(ColumnasCoordenada.LONGITUD, g.getLongitud());
+
+                cv.put(ColumnasCoordenada.ID_SERVIDOR, g.getIdServidor());
+                cv.put(ColumnasCoordenada.VERSION, g.getVersion());
                 g.setId(db.insert(ColumnasCoordenada.NOMBRE_TABLA, null, cv));
             }
 
@@ -868,8 +919,12 @@ public class Database {
         LinkedList<Coordenada> coords = new LinkedList<Coordenada>();
         db.beginTransaction();
         try {
-            Cursor c = db.query(ColumnasCoordenada.NOMBRE_TABLA, new String[] {ColumnasCoordenada.LATITUD, ColumnasCoordenada.LONGITUD,
-                    ColumnasCoordenada.KEY_ID }, ColumnasCoordenada.ID_RECORRIDO
+            Cursor c = db.query(ColumnasCoordenada.NOMBRE_TABLA, new String[] {
+                    ColumnasCoordenada.LATITUD,
+                    ColumnasCoordenada.LONGITUD,
+                    ColumnasCoordenada.KEY_ID,
+                    ColumnasCoordenada.ID_SERVIDOR,
+                    ColumnasCoordenada.VERSION}, ColumnasCoordenada.ID_RECORRIDO
                     + " = " + recorrID , null, null, null, null, null);
             c.moveToFirst();
             c.moveToPrevious();
@@ -879,6 +934,8 @@ public class Database {
                 g.setLatitud(c.getDouble(0));
                 g.setLongitud(c.getDouble(1));
                 g.setId(c.getLong(2));
+                g.setIdServidor(c.getLong(3));
+                g.setVersion(c.getLong(4));
                 g.setIdRecorrido(recorrID);
                 coords.add(g);
             }
@@ -902,6 +959,119 @@ public class Database {
             filas=db
                     .delete(ColumnasCoordenada.NOMBRE_TABLA,
                             ColumnasCoordenada.ID_RECORRIDO + " = " + recorrID, null);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        return filas;
+    }
+
+
+
+    //TODO Updates
+
+    public long addUpdate(Update update) {
+        long id=-1;
+        if (update==null)
+            return id;
+
+        ContentValues cv = new ContentValues();
+        db.beginTransaction();
+        try {
+            cv.put(ColumnasUpdates.NOMBRE, update.getNombre());
+            cv.put(ColumnasUpdates.VERSION, update.getVersion());
+            id= db.insert(ColumnasUpdates.NOMBRE_TABLA, null, cv);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        return id;
+    }
+    public boolean addUpdates(List<Update> lstUpdate) {
+        if (lstUpdate.isEmpty())
+            return false;
+
+        ContentValues cv = new ContentValues();
+        db.beginTransaction();
+
+        try {
+            for (Update update : lstUpdate) {
+                cv.put(ColumnasUpdates.NOMBRE, update.getNombre());
+                cv.put(ColumnasUpdates.VERSION, update.getVersion());
+                db.insert(ColumnasUpdates.NOMBRE_TABLA, null, cv);
+            }
+
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        return true;
+    }
+
+    public Update getUpdate(String nombre) {
+        Update update = new Update();
+        db.beginTransaction();
+        try {
+            Cursor c = db.query(ColumnasUpdates.NOMBRE_TABLA, new String[] {
+                    ColumnasUpdates.VERSION
+            }, ColumnasUpdates.NOMBRE + " = " + nombre, null, null, null, null, null);
+
+            c.moveToFirst();
+            //rellenamos el objeto Marcador
+            update.setVersion(c.getLong(0));
+            update.setNombre(nombre);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        return update;
+    }
+
+    public List<Update> getAllUpdates() {
+        LinkedList<Update> allUpdates = new LinkedList<Update>();
+
+        db.beginTransaction();
+        try{
+            Cursor c = db.query(ColumnasUpdates.NOMBRE_TABLA, new String[] {
+                    ColumnasUpdates.NOMBRE,
+                    ColumnasUpdates.VERSION}, null, null, null, null, null);
+            c.moveToFirst();
+            c.moveToPrevious();
+
+            while (c.moveToNext()) {
+                Update update = new Update();
+                update.setNombre(c.getString(0));
+                update.setVersion(c.getLong(1));
+                allUpdates.add(update);
+            }
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        return allUpdates;
+    }
+
+    public int deleteUpdate(String nombre) {
+        int filas=0;
+        db.beginTransaction();
+        try{
+            filas = db.delete(ColumnasUpdates.NOMBRE_TABLA,
+                    ColumnasUpdates.NOMBRE + " = " + nombre, null);
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+        return filas;
+    }
+
+    public int editUpdate(Update update) {
+        int filas;
+        ContentValues cv = new ContentValues();
+        cv.put(ColumnasUpdates.VERSION, update.getVersion());
+        db.beginTransaction();
+        try{
+            filas= db.update(ColumnasUpdates.NOMBRE_TABLA, cv,
+                    ColumnasUpdates.NOMBRE + " = " + update.getNombre(), null);
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();

@@ -16,10 +16,18 @@ public class Recorrido {
     private String [] uri_imagen;
     private String uri_video;
     private String uri_audio;
+    private long id_servidor;
+    private long version;
 
 
     // setters
 
+    public void setIdServidor(long id_remota) {
+        this.id_servidor = id_remota;
+    }
+    public void setVersion(long version) {
+        this.version = version;
+    }
     /**
      * Inicializa Id del recorrido.
      */
@@ -161,7 +169,13 @@ public class Recorrido {
     public long [] getId_marcadores() {
         return id_marcadores;
     }
+    public long getIdServidor() {
+        return id_servidor;
+    }
 
+    public long getVersion() {
+        return version;
+    }
     /**
      * Recorrido -> To String
      * @return
@@ -173,6 +187,7 @@ public class Recorrido {
                 +
                 "\nUriImagen: "+ Utils.crearStringComas(uri_imagen)+
                 "\nUriVideo: "+(uri_video)+
-                "\nUriAudio: "+(uri_audio);
+                "\nUriAudio: "+(uri_audio)+
+                "\nId servidor: " + id_servidor+  "\nVersion: "+ version;
     }
 }

@@ -93,10 +93,8 @@ public class VistaMapa extends FragmentActivity  {
         }
     }
 
+
     private void setUpMap() {
-
-
-
         //pintamos los marcadores al inicializar el mapa
         int i=0;
         for(Marcador marcador : markers){
@@ -115,8 +113,6 @@ public class VistaMapa extends FragmentActivity  {
                     .snippet(marcador.getDescripcion()));
             markerMap.put(marker.getId(),marcador);
             Log.d("VistaMapa","Mapeo G: "+marker.getId()+" M: "+marcador.getId());
-
-
         }
 
         mMap.setInfoWindowAdapter(new InfoWindowAdapter() {
@@ -161,7 +157,6 @@ public class VistaMapa extends FragmentActivity  {
 
             }
         });
-
 
         //Transformamos las coordenadas a LatLong
         for(Coordenada coord : coords){
@@ -217,5 +212,4 @@ public class VistaMapa extends FragmentActivity  {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }

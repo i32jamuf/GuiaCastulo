@@ -13,7 +13,8 @@ public class Informacion {
     private String direccion;
     private String web;
     private String mas_info;
-
+    private long id_servidor;
+    private long version;
 
     // setters
 
@@ -22,6 +23,14 @@ public class Informacion {
      */
     public void setId(long infoId) {
         this.id = infoId;
+    }
+
+
+    public void setIdServidor(long id_remota) {
+        this.id_servidor = id_remota;
+    }
+    public void setVersion(long version) {
+        this.version = version;
     }
 
     /**
@@ -116,6 +125,15 @@ public class Informacion {
         return mas_info;
     }
 
+
+    public long getIdServidor() {
+        return id_servidor;
+    }
+
+    public long getVersion() {
+        return version;
+    }
+
     /**
      * Informacion -> To String
      * @return
@@ -123,7 +141,8 @@ public class Informacion {
     public String toString() {
         return "Id Informacion: " + id + "\n" + "\nDirección: " + direccion
                 + "\nHorario: " + horario + "\nTelf: " + telefono+ "\nWeb: "+web+
-                "\nMás Info: " +mas_info;
+                "\nMás Info: " +mas_info+
+                "\nId servidor: " + id_servidor+  "\nVersion: "+ version;
 
     }
 }

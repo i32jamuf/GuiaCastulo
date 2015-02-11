@@ -11,6 +11,8 @@ public class Coordenada {
     private long id_recorrido;
     private double latitud;
     private double longitud;
+    private long id_servidor;
+    private long version;
 
 
 
@@ -20,6 +22,14 @@ public class Coordenada {
      */
     public void setId(long coordId) {
         this.id = coordId;
+    }
+
+    public void setIdServidor(long id_remota) {
+        this.id_servidor = id_remota;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
     }
 
     /**
@@ -53,6 +63,14 @@ public class Coordenada {
         return id;
     }
 
+    public long getIdServidor() {
+        return id_servidor;
+    }
+
+    public long getVersion() {
+        return version;
+    }
+
     /**
      * Obtiene Id del objeto Recorrido
      *
@@ -61,8 +79,6 @@ public class Coordenada {
     public long getIdRecorrido() {
         return id_recorrido;
     }
-
-
     /**
      * Inicializa latitud.
      */
@@ -75,12 +91,10 @@ public class Coordenada {
     public double getLongitud() {
         return longitud;
     }
+
     public String toString() {
         return "Id Coordenada: " + id + "\n" + "IdRecorrido: " + id_recorrido
-                +  "\nLatitud: "
-                + latitud+  "\nLongitud: "
-                + longitud;
-
+                +  "\nLatitud: "+ latitud+  "\nLongitud: "+ longitud+
+                "\nId servidor: " + id_servidor+  "\nVersion: "+ version;
     }
-
 }
