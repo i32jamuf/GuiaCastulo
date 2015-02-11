@@ -132,12 +132,12 @@ public class DescripcionRecorridos extends Activity implements
         });
     }
 
-    public void bvideoClick(View view){
+    public void onButtonVideoClicked(View view){
         mController.hide();
         cargarVideo();
 
     }
-    public void baudioClick(View view) {
+    public void onButtonAudioClicked(View view) {
         cargarAudio();
     }
     /**
