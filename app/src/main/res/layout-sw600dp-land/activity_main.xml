@@ -10,20 +10,19 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:text="Esta es la pantalla 320"
+        android:text="Esta es la pantalla 600 tumbao"
         android:textColor="#ffffff"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
 
     <ImageButton
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/imgbtajustes"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:onClick="bajustesClick"
         android:id="@+id/bajustes"
         android:scaleType="centerInside"
-        android:background="@null"
+        android:background="@drawable/imgbtajustes"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="47dp" />
@@ -36,36 +35,28 @@
         android:singleLine="false"
         android:textColor="#ffffff"
         android:layout_centerHorizontal="true"
-
-        android:textSize="@dimen/abc_text_size_large_material"
+        android:textSize="28sp"
         android:layout_below="@+id/bajustes"
          />
 
 
     <ImageButton
-        android:layout_width="167.5dp"
-        android:layout_height="125dp"
-        android:src="@drawable/imgbtrecorridos"
+        android:layout_width="250dp"
+        android:layout_height="186.5dp"
         android:onClick="brecorridoClick"
         android:id="@+id/brecorrido"
-        android:scaleType="centerInside"
-        android:background="@null"
+        android:background="@drawable/imgbtrecorridos"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="83dp"/>
 
-
-
-
     <ImageButton
-        android:layout_width="167.5dp"
-        android:layout_height="125dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/imgbtpuntosinteres"
+        android:layout_width="250dp"
+        android:layout_height="186.5dp"
         android:onClick="bptointeresClick"
         android:id="@+id/bptointeres"
         android:layout_alignTop="@+id/brecorrido"
-        android:background="@null"
+        android:background="@drawable/imgbtpuntosinteres"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -79,11 +70,11 @@
         android:layout_below="@+id/bptointeres"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="30dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginStart="47dp"
         android:singleLine="false"
         android:textColor="#ffffff"
-        android:textSize="@dimen/abc_text_size_large_material" />
+        android:textSize="28sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -93,10 +84,10 @@
         android:layout_below="@+id/bptointeres"
         android:layout_alignRight="@+id/bptointeres"
         android:layout_alignEnd="@+id/bptointeres"
-        android:layout_marginRight="35dp"
+        android:layout_marginRight="60dp"
         android:singleLine="false"
         android:textColor="#ffffff"
-        android:textSize="@dimen/abc_text_size_large_material"/>
+        android:textSize="28sp"/>
 
 
 </RelativeLayout>

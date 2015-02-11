@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:text="Esta es la pantalla 320 tumbao"
+        android:text="Esta es la pantalla 720 tumbao"
         android:textColor="#ffffff"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />

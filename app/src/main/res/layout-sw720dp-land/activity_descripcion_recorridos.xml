@@ -5,16 +5,14 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    android:background="@drawable/fondo"
     android:id="@+id/root"
+    android:background="@drawable/fondo"
     tools:context="es.aplicacion.guiacastulo.FichaPuntosInteres">
 
     <Gallery xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/gallery"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"/>
-
-
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -25,7 +23,7 @@
             android:layout_width="150dp"
             android:layout_height="75dp"
             android:src="@drawable/imgbtaudio"
-            android:onClick="baudioClick"
+            android:onClick="onButtonAudioClicked"
             android:id="@+id/b_audio"
             android:scaleType="centerInside"
             android:background="@null"/>
@@ -33,38 +31,27 @@
             android:layout_width="150dp"
             android:layout_height="75dp"
             android:src="@drawable/imgbtvideo"
-            android:onClick="bvideoClick"
             android:id="@+id/b_video"
             android:scaleType="centerInside"
-            android:background="@null"/>
+            android:background="@null"
+            android:onClick="onButtonVideoClicked"/>
 
 
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
+
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:text="Anterior"
-            android:id="@+id/b_anterior"
-            android:onClick="onButtonAnteriorClicked"/>
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#ffffff"
-            android:text="Siguiente"
-            android:id="@+id/b_siguiente"
-            android:onClick="onButtonSiguienteClicked"/>
-    </LinearLayout>
+        android:text="Ir al recorrido"
+        style="@style/button_text"
+        android:background="@drawable/red_button"
+        android:id="@+id/b_mapa"
+        android:textColor="#ffffff"
+        android:onClick="bmapaClick"
+        android:layout_gravity="center_horizontal" />
+
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -72,8 +59,6 @@
         android:scrollbarStyle="outsideOverlay"
         android:scrollbarSize="@dimen/abc_action_bar_default_height_material"
         >
-
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,11 +66,8 @@
             android:id="@+id/infotext"
             android:textColor="#ffffff"
             android:typeface="sans"
-            android:textSize="25sp"
-            android:text="La ciudad iberorromana de Cástulo se encuentra localizada en el Alto Guadalquivir, en la provincia de Jaén, en las estribaciones de Sierra Morena, configurándose como nexo de unión con la meseta peninsular. Plinio el Viejo la utiliza como marca para definir parte de las dimensiones de Hispania.3 4 Se emplaza en una de las terrazas de la margen derecha del río Guadalimar, habiéndose estudiado vestigios del asentamiento tanto en las laderas como en una meseta amurallada ubicada en los cerros de Plaza de Armas y de La Muela, a unos 300 msnm, controlando un ámbito visual extenso que domina la vega del río."
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
     </ScrollView>
-
 
 </LinearLayout>
