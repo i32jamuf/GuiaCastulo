@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.MediaController;
 import android.widget.TextView;
 
@@ -39,8 +40,8 @@ public class FichaPuntosInteres extends Activity implements
     Marcador marcador =new Marcador();
     PuntoInteres PoI =new PuntoInteres();
     LinkedList<PuntoInteres> PoIsMarker =new LinkedList<PuntoInteres>();
-    Button b_anterior;
-    Button b_siguiente;
+    ImageButton b_anterior;
+    ImageButton b_siguiente;
     int n_PoI=0;
     MediaController mController;
     MediaPlayer mPlayer;
@@ -50,6 +51,7 @@ public class FichaPuntosInteres extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ficha_puntos_interes);
+
         Bundle bundle = this.getIntent().getExtras();
         long id_marcador = bundle.getLong("ID_MARCADOR");
         database.open();
@@ -64,8 +66,8 @@ public class FichaPuntosInteres extends Activity implements
             PoIsMarker.add(database.getPuntoInteres(ids_PoIs[i]));
 
         }
-        b_anterior= (Button)findViewById(R.id.b_anterior);
-        b_siguiente= (Button)findViewById(R.id.b_siguiente);
+        b_anterior= (ImageButton)findViewById(R.id.b_anterior);
+        b_siguiente= (ImageButton)findViewById(R.id.b_siguiente);
         //en el primer PoI ocultamos el boton anterior
         b_anterior.setVisibility(View.INVISIBLE);
         //si es el unico PoI ocultamos el boton siguiente

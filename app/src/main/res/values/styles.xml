@@ -6,6 +6,11 @@
 
     </style>
 
+    <style name="noactionbar" >
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowTitleSize">0dp</item>
+        </style>
+
     <style name="button_text" >
 
         <item name="android:textColor" >#ffffff</item>

@@ -46,22 +46,24 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:textColor="#ffffff"
-            android:text="Anterior"
+            android:src="@drawable/imgflechaanterior"
+            android:background="@null"
             android:id="@+id/b_anterior"
             android:onClick="onButtonAnteriorClicked"/>
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:textColor="#ffffff"
-            android:text="Siguiente"
+            android:src="@drawable/imgflechasiguiente"
+            android:background="@null"
             android:id="@+id/b_siguiente"
             android:onClick="onButtonSiguienteClicked"/>
     </LinearLayout>

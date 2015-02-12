@@ -9,7 +9,7 @@
     <string name="title_activity_ficha_puntos_interes">FichaPuntosInteres</string>
     <string name="title_activity_list_recorridos">ListRecorridos</string>
     <string name="title_activity_descripcion_recorridos">DescripcionRecorridos</string>
-    <string name="title_activity_vista_mapa">Map</string>
+    <string name="title_activity_vista_mapa">Mapa</string>
     <string name="db_ok">terminado</string>
     <string name="title_activity_preference">PreferenceActivity</string>
     <string name="title_activity_image_dialog">ImageDialog</string>
