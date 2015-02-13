@@ -52,22 +52,67 @@
         android:onClick="bmapaClick"
         android:layout_gravity="center_horizontal" />
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:fillViewport="true"
-        android:scrollbarStyle="outsideOverlay"
-        android:scrollbarSize="@dimen/abc_action_bar_default_height_material"
-        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
         <TextView
+            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:id="@+id/infotext"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:id="@+id/tvnombre"
+            android:text="Nombre"
             android:textColor="#ffffff"
             android:typeface="sans"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
-    </ScrollView>
+
+
+        <ScrollView
+            android:layout_weight="80"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbarSize="@dimen/abc_action_bar_default_height_material"
+            android:layout_marginTop="20dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:id="@+id/infotext"
+                android:textColor="#ffffff"
+                android:typeface="sans"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+        </ScrollView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:textSize="16dp"
+            android:id="@+id/tvduracion"
+            android:text="Duracion del camino"
+            android:textColor="#ffffff"
+            android:typeface="sans"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="27dp"
+            android:id="@+id/tvdistancia"
+            android:textSize="16dp"
+            android:text="Distancia del camino"
+            android:textColor="#ffffff"
+            android:typeface="sans"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </LinearLayout>
 
 </LinearLayout>

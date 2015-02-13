@@ -4,89 +4,109 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:background="@drawable/fondo"
     android:id="@+id/root"
     tools:context="es.aplicacion.guiacastulo.FichaPuntosInteres">
-
-    <Gallery xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/gallery"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
-
-
-
     <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <ImageButton
-            android:layout_width="150dp"
-            android:layout_height="75dp"
-            android:src="@drawable/imgbtaudio"
-            android:onClick="baudioClick"
-            android:id="@+id/b_audio"
-            android:scaleType="centerInside"
-            android:background="@null"/>
-        <ImageButton
-            android:layout_width="150dp"
-            android:layout_height="75dp"
-            android:src="@drawable/imgbtvideo"
-            android:onClick="bvideoClick"
-            android:id="@+id/b_video"
-            android:scaleType="centerInside"
-            android:background="@null"/>
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <ImageButton
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:textColor="#ffffff"
-            android:src="@drawable/imgflechaanterior"
-            android:background="@null"
-            android:id="@+id/b_anterior"
-            android:onClick="onButtonAnteriorClicked"/>
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-        <ImageButton
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:textColor="#ffffff"
-            android:src="@drawable/imgflechasiguiente"
-            android:background="@null"
-            android:id="@+id/b_siguiente"
-            android:onClick="onButtonSiguienteClicked"/>
-    </LinearLayout>
-    <ScrollView
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:fillViewport="true"
-        android:scrollbarStyle="outsideOverlay"
-        android:scrollbarSize="@dimen/abc_action_bar_default_height_material"
-        >
-
-
-        <TextView
+        android:orientation="vertical"
+        android:gravity="left">
+        <Gallery xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/gallery"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:id="@+id/infotext"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <ImageButton
+                android:layout_width="175dp"
+                android:layout_height="100dp"
+                android:src="@drawable/imgbtaudio"
+                android:onClick="baudioClick"
+                android:id="@+id/b_audio"
+                android:scaleType="centerInside"
+                android:background="@null"/>
+            <ImageButton
+                android:layout_width="175dp"
+                android:layout_height="100dp"
+                android:src="@drawable/imgbtvideo"
+                android:onClick="bvideoClick"
+                android:id="@+id/b_video"
+                android:scaleType="centerInside"
+                android:background="@null"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageButton
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:textColor="#ffffff"
+                android:src="@drawable/imgflechaanterior"
+                android:background="@null"
+                android:id="@+id/b_anterior"
+                android:onClick="onButtonAnteriorClicked"/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <ImageButton
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:textColor="#ffffff"
+                android:src="@drawable/imgflechasiguiente"
+                android:background="@null"
+                android:id="@+id/b_siguiente"
+                android:onClick="onButtonSiguienteClicked"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="35dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:id="@+id/tvnombre"
+            android:text="Nombre"
             android:textColor="#ffffff"
             android:typeface="sans"
-            android:text="La ciudad iberorromana de Cástulo se encuentra localizada en el Alto Guadalquivir, en la provincia de Jaén, en las estribaciones de Sierra Morena, configurándose como nexo de unión con la meseta peninsular. Plinio el Viejo la utiliza como marca para definir parte de las dimensiones de Hispania.3 4 Se emplaza en una de las terrazas de la margen derecha del río Guadalimar, habiéndose estudiado vestigios del asentamiento tanto en las laderas como en una meseta amurallada ubicada en los cerros de Plaza de Armas y de La Muela, a unos 300 msnm, controlando un ámbito visual extenso que domina la vega del río."
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
-    </ScrollView>
+
+        <ScrollView
+            android:layout_marginLeft="35dp"
+            android:layout_weight="80"
+            android:layout_width="fill_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbarSize="@dimen/abc_action_bar_default_height_material"
+            android:layout_marginTop="20dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:id="@+id/infotext"
+                android:textColor="#ffffff"
+                android:textSize="30dp"
+                android:typeface="sans"
+                android:text="La ciudad iberorromana de Cástulo se encuentra localizada en el Alto Guadalquivir, en la provincia de Jaén, en las estribaciones de Sierra Morena, configurándose como nexo de unión con la meseta peninsular. Plinio el Viejo la utiliza como marca para definir parte de las dimensiones de Hispania.3 4 Se emplaza en una de las terrazas de la margen derecha del río Guadalimar, habiéndose estudiado vestigios del asentamiento tanto en las laderas como en una meseta amurallada ubicada en los cerros de Plaza de Armas y de La Muela, a unos 300 msnm, controlando un ámbito visual extenso que domina la vega del río."
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+        </ScrollView>
 
 
+    </LinearLayout>
 </LinearLayout>

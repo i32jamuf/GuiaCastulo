@@ -199,8 +199,14 @@ public class FichaPuntosInteres extends Activity implements
     }
 
     private void cargarDescripcion(PuntoInteres PoI){
+
+        // Se carga el nombre y la descripción del punto de interés
+
+
+        TextView nombre =(TextView) findViewById(R.id.tvnombre);
+        nombre.setText(PoI.getNombre());
         TextView infoText =(TextView) findViewById(R.id.infotext);
-        infoText.setText(PoI.toString());
+//Tocar cuando sea definitivo
     }
     private void cargarAudio(PuntoInteres PoI){
 

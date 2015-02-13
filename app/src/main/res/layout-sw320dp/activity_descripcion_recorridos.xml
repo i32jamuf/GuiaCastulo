@@ -52,22 +52,99 @@
         android:onClick="bmapaClick"
         android:layout_gravity="center_horizontal" />
 
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:id="@+id/tvnombre"
+        android:text="Nombre"
+        android:textColor="#ffffff"
+        android:typeface="sans"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
     <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="120dp"
         android:fillViewport="true"
         android:scrollbarStyle="outsideOverlay"
         android:scrollbarSize="@dimen/abc_action_bar_default_height_material"
+        android:layout_marginTop="20dp"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
+            android:textSize="18dp"
             android:id="@+id/infotext"
             android:textColor="#ffffff"
             android:typeface="sans"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
     </ScrollView>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:textSize="18dp"
+        android:id="@+id/tvduracionfija"
+        android:text="Duración:"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:typeface="sans"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="18dp"
+        android:id="@+id/tvduracion"
+        android:text="Duracion del camino"
+        android:textColor="#ffffff"
+        android:typeface="sans"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+           android:textColor="#ffffff"
+            android:textSize="18dp"
+            android:id="@+id/tvdistanciafija"
+            android:text="Distancia:"
+            android:textStyle="bold"
+            android:typeface="sans"
+            />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/tvdistancia"
+        android:textSize="18dp"
+        android:text="Distancia del camino"
+        android:textColor="#ffffff"
+        android:typeface="sans"
+         />
+</LinearLayout>
+</LinearLayout>
 </LinearLayout>

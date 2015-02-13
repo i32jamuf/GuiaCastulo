@@ -22,16 +22,16 @@
         android:orientation="horizontal"
         android:gravity="center">
         <ImageButton
-            android:layout_width="150dp"
-            android:layout_height="75dp"
+            android:layout_width="175dp"
+            android:layout_height="100dp"
             android:src="@drawable/imgbtaudio"
             android:onClick="baudioClick"
             android:id="@+id/b_audio"
             android:scaleType="centerInside"
             android:background="@null"/>
         <ImageButton
-            android:layout_width="150dp"
-            android:layout_height="75dp"
+            android:layout_width="175dp"
+            android:layout_height="100dp"
             android:src="@drawable/imgbtvideo"
             android:onClick="bvideoClick"
             android:id="@+id/b_video"
@@ -67,13 +67,28 @@
             android:id="@+id/b_siguiente"
             android:onClick="onButtonSiguienteClicked"/>
     </LinearLayout>
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="35dp"
+        android:textStyle="bold"
+        android:id="@+id/tvnombre"
+        android:text="Nombre"
+        android:textColor="#ffffff"
+        android:typeface="sans"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:fillViewport="true"
         android:scrollbarStyle="outsideOverlay"
         android:scrollbarSize="@dimen/abc_action_bar_default_height_material"
+        android:layout_marginTop="20dp"
         >
+
 
 
         <TextView
@@ -83,6 +98,7 @@
             android:id="@+id/infotext"
             android:textColor="#ffffff"
             android:typeface="sans"
+            android:textSize="25dp"
             android:text="La ciudad iberorromana de Cástulo se encuentra localizada en el Alto Guadalquivir, en la provincia de Jaén, en las estribaciones de Sierra Morena, configurándose como nexo de unión con la meseta peninsular. Plinio el Viejo la utiliza como marca para definir parte de las dimensiones de Hispania.3 4 Se emplaza en una de las terrazas de la margen derecha del río Guadalimar, habiéndose estudiado vestigios del asentamiento tanto en las laderas como en una meseta amurallada ubicada en los cerros de Plaza de Armas y de La Muela, a unos 300 msnm, controlando un ámbito visual extenso que domina la vega del río."
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />

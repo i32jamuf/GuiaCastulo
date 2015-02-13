@@ -145,8 +145,18 @@ public class DescripcionRecorridos extends Activity implements
      * @param recorrido
      */
     private void cargarDescripcion(Recorrido recorrido){
+
+        TextView nombre =(TextView) findViewById(R.id.tvnombre);
+        nombre.setText(recorrido.getNombre());
         TextView infoText =(TextView) findViewById(R.id.infotext);
-        infoText.setText(recorrido.toString());
+        infoText.setText(recorrido.getDescripcion());
+        TextView duracion =(TextView) findViewById(R.id.tvduracion);
+        duracion.setText(recorrido.getDuracion());
+        TextView distancia =(TextView) findViewById(R.id.tvdistancia);
+        distancia.setText(recorrido.getDistancia());
+
+
+
     }
 
 
