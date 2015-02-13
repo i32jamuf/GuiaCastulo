@@ -35,7 +35,6 @@
                 android:layout_height="50dp"
                 android:src="@drawable/imgbtvideo"
                 android:onClick="bvideoClick"
-
                 android:id="@+id/b_video"
                 android:scaleType="centerInside"
                 android:background="@null"/>
