@@ -13,6 +13,8 @@ public class Marcador {
     private String nombre;
     private String descripcion;
     private String [] uri_imagen;
+    private String uri_video;
+    private String uri_audio;
     private double latitud;
     private double longitud;
     private long id_servidor;
@@ -57,11 +59,25 @@ public class Marcador {
     }
 
     /**
-     * Inicializa la direccion donde esta alojada la imagen del marcador.
+     * Inicializa la direccion donde esta alojada la imagen del recorrido.
      */
     public void setUriImagen(String [] uri_imagen) {
         this.uri_imagen = uri_imagen;
     }
+    /**
+     * Inicializa la direccion donde esta alojado el video del punto de interes.
+     */
+    public void setUriVideo(String uri_video) {
+        this.uri_video = uri_video;
+    }
+
+    /**
+     * Inicializa la direccion donde esta alojado el audio del punto de interes.
+     */
+    public void setUriAudio(String uri_audio) {
+        this.uri_audio = uri_audio;
+    }
+
     /**
      * Inicializa la latitud del marcador.
      */
@@ -118,12 +134,29 @@ public class Marcador {
     }
 
     /**
-     * Obtiene la direccion donde esta guardada la imagen.
+     * Obtiene la/s direccion donde esta guardada la imagen.
      *
      * @return String uri_imagen.
      */
     public String [] getUriImagen() {
         return uri_imagen;
+    }
+
+    /**
+     * Obtiene la/s direccion donde esta guardado el video/s.
+     *
+     * @return String uri_imagen.
+     */
+    public String getUriVideo() {
+        return uri_video;
+    }
+    /**
+     * Obtiene la/s direccion donde esta guardado el audio/s.
+     *
+     * @return String uri_imagen.
+     */
+    public String getUriAudio() {
+        return uri_audio;
     }
 
     /**
@@ -157,7 +190,9 @@ public class Marcador {
     public String toString() {
         return "\nId Marcador: " + id + "\n" + "\nIds PoI: " + Utils.crearStringComas(ids_puntos_interes)
                 + "\nNombre: " + nombre + "\nDescrición: " + descripcion+
-                "\nUriImagen: "+Utils.crearStringComas(uri_imagen)+
+                "\nUriImagen: "+ Utils.crearStringComas(uri_imagen)+
+                "\nUriVideo: "+(uri_video)+
+                "\nUriAudio: "+(uri_audio)+
                 "\nCoordenadas: " +latitud+" , "+longitud+
                 "\nId servidor: " + id_servidor+  "\nVersion: "+ version;
 

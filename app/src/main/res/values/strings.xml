@@ -25,5 +25,10 @@
     <string name="map_summary">Cambia el tipo de mapa a mostrar.</string>
     <string name="gps_on_summary">Abre el marcador más cercano del recorrido según su posición. Consume más bateria.</string>
     <string name="gps_on">Activar GPS</string>
+    <string name="title_activity_proximity_alert">ProximityAlert</string>
+    <string name="volver_mapa">Volver al mapa</string>
+    <string name="visitar">Visitar</string>
+    <string name="titulo_visitar">¿Visitar?</string>
+    <string name="title_activity_ficha_marcador">FichaMarcador</string>
 
 </resources>

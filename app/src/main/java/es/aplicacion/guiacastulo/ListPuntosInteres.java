@@ -1,5 +1,6 @@
 package es.aplicacion.guiacastulo;
 
+
 import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaActionSound;
@@ -51,7 +52,7 @@ public class ListPuntosInteres extends Activity {
         //items.add(new ItemRecorrido(2, "Mosaico", "Localizacion Sur", "drawable/naranjas"));
         //items.add(new ItemRecorrido(3, "Cardo máximo","Localizacion Este", "drawable/lechuga"));
         for(Marcador marcadores : listamarcadores){
-            items.add(new ItemRecorrido(marcadores.getId(),marcadores.getNombre(),"", Utils.crearStringComas(marcadores.getUriImagen())));
+            items.add(new ItemRecorrido(marcadores.getId(),marcadores.getNombre(),"",(marcadores.getUriImagen()[0])));
         }
 
         return items;
@@ -69,25 +70,4 @@ public class ListPuntosInteres extends Activity {
         }
     };
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_list_recorridos, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

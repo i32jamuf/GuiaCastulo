@@ -570,7 +570,9 @@ public class Database {
             cv.put(ColumnasMarcadores.LATITUD, marcador.getLatitud());
             cv.put(ColumnasMarcadores.LONGITUD, marcador.getLongitud());
             //El contenido de las columnas son una sucesion de URIs separadas por comas
-            cv.put(ColumnasMarcadores.IMAGEN, Utils.crearStringComas(marcador.getUriImagen()));
+            cv.put(ColumnasRecorridos.AUDIO, (marcador.getUriAudio()));
+            cv.put(ColumnasRecorridos.VIDEO, (marcador.getUriVideo()));
+            cv.put(ColumnasRecorridos.IMAGEN, Utils.crearStringComas(marcador.getUriImagen()));
             cv.put(ColumnasMarcadores.ID_SERVIDOR, marcador.getIdServidor());
             cv.put(ColumnasMarcadores.VERSION, marcador.getVersion());
             id= db.insert(ColumnasMarcadores.NOMBRE_TABLA, null, cv);
@@ -597,7 +599,9 @@ public class Database {
                 cv.put(ColumnasMarcadores.LATITUD, marcador.getLatitud());
                 cv.put(ColumnasMarcadores.LONGITUD, marcador.getLongitud());
                 //El contenido de las columnas son una sucesion de URIs separadas por comas
-                cv.put(ColumnasMarcadores.IMAGEN, Utils.crearStringComas(marcador.getUriImagen()));
+                cv.put(ColumnasRecorridos.AUDIO, (marcador.getUriAudio()));
+                cv.put(ColumnasRecorridos.VIDEO, (marcador.getUriVideo()));
+                cv.put(ColumnasRecorridos.IMAGEN, Utils.crearStringComas(marcador.getUriImagen()));
                 cv.put(ColumnasMarcadores.ID_SERVIDOR, marcador.getIdServidor());
                 cv.put(ColumnasMarcadores.VERSION, marcador.getVersion());
                 marcador.setId(db.insert(ColumnasMarcadores.NOMBRE_TABLA, null, cv));
@@ -627,7 +631,9 @@ public class Database {
                     ColumnasMarcadores.IMAGEN,
                     ColumnasMarcadores.ID_PUNTOS_INTERES,
                     ColumnasMarcadores.ID_SERVIDOR,
-                    ColumnasMarcadores.VERSION
+                    ColumnasMarcadores.VERSION,
+                    ColumnasMarcadores.AUDIO,
+                    ColumnasMarcadores.VIDEO
             }, ColumnasMarcadores.KEY_ID + " = " + markID, null, null, null, null, null);
 
             c.moveToFirst();
@@ -642,6 +648,8 @@ public class Database {
             marcador.setIdsPoI(Utils.separarStringComasALong(c.getString(6)));
             marcador.setIdServidor(c.getLong(7));
             marcador.setVersion(c.getLong(8));
+            marcador.setUriAudio((c.getString(9)));
+            marcador.setUriVideo((c.getString(10)));
 
             db.setTransactionSuccessful();
         } finally {
@@ -669,7 +677,9 @@ public class Database {
                     ColumnasMarcadores.IMAGEN,
                     ColumnasMarcadores.ID_PUNTOS_INTERES,
                     ColumnasMarcadores.ID_SERVIDOR,
-                    ColumnasMarcadores.VERSION}, null, null, null, null, null);
+                    ColumnasMarcadores.VERSION,
+                    ColumnasMarcadores.AUDIO,
+                    ColumnasMarcadores.VIDEO}, null, null, null, null, null);
             c.moveToFirst();
             c.moveToPrevious();
 
@@ -686,6 +696,8 @@ public class Database {
                 marcador.setIdsPoI(Utils.separarStringComasALong(c.getString(6)));
                 marcador.setIdServidor(c.getLong(7));
                 marcador.setVersion(c.getLong(8));
+                marcador.setUriAudio((c.getString(9)));
+                marcador.setUriVideo((c.getString(10)));
                 allMarcadores.add(marcador);
             }
             db.setTransactionSuccessful();
@@ -738,7 +750,10 @@ public class Database {
             cv.put(ColumnasMarcadores.IMAGEN, Utils.crearStringComas(marcador.getUriImagen()));
         if (marcador.getId_puntos_interes() != null)
             cv.put(ColumnasMarcadores.ID_PUNTOS_INTERES, Utils.crearStringComas(marcador.getId_puntos_interes()));
-
+        if (marcador.getUriVideo() != null)
+            cv.put(ColumnasMarcadores.VIDEO,(marcador.getUriVideo()));
+        if (marcador.getUriAudio() != null)
+            cv.put(ColumnasMarcadores.AUDIO, (marcador.getUriAudio()));
         cv.put(ColumnasMarcadores.ID_SERVIDOR, marcador.getIdServidor());
         cv.put(ColumnasMarcadores.VERSION, marcador.getVersion());
 

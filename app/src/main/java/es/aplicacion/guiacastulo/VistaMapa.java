@@ -1,10 +1,14 @@
 package es.aplicacion.guiacastulo;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.FragmentManager;
+
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.LocationManager;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.support.v4.app.FragmentActivity;
@@ -41,6 +45,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import es.aplicacion.guiacastulo.Utilidades.ProximityAlert;
 import es.aplicacion.guiacastulo.Utilidades.Utils;
 import es.aplicacion.guiacastulo.db.model.Coordenada;
 import es.aplicacion.guiacastulo.db.model.Marcador;
@@ -58,6 +63,11 @@ public class VistaMapa extends FragmentActivity  {
     private int thumbHeight=200;
     private LinkedList<LatLng> latlong = new LinkedList<LatLng>();
     List<Coordenada> coords;
+    private boolean gps_on=true;
+    LocationManager locationManager;
+    int nMarcadores=0;
+    //PendingIntent pendingIntent;
+boolean alertCreated=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +85,19 @@ public class VistaMapa extends FragmentActivity  {
             markers.add(marker);
         }
         coords = database.getCoords(id_recorrido);
-        setUpMapIfNeeded();
+        // Getting Google Play availability status
+        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
+
+        // Showing status
+        if(status!=ConnectionResult.SUCCESS){ // Google Play Services are not available
+            int requestCode = 10;
+            Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status, this, requestCode);
+            dialog.show();
+
+        }else { // Google Play Services are available
+
+            setUpMapIfNeeded();
+        }
     }
 
     private void setUpMapIfNeeded() {
@@ -97,23 +119,55 @@ public class VistaMapa extends FragmentActivity  {
     private void setUpMap() {
         //pintamos los marcadores al inicializar el mapa
         int i=0;
-        for(Marcador marcador : markers){
-            if(i==0){
-                mCamera = CameraUpdateFactory.newLatLngZoom(new LatLng(marcador.getLatitud(), marcador.getLongitud()), 15);
-                mMap.animateCamera(mCamera);
-                i++;
+        mCamera = CameraUpdateFactory.newLatLngZoom(new LatLng(markers.getFirst().getLatitud(), markers.getFirst().getLongitud()), 15);
+        mMap.animateCamera(mCamera);
+
+        if(gps_on) {
+            nMarcadores=0;
+            locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            for (Marcador marcador : markers) {
+                //si el gps esta activado, montamos los marcadores y las alertas de proximidad
+                Marker marker = mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(marcador.getLatitud(), marcador.getLongitud()))
+                        .title(marcador.getNombre())
+                        .snippet(marcador.getDescripcion()));
+                markerMap.put(marker.getId(), marcador);
+//if(!alertCreated) {
+    Intent proximityIntent = new Intent(getApplicationContext(),FichaMarcador.class);
+                proximityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    //Bundle b = new Bundle();
+    //sacamos el valor, mapeado con este marcador de google, del id de la base de datos
+    //   b.putString("NOMBRE_MARCADOR", marcador.getNombre());
+    // b.putString("DESCR_MARCADOR", marcador.getDescripcion());
+    //  b.putString("URI_IMG_MARCADOR", marcador.getUriImagen());
+   // b.putLong("ID_MARCADOR", marcador.getId());
+    //proximityIntent.putExtras(b);
+                proximityIntent.putExtra("ID_MARCADOR", marcador.getId());
+    //TODO PendingIntent
+
+                PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(),nMarcadores,
+                        proximityIntent,PendingIntent.FLAG_CANCEL_CURRENT );
+                nMarcadores++;
+    //Log.d("PendigIntent_VistaMapa", pendingIntent.toString());
+    locationManager.addProximityAlert(marcador.getLatitud(), marcador.getLongitud(), 20, -1, pendingIntent);
+//}
+            }alertCreated=true;
+        }else{
+            for(Marcador marcador : markers){
+                //si no esta activo el GPS ponemos los marcadores en el mapa de google y
+                // mapeamos el id del marcador de google con
+                // el id del marcador en la base de datos
+
+                Marker marker =mMap.addMarker(new MarkerOptions()
+                        .position(new LatLng(marcador.getLatitud(),marcador.getLongitud()))
+                        .title(marcador.getNombre())
+                        .snippet(marcador.getDescripcion()));
+                markerMap.put(marker.getId(),marcador);
+                Log.d("VistaMapa","Mapeo G: "+marker.getId()+" M: "+marcador.getId());
             }
 
-            //ponemos los marcadores en el mapa de google y mapeamos el id del marcador de google con
-            // el id del marcador en la base de datos
-
-            Marker marker =mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(marcador.getLatitud(),marcador.getLongitud()))
-                    .title(marcador.getNombre())
-                    .snippet(marcador.getDescripcion()));
-            markerMap.put(marker.getId(),marcador);
-            Log.d("VistaMapa","Mapeo G: "+marker.getId()+" M: "+marcador.getId());
         }
+
 
         mMap.setInfoWindowAdapter(new InfoWindowAdapter() {
             @Override
@@ -135,7 +189,7 @@ public class VistaMapa extends FragmentActivity  {
                 tvSnippet.setText(marker.getSnippet());
                 //imagen
                 ImageView image = (ImageView) myContentView.findViewById(R.id.imagen_marcador);
-                Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(Utils.crearStringComas(markerMap.get(marker.getId()).getUriImagen())), thumbWidth, thumbHeight);
+                Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile((markerMap.get(marker.getId()).getUriImagen()[0])), thumbWidth, thumbHeight);
                 image.setImageBitmap(ThumbImage);
                 return myContentView;
             }
@@ -146,9 +200,9 @@ public class VistaMapa extends FragmentActivity  {
 
             @Override
             public void onInfoWindowClick(Marker marker) {
-                // TODO Auto-generated method stub
+
                 Log.d("VistaMapa","onInfoWindowClick G: "+marker.getId()+" M: "+markerMap.get(marker.getId()));
-                Intent intent = new Intent(VistaMapa.this,FichaPuntosInteres.class);
+                Intent intent = new Intent(VistaMapa.this,FichaMarcador.class);
                 Bundle b = new Bundle();
                 //sacamos el valor, mapeado con este marcador de google, del id de la base de datos
                 b.putLong("ID_MARCADOR",markerMap.get(marker.getId()).getId());
@@ -189,6 +243,19 @@ public class VistaMapa extends FragmentActivity  {
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+//TODO desregistrarse al LocationManager o proximitys
+/**
+        Intent proximityIntent = new Intent(getApplicationContext(),FichaMarcador.class);
+        for(int i=0;i<nMarcadores;i++){
+            PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(),i,
+                    proximityIntent,PendingIntent.FLAG_CANCEL_CURRENT );
+            locationManager.removeProximityAlert(pendingIntent);
+        }
+**/
+    }
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 

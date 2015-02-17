@@ -105,7 +105,7 @@ public class VistaMapaAllPoIs extends FragmentActivity  {
                         .findViewById(R.id.subtitulo));
                 tvSnippet.setText(marker.getSnippet());
                 ImageView image = (ImageView) myContentView.findViewById(R.id.imagen_marcador);
-                Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile(Utils.crearStringComas(markerMap.get(marker.getId()).getUriImagen())), thumbWidth, thumbHeight);
+                Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile((markerMap.get(marker.getId()).getUriImagen()[0])), thumbWidth, thumbHeight);
                 image.setImageBitmap(ThumbImage);
                 //  image.setImageURI(Uri.parse(Utils.crearStringComas(markerMap.get(marker.getId()).getUriImagen())));
                 return myContentView;

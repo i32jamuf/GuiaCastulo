@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
     <!--
  The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but are recommended.
@@ -79,7 +80,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBNC7zNdFMp1mVzh4bJMALLEYb-ulrqVsM" />
+            android:value="AIzaSyD9c3ZGaH7rT_CXhGAZqmfiINLrM8BnAcU" />
 
         <activity
             android:name=".VistaMapa"
@@ -89,7 +90,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="es.aplicacion.guiacastulo.DescripcionRecorridos" />
         </activity>
-
         <activity
             android:name=".PreferenceActivity"
             android:label="@string/title_activity_preference" >
@@ -101,7 +101,15 @@
         </activity>
         <activity
             android:theme="@style/noactionbar"
-            android:name=".Utilidades.Video">
+            android:name=".Utilidades.Video"/>
+        <activity
+            android:theme="@style/noactionbar"
+            android:name=".FichaMarcador"
+            android:label="@string/title_activity_ficha_marcador" >
+            <intent-filter >
+                <action android:name="es.aplicacion.guiacastulo.activity.fichamarcador"/>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
     </application>
 

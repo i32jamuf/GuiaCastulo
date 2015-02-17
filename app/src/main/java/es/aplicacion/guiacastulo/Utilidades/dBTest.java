@@ -73,6 +73,19 @@ public class dBTest {
                         break;
                     default:     id_markers[j] = crearMarcador(database,"marcador_" + j+"rec_"+k, "descrp_" + j+"rec_"+k, 0 + (j), 0 + j, id_pois, uri_img+"marcador_0"+(j)+".jpg");
                 }
+                **/
+                switch (j) {
+                    case 0:
+                        id_markers[j] = crearMarcador(database,"Mosaico de los Amores", "descrp_" + j+"rec_"+k,38.09945, -3.6318, id_pois, uri_img+"marcador_0"+(j)+".jpg");
+                        break;
+                    case 1:
+                        id_markers[j] = crearMarcador(database,"Termas", "descrp_" + j+"rec_"+k,38.09988, -3.63252, id_pois, uri_img+"marcador_0"+(j)+".jpg");
+                        break;
+                    case 2:
+                        id_markers[j] = crearMarcador(database,"Centro de Interpretación", "descrp_" + j+"rec_"+k,38.10028, -3.63327, id_pois, uri_img+"marcador_0"+(j)+".jpg");
+                        break;
+                    default:     id_markers[j] = crearMarcador(database,"marcador_" + j+"rec_"+k, "descrp_" + j+"rec_"+k, 0 + (j), 0 + j, id_pois, uri_img+"marcador_0"+(j)+".jpg");
+                }
                 //  id_markers[j] = crearMarcador("marcador_" + j+"rec_"+k, "descrp_" + j+"rec_"+k, 0 + (j), 0 + j, id_pois, uri_img+"marcador_0"+(j)+".jpg");
             }
             database.setCoords(listCoord, crearRecorrido(database,"Recorrido_" + k, "La ciudad iberorromana de Cástulo se encuentra localizada en el Alto Guadalquivir, en la provincia de Jaén, en las estribaciones de Sierra Morena, configurándose como nexo de unión con la meseta peninsular. Plinio el Viejo la utiliza como marca para definir parte de las dimensiones de Hispania.3 4 Se emplaza en una de las terrazas de la margen derecha del río Guadalimar, habiéndose estudiado vestigios del asentamiento tanto en las laderas como en una meseta amurallada ubicada en los cerros de Plaza de Armas y de La Muela, a unos 300 msnm, controlando un ámbito visual extenso que domina la vega del río." + k, "20 min" + k, "200 metros" + k, uri_img + "recorrido_0" + (k) + ".jpg",

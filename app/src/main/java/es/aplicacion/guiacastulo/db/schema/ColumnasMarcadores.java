@@ -15,6 +15,8 @@ public class ColumnasMarcadores {
     public static final String NOMBRE = "nombre";
     public static final String DESCRIPCION = "descripcion";
     public static final String IMAGEN = "imagen";
+    public static final String VIDEO = "video";
+    public static final String AUDIO = "audio";
     public static final String LATITUD = "latitud";
     public static final String LONGITUD = "longitud";
     public static final String ID_SERVIDOR = "id_servidor";
@@ -24,6 +26,7 @@ public class ColumnasMarcadores {
     public static final String CREAR_TABLA = "CREATE TABLE " + NOMBRE_TABLA
             + " (" + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + NOMBRE + " TEXT, " + DESCRIPCION + " TEXT, "+ ID_PUNTOS_INTERES + " TEXT, "
-            + IMAGEN + " TEXT, "+ LATITUD + " REAL, "+ LONGITUD + " REAL, "+ID_SERVIDOR+" INTEGER, "
+            + IMAGEN + " TEXT, "+ VIDEO + " TEXT, "
+            + AUDIO + " TEXT, "+ LATITUD + " REAL, "+ LONGITUD + " REAL, "+ID_SERVIDOR+" INTEGER, "
             +VERSION+" INTEGER );";
 }
