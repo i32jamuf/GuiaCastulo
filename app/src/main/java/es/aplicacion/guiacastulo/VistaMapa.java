@@ -129,8 +129,7 @@ boolean alertCreated=false;
                 //si el gps esta activado, montamos los marcadores y las alertas de proximidad
                 Marker marker = mMap.addMarker(new MarkerOptions()
                         .position(new LatLng(marcador.getLatitud(), marcador.getLongitud()))
-                        .title(marcador.getNombre())
-                        .snippet(marcador.getDescripcion()));
+                        .title(marcador.getNombre()));
                 markerMap.put(marker.getId(), marcador);
 //if(!alertCreated) {
     Intent proximityIntent = new Intent(getApplicationContext(),FichaMarcador.class);
@@ -160,8 +159,7 @@ boolean alertCreated=false;
 
                 Marker marker =mMap.addMarker(new MarkerOptions()
                         .position(new LatLng(marcador.getLatitud(),marcador.getLongitud()))
-                        .title(marcador.getNombre())
-                        .snippet(marcador.getDescripcion()));
+                        .title(marcador.getNombre()));
                 markerMap.put(marker.getId(),marcador);
                 Log.d("VistaMapa","Mapeo G: "+marker.getId()+" M: "+marcador.getId());
             }

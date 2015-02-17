@@ -54,41 +54,100 @@ public class dBTest {
                 for (int i = 0; i < n_pois; i++) {
                     //creamos tantos puntos de interes por marcador como diga n_pois
 
-                    id_pois[i] = crearPoI(database,"casa_" + i + "mar_" + j+"rec_"+k, "grande_" + i + "mar_" + j+"rec_"+k,
+                    id_pois[i] = crearPoI(database,"casa_" + i + "mar_" + j+"rec_"+k, "La ciudad iberorromana de Cástulo se encuentra localizada en " +
+                                    "el Alto Guadalquivir, en la provincia de Jaén, en las estribaciones de Sierra Morena, " +
+                                    "configurándose como nexo de unión con la meseta peninsular. Plinio el Viejo la utiliza " +
+                                    "como marca para definir parte de las dimensiones de Hispania.3 4 Se emplaza en una de " +
+                                    "las terrazas de la margen derecha del río Guadalimar, habiéndose estudiado vestigios " +
+                                    "del asentamiento tanto en las laderas como en una meseta amurallada ubicada en los " +
+                                    "cerros de Plaza de Armas y de La Muela, a unos 300 msnm, controlando un ámbito visual " +
+                                    "extenso que domina la vega del río." + i + "mar_" + j+"rec_"+k,
                             1.05 + i, 2.05 + i, uri_img+"PoI_0"+(i)+"_m_0"+(j)+".jpg,"+uri_img+"PoI_0"+(i)+"_m_0"+(j)+".jpg,"+uri_img+"PoI_0"+(i)+"_m_0"+(j)+".jpg","uri_audio_" + i + "mar_" + j+"rec_"+k,
                             "uri_video_" + i + "mar_" + j+"rec_"+k);
 
                     //   Log.d("PrefActivi_LLenar DB")database.getPuntoInteres(id_pois[i]).toString();
                 }
                 //creamos tantos marcadores como diga n_mark
+                /**
+                 * //marcadores en castulo
                 switch (j) {
                     case 0:
-                        id_markers[j] = crearMarcador(database,"Mosaico de los Amores", "descrp_" + j+"rec_"+k,38.034786, -3.624908, id_pois, uri_img+"marcador_0"+(j)+".jpg");
+                        id_markers[j] = crearMarcador(database,"Mosaico de los Amores", "La ciudad iberorromana de Cástulo se encuentra localizada en " +
+                 "el Alto Guadalquivir, en la provincia de Jaén, en las estribaciones de Sierra Morena, " +
+                 "configurándose como nexo de unión con la meseta peninsular. Plinio el Viejo la utiliza " +
+                 "como marca para definir parte de las dimensiones de Hispania.3 4 Se emplaza en una de " +
+                 "las terrazas de la margen derecha del río Guadalimar, habiéndose estudiado vestigios " +
+                 "del asentamiento tanto en las laderas como en una meseta amurallada ubicada en los " +
+                 "cerros de Plaza de Armas y de La Muela, a unos 300 msnm, controlando un ámbito visual " +
+                 "extenso que domina la vega del río." + j+"rec_"+k,38.034786, -3.624908, id_pois, uri_img+"marcador_0"+(j)+".jpg");
                         break;
                     case 1:
-                        id_markers[j] = crearMarcador(database,"Termas", "descrp_" + j+"rec_"+k,38.036157, -3.623432, id_pois, uri_img+"marcador_0"+(j)+".jpg");
+                        id_markers[j] = crearMarcador(database,"Termas", "La ciudad iberorromana de Cástulo se encuentra localizada en " +
+                 "el Alto Guadalquivir, en la provincia de Jaén, en las estribaciones de Sierra Morena, " +
+                 "configurándose como nexo de unión con la meseta peninsular. Plinio el Viejo la utiliza " +
+                 "como marca para definir parte de las dimensiones de Hispania.3 4 Se emplaza en una de " +
+                 "las terrazas de la margen derecha del río Guadalimar, habiéndose estudiado vestigios " +
+                 "del asentamiento tanto en las laderas como en una meseta amurallada ubicada en los " +
+                 "cerros de Plaza de Armas y de La Muela, a unos 300 msnm, controlando un ámbito visual " +
+                 "extenso que domina la vega del río." + j+"rec_"+k,38.036157, -3.623432, id_pois, uri_img+"marcador_0"+(j)+".jpg");
                         break;
                     case 2:
-                        id_markers[j] = crearMarcador(database,"Centro de Interpretación", "descrp_" + j+"rec_"+k,38.040128, -3.62515, id_pois, uri_img+"marcador_0"+(j)+".jpg");
+                        id_markers[j] = crearMarcador(database,"Centro de Interpretación", "La ciudad iberorromana de Cástulo se encuentra localizada en " +
+                 "el Alto Guadalquivir, en la provincia de Jaén, en las estribaciones de Sierra Morena, " +
+                 "configurándose como nexo de unión con la meseta peninsular. Plinio el Viejo la utiliza " +
+                 "como marca para definir parte de las dimensiones de Hispania.3 4 Se emplaza en una de " +
+                 "las terrazas de la margen derecha del río Guadalimar, habiéndose estudiado vestigios " +
+                 "del asentamiento tanto en las laderas como en una meseta amurallada ubicada en los " +
+                 "cerros de Plaza de Armas y de La Muela, a unos 300 msnm, controlando un ámbito visual " +
+                 "extenso que domina la vega del río." + j+"rec_"+k,38.040128, -3.62515, id_pois, uri_img+"marcador_0"+(j)+".jpg");
                         break;
                     default:     id_markers[j] = crearMarcador(database,"marcador_" + j+"rec_"+k, "descrp_" + j+"rec_"+k, 0 + (j), 0 + j, id_pois, uri_img+"marcador_0"+(j)+".jpg");
                 }
                 **/
+            //marcadores en linares
                 switch (j) {
                     case 0:
-                        id_markers[j] = crearMarcador(database,"Mosaico de los Amores", "descrp_" + j+"rec_"+k,38.09945, -3.6318, id_pois, uri_img+"marcador_0"+(j)+".jpg");
+                        id_markers[j] = crearMarcador(database,"Mosaico de los Amores", "La ciudad iberorromana de Cástulo se encuentra localizada en " +
+                                "el Alto Guadalquivir, en la provincia de Jaén, en las estribaciones de Sierra Morena, " +
+                                "configurándose como nexo de unión con la meseta peninsular. Plinio el Viejo la utiliza " +
+                                "como marca para definir parte de las dimensiones de Hispania.3 4 Se emplaza en una de " +
+                                "las terrazas de la margen derecha del río Guadalimar, habiéndose estudiado vestigios " +
+                                "del asentamiento tanto en las laderas como en una meseta amurallada ubicada en los " +
+                                "cerros de Plaza de Armas y de La Muela, a unos 300 msnm, controlando un ámbito visual " +
+                                "extenso que domina la vega del río." + j+"rec_"+k,38.09945, -3.6318, id_pois, uri_img+"marcador_0"+(j)+".jpg");
                         break;
                     case 1:
-                        id_markers[j] = crearMarcador(database,"Termas", "descrp_" + j+"rec_"+k,38.09988, -3.63252, id_pois, uri_img+"marcador_0"+(j)+".jpg");
+                        id_markers[j] = crearMarcador(database,"Termas", "La ciudad iberorromana de Cástulo se encuentra localizada en " +
+                                "el Alto Guadalquivir, en la provincia de Jaén, en las estribaciones de Sierra Morena, " +
+                                "configurándose como nexo de unión con la meseta peninsular. Plinio el Viejo la utiliza " +
+                                "como marca para definir parte de las dimensiones de Hispania.3 4 Se emplaza en una de " +
+                                "las terrazas de la margen derecha del río Guadalimar, habiéndose estudiado vestigios " +
+                                "del asentamiento tanto en las laderas como en una meseta amurallada ubicada en los " +
+                                "cerros de Plaza de Armas y de La Muela, a unos 300 msnm, controlando un ámbito visual " +
+                                "extenso que domina la vega del río." + j+"rec_"+k,38.09988, -3.63252, id_pois, uri_img+"marcador_0"+(j)+".jpg");
                         break;
                     case 2:
-                        id_markers[j] = crearMarcador(database,"Centro de Interpretación", "descrp_" + j+"rec_"+k,38.10028, -3.63327, id_pois, uri_img+"marcador_0"+(j)+".jpg");
+                        id_markers[j] = crearMarcador(database,"Centro de Interpretación", "La ciudad iberorromana de Cástulo se encuentra localizada en " +
+                                "el Alto Guadalquivir, en la provincia de Jaén, en las estribaciones de Sierra Morena, " +
+                                "configurándose como nexo de unión con la meseta peninsular. Plinio el Viejo la utiliza " +
+                                "como marca para definir parte de las dimensiones de Hispania.3 4 Se emplaza en una de " +
+                                "las terrazas de la margen derecha del río Guadalimar, habiéndose estudiado vestigios " +
+                                "del asentamiento tanto en las laderas como en una meseta amurallada ubicada en los " +
+                                "cerros de Plaza de Armas y de La Muela, a unos 300 msnm, controlando un ámbito visual " +
+                                "extenso que domina la vega del río." + j+"rec_"+k,38.10028, -3.63327, id_pois, uri_img+"marcador_0"+(j)+".jpg");
                         break;
                     default:     id_markers[j] = crearMarcador(database,"marcador_" + j+"rec_"+k, "descrp_" + j+"rec_"+k, 0 + (j), 0 + j, id_pois, uri_img+"marcador_0"+(j)+".jpg");
                 }
                 //  id_markers[j] = crearMarcador("marcador_" + j+"rec_"+k, "descrp_" + j+"rec_"+k, 0 + (j), 0 + j, id_pois, uri_img+"marcador_0"+(j)+".jpg");
             }
-            database.setCoords(listCoord, crearRecorrido(database,"Recorrido_" + k, "La ciudad iberorromana de Cástulo se encuentra localizada en el Alto Guadalquivir, en la provincia de Jaén, en las estribaciones de Sierra Morena, configurándose como nexo de unión con la meseta peninsular. Plinio el Viejo la utiliza como marca para definir parte de las dimensiones de Hispania.3 4 Se emplaza en una de las terrazas de la margen derecha del río Guadalimar, habiéndose estudiado vestigios del asentamiento tanto en las laderas como en una meseta amurallada ubicada en los cerros de Plaza de Armas y de La Muela, a unos 300 msnm, controlando un ámbito visual extenso que domina la vega del río." + k, "20 min" + k, "200 metros" + k, uri_img + "recorrido_0" + (k) + ".jpg",
+            database.setCoords(listCoord, crearRecorrido(database,"Recorrido_" + k, "La ciudad iberorromana de Cástulo se encuentra localizada en " +
+                            "el Alto Guadalquivir, en la provincia de Jaén, en las estribaciones de Sierra Morena, " +
+                            "configurándose como nexo de unión con la meseta peninsular. Plinio el Viejo la utiliza " +
+                            "como marca para definir parte de las dimensiones de Hispania.3 4 Se emplaza en una de " +
+                            "las terrazas de la margen derecha del río Guadalimar, habiéndose estudiado vestigios " +
+                            "del asentamiento tanto en las laderas como en una meseta amurallada ubicada en los " +
+                            "cerros de Plaza de Armas y de La Muela, a unos 300 msnm, controlando un ámbito visual " +
+                            "extenso que domina la vega del río." + k, "20 min" + k, "200 metros" + k, uri_img + "recorrido_0" + (k) + ".jpg",
                     id_markers));
         }
     }

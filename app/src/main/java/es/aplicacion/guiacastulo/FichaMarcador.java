@@ -48,12 +48,12 @@ public class FichaMarcador  extends Activity implements
         boolean proximity_entering = bundle.getBoolean(LocationManager.KEY_PROXIMITY_ENTERING,true);
         if(!proximity_entering) {
           finish();
-            Toast.makeText(this,"ESTA SALIENDO",Toast.LENGTH_LONG).show();
+          //  Toast.makeText(this,"ESTA SALIENDO",Toast.LENGTH_LONG).show();
         }
         id_marcador = bundle.getLong("ID_MARCADOR");
         setContentView(R.layout.activity_ficha_marcador);
 
-        Toast.makeText(this,"ESTA ENTRANDO",Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,"ESTA ENTRANDO",Toast.LENGTH_LONG).show();
         Log.d("PendigIntent_VistaMapa", " "+id_marcador);
         database.open();
         marcador=database.getMarcador(id_marcador);

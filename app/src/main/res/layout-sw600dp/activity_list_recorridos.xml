@@ -6,8 +6,6 @@
     tools:context="es.aplicacion.guiacastulo.ListRecorridos"
     android:background="@drawable/fondo">
 
-
-
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
