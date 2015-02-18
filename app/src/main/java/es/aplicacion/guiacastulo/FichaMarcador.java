@@ -28,7 +28,6 @@ import es.aplicacion.guiacastulo.db.model.Marcador;
 import es.aplicacion.guiacastulo.db.model.Recorrido;
 import es.aplicacion.guiacastulo.db.schema.Database;
 
-
 public class FichaMarcador  extends Activity implements
         MediaController.MediaPlayerControl,
         MediaPlayer.OnBufferingUpdateListener{
@@ -69,7 +68,6 @@ public class FichaMarcador  extends Activity implements
         mPlayer = new MediaPlayer();
     }
 
-
     //Llamada a la clase mapa al presionar el boton de Mapa
     public void bMasInfoClick(View view) {
         mController.hide();
@@ -78,7 +76,6 @@ public class FichaMarcador  extends Activity implements
         b.putLong("ID_MARCADOR", id_marcador);
         intent.putExtras(b);
         startActivity(intent);
-
     }
 
     /**
@@ -124,10 +121,11 @@ public class FichaMarcador  extends Activity implements
      * @param marcador
      */
     private void cargarDescripcion(Marcador marcador){
+        TextView tvnombre =(TextView) findViewById(R.id.tvnombre);
+        tvnombre.setText(marcador.getNombre());
         TextView infoText =(TextView) findViewById(R.id.infotext);
-        infoText.setText(marcador.toString());
+        infoText.setText(marcador.getDescripcion());
     }
-
 
     private void cargarAudio() {
         //si no se esta reproduciendo el audio, carga uno nuevo
@@ -151,8 +149,6 @@ public class FichaMarcador  extends Activity implements
 
             mController.setMediaPlayer(this);
             mController.setEnabled(true);
-
-
         }
         mController.show();
     }
@@ -195,7 +191,6 @@ public class FichaMarcador  extends Activity implements
     public int getCurrentPosition() {
 
         return mPlayer.getCurrentPosition();
-
     }
 
     @Override
@@ -237,5 +232,4 @@ public class FichaMarcador  extends Activity implements
     public boolean canSeekForward() {
         return true;
     }
-
 }

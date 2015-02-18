@@ -32,7 +32,7 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
       //  setContentView(R.layout.activity_preference);
         addPreferencesFromResource(R.xml.ajustes);
         Database database= new Database(getApplicationContext());
-       // dBTest.llenarDB(database,3, 3, 3);
+        dBTest.llenarDB(database,3, 3, 3);
       //  dBTest.leerDb(database);
         database.open();
         dBTest.crearInfo(database,"Calle cieza", "Tlf: 98733221, Fax: 99882", "9:40-17:30", "www.castulo.es", "Visitas concertadas");
