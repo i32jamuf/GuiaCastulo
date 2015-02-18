@@ -1,6 +1,7 @@
 package es.aplicacion.guiacastulo;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
@@ -31,8 +32,10 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
       //  setContentView(R.layout.activity_preference);
         addPreferencesFromResource(R.xml.ajustes);
         Database database= new Database(getApplicationContext());
-        dBTest.llenarDB(database,3, 3, 3);
-        dBTest.leerDb(database);
+       // dBTest.llenarDB(database,3, 3, 3);
+      //  dBTest.leerDb(database);
+        database.open();
+        dBTest.crearInfo(database,"Calle cieza", "Tlf: 98733221, Fax: 99882", "9:40-17:30", "www.castulo.es", "Visitas concertadas");
     }
 
 
@@ -54,7 +57,10 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
+        if (id == R.id.action_info) {
+            startActivity(new Intent(PreferenceActivity.this, Info.class));
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 }

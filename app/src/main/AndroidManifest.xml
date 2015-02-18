@@ -50,8 +50,8 @@
         <activity
             android:name=".FichaPuntosInteres"
             android:label="@string/title_activity_ficha_puntos_interes"
-            android:theme="@style/noactionbar"
-            android:parentActivityName="ListPuntosInteres" >
+            android:theme="@style/noactionbar">
+            android:parentActivityName=".ListPuntosInteres" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="es.aplicacion.guiacastulo.MainActivity" />
@@ -60,12 +60,10 @@
             android:name=".ListRecorridos"
             android:label="@string/title_activity_list_recorridos"
             android:theme="@style/noactionbar"
-
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="es.aplicacion.guiacastulo.MainActivity"
-               />
+                android:value="es.aplicacion.guiacastulo.MainActivity" />
         </activity>
         <activity
             android:name=".DescripcionRecorridos"
@@ -82,7 +80,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBNC7zNdFMp1mVzh4bJMALLEYb-ulrqVsM" />
+            android:value="AIzaSyD9c3ZGaH7rT_CXhGAZqmfiINLrM8BnAcU" />
 
         <activity
             android:name=".VistaMapa"

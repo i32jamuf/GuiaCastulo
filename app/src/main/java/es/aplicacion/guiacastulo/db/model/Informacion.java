@@ -7,7 +7,6 @@ package es.aplicacion.guiacastulo.db.model;
  * Created by Enmanuel on 21/01/2015.
  */
 public class Informacion {
-    private long id;
     private String horario;
     private String telefono;
     private String direccion;
@@ -17,13 +16,6 @@ public class Informacion {
     private long version;
 
     // setters
-
-    /**
-     * Inicializa Id del objeto informacion.
-     */
-    public void setId(long infoId) {
-        this.id = infoId;
-    }
 
 
     public void setIdServidor(long id_remota) {
@@ -70,15 +62,6 @@ public class Informacion {
 
 
     // getters
-
-    /**
-     * Obtiene la Id del objeto informacion.
-     *
-     * @return id
-     */
-    public long getId() {
-        return id;
-    }
 
     /**
      * Obtiene el horario.
@@ -139,7 +122,7 @@ public class Informacion {
      * @return
      */
     public String toString() {
-        return "Id Informacion: " + id + "\n" + "\nDirección: " + direccion
+        return "\nDirección: " + direccion
                 + "\nHorario: " + horario + "\nTelf: " + telefono+ "\nWeb: "+web+
                 "\nMás Info: " +mas_info+
                 "\nId servidor: " + id_servidor+  "\nVersion: "+ version;
