@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="es.aplicacion.guiacastulo"
-    android:largeHeap="true">
-
+    android:largeHeap="true" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -19,19 +18,17 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/iconocastulo"
-        android:label="@string/app_name">
+        android:label="@string/app_name" >
         <activity
             android:name=".MainActivity"
-            android:theme="@style/noactionbar"
             android:label="@string/app_name"
-          >
+            android:theme="@style/noactionbar" >
         </activity>
         <activity
             android:name=".PantallaCarga"
             android:label="@string/title_activity_pantalla_carga"
-            android:theme="@style/AppTheme"
-            android:noHistory="true">
-
+            android:noHistory="true"
+            android:theme="@style/AppTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,8 +38,8 @@
         <activity
             android:name=".ListPuntosInteres"
             android:label="@string/title_activity_list_puntos_interes"
-            android:theme="@style/noactionbar"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/noactionbar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="es.aplicacion.guiacastulo.MainActivity" />
@@ -50,7 +47,7 @@
         <activity
             android:name=".FichaPuntosInteres"
             android:label="@string/title_activity_ficha_puntos_interes"
-            android:theme="@style/noactionbar">
+            android:theme="@style/noactionbar" >
             android:parentActivityName=".ListPuntosInteres" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -59,8 +56,8 @@
         <activity
             android:name=".ListRecorridos"
             android:label="@string/title_activity_list_recorridos"
-            android:theme="@style/noactionbar"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/noactionbar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="es.aplicacion.guiacastulo.MainActivity" />
@@ -68,8 +65,8 @@
         <activity
             android:name=".DescripcionRecorridos"
             android:label="@string/title_activity_descripcion_recorridos"
-            android:theme="@style/noactionbar"
-            android:parentActivityName=".ListRecorridos" >
+            android:parentActivityName=".ListRecorridos"
+            android:theme="@style/noactionbar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="es.aplicacion.guiacastulo.ListRecorridos" />
@@ -84,8 +81,8 @@
 
         <activity
             android:name=".VistaMapa"
-            android:theme="@style/noactionbar"
-            android:label="@string/title_activity_vista_mapa" >
+            android:label="@string/title_activity_vista_mapa"
+            android:theme="@style/noactionbar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="es.aplicacion.guiacastulo.DescripcionRecorridos" />
@@ -95,21 +92,26 @@
             android:label="@string/title_activity_preference" >
         </activity>
         <activity
-            android:theme="@style/noactionbar"
             android:name=".Utilidades.ImageDialog"
-            android:label="@string/title_activity_image_dialog" >
+            android:label="@string/title_activity_image_dialog"
+            android:theme="@style/noactionbar" >
         </activity>
         <activity
-            android:theme="@style/noactionbar"
-            android:name=".Utilidades.Video"/>
+            android:name=".Utilidades.Video"
+            android:theme="@style/noactionbar" />
         <activity
-            android:theme="@style/noactionbar"
             android:name=".FichaMarcador"
-            android:label="@string/title_activity_ficha_marcador" >
-            <intent-filter >
-                <action android:name="es.aplicacion.guiacastulo.activity.fichamarcador"/>
+            android:label="@string/title_activity_ficha_marcador"
+            android:theme="@style/noactionbar" >
+            <intent-filter>
+                <action android:name="es.aplicacion.guiacastulo.activity.fichamarcador" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Info"
+            android:label="@string/title_activity_informacion" >
         </activity>
     </application>
 

@@ -30,5 +30,6 @@
     <string name="visitar">Visitar</string>
     <string name="titulo_visitar">¿Visitar?</string>
     <string name="title_activity_ficha_marcador">FichaMarcador</string>
-
+    <string name="title_activity_informacion">Informacion</string>
+    <string name="action_info">Información</string>
 </resources>

@@ -6,11 +6,13 @@ import android.app.FragmentManager;
 
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.LocationManager;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -51,6 +53,11 @@ import es.aplicacion.guiacastulo.db.model.Coordenada;
 import es.aplicacion.guiacastulo.db.model.Marcador;
 import es.aplicacion.guiacastulo.db.schema.Database;
 
+import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_HYBRID;
+import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_NORMAL;
+import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_SATELLITE;
+import static com.google.android.gms.maps.GoogleMap.MAP_TYPE_TERRAIN;
+
 public class VistaMapa extends FragmentActivity  {
 
     private CameraUpdate mCamera;
@@ -66,6 +73,10 @@ public class VistaMapa extends FragmentActivity  {
     private boolean gps_on=true;
     LocationManager locationManager;
     int nMarcadores=0;
+    private static final int SATELLITE = 1;
+    private static final int NORMAL = 2;
+    private static final int HYBRID = 3;
+    private static final int TERRAIN = 4;
     //PendingIntent pendingIntent;
 boolean alertCreated=false;
     @Override
@@ -108,8 +119,8 @@ boolean alertCreated=false;
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
-                mMap.setMyLocationEnabled(true);
-                mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+                //mMap.setMyLocationEnabled(true);
+               // mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
                 setUpMap();
             }
         }
@@ -125,6 +136,7 @@ boolean alertCreated=false;
         if(gps_on) {
             nMarcadores=0;
             locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            mMap.setMyLocationEnabled(true);
             for (Marcador marcador : markers) {
                 //si el gps esta activado, montamos los marcadores y las alertas de proximidad
                 Marker marker = mMap.addMarker(new MarkerOptions()
@@ -232,8 +244,30 @@ boolean alertCreated=false;
     protected void onResume() {
         super.onResume();
 
+        SharedPreferences pref = PreferenceManager
+                .getDefaultSharedPreferences(getApplicationContext());
+        gps_on= pref.getBoolean("gps_on_key", true);
+        int tipoMapa = Integer.parseInt(pref.getString("map_key", "1"));
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
 
+        switch (tipoMapa) {// Inicializa el tipo de mapa segun las preferencias
+            case NORMAL:
+                mMap.setMapType(MAP_TYPE_NORMAL);
+
+                break;
+            case SATELLITE:
+                mMap.setMapType(MAP_TYPE_SATELLITE);
+
+                break;
+            case HYBRID:
+                mMap.setMapType(MAP_TYPE_HYBRID);
+
+                break;
+            case TERRAIN:
+                mMap.setMapType(MAP_TYPE_TERRAIN);
+
+                break;
+        }
         if (resultCode == ConnectionResult.SUCCESS){
             //  Toast.makeText(getApplicationContext(),"isGooglePlayServicesAvailable SUCCESS",Toast.LENGTH_LONG).show();
         }else{

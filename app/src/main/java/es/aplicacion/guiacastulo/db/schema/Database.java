@@ -797,15 +797,13 @@ public class Database {
 
     /**
      * Obtenemos de la base de datos la informacion de contacto
-     * @param infoID
      * @return {@Informacion}
      */
-    public Informacion getInformacion(long infoID) {
+    public Informacion getInformacion() {
         Informacion informacion = new Informacion();
         db.beginTransaction();
         try {
             Cursor c = db.query(ColumnasInformacion.NOMBRE_TABLA, new String[] {
-                    ColumnasInformacion.KEY_ID,
                     ColumnasInformacion.HORARIO,
                     ColumnasInformacion.TELEFONO,
                     ColumnasInformacion.DIRECCION,
@@ -813,43 +811,24 @@ public class Database {
                     ColumnasInformacion.MAS_INFO,
                     ColumnasInformacion.ID_SERVIDOR,
                     ColumnasInformacion.VERSION
-            }, ColumnasInformacion.KEY_ID + " = " + infoID, null, null, null, null, null);
+            },null , null, null, null, null, null);
 
             c.moveToFirst();
-            //rellenamos el objeto PuntoInteres
-            informacion.setId(c.getLong(0));
-            informacion.setHorario(c.getString(1));
-            informacion.setTelefono(c.getString(2));
-            informacion.setDireccion(c.getString(3));
-            informacion.setWeb(c.getString(4));
-            informacion.setMasInfo(c.getString(5));
-            informacion.setIdServidor(c.getLong(6));
-            informacion.setVersion(c.getLong(7));
+            //rellenamos el objeto informacion
+
+            informacion.setHorario(c.getString(0));
+            informacion.setTelefono(c.getString(1));
+            informacion.setDireccion(c.getString(2));
+            informacion.setWeb(c.getString(3));
+            informacion.setMasInfo(c.getString(4));
+            informacion.setIdServidor(c.getLong(5));
+            informacion.setVersion(c.getLong(6));
 
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
         }
         return informacion;
-    }
-
-    /**
-     * Elimina la informacion de contacto de la base de datos.
-     *
-     * @param infoId
-     * @return el numero de filas afectadas.
-     */
-    public int deleteInfo(long infoId) {
-        int filas=0;
-        db.beginTransaction();
-        try{
-            filas = db.delete(ColumnasInformacion.NOMBRE_TABLA,
-                    ColumnasInformacion.KEY_ID + " = " + infoId, null);
-            db.setTransactionSuccessful();
-        } finally {
-            db.endTransaction();
-        }
-        return filas;
     }
 
     /**
@@ -883,7 +862,7 @@ public class Database {
 
         try{
             filas= db.update(ColumnasInformacion.NOMBRE_TABLA, cv,
-                    ColumnasInformacion.KEY_ID + " = " + informacion.getId(), null);
+                    null, null);
 
             db.setTransactionSuccessful();
         } finally {

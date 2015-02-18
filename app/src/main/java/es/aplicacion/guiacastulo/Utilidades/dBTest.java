@@ -45,7 +45,7 @@ public class dBTest {
        // database = new Database();
         database.open();
 
-        // crearInfo("Calle los pinchos", "Tlf: 98733221, Fax: 99882", "9:40-17:30", "www.castulo.es", "Visitas concertadas");
+        crearInfo(database,"Calle los pinchos", "Tlf: 98733221, Fax: 99882", "9:40-17:30", "www.castulo.es", "Visitas concertadas");
 
         for(int k =0;k < n_recor;k++) {
             long[] id_markers = new long[n_mark];
@@ -233,7 +233,7 @@ public class dBTest {
         return database.addPuntoInteres(PoI);
     }
 
-    private long crearInfo(String direcc, String tlf, String horario, String web, String mas_info){
+    public static long crearInfo(Database database, String direcc, String tlf, String horario, String web, String mas_info){
         //cargar informacion
         Informacion info= new Informacion();
         info.setDireccion(direcc);
@@ -242,6 +242,9 @@ public class dBTest {
         info.setWeb(web);
         info.setMasInfo(mas_info);
         //  Log.d("Info_Pre_DB", info.toString());
-        return database.addInformacion(info);
+        //para primera informacion crea
+        //return database.addInformacion(info);
+        //para las siguientes informaciones edita
+        return database.editInformacion(info);
     }
 }
