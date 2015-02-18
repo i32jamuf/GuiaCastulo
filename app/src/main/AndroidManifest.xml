@@ -50,7 +50,7 @@
         <activity
             android:name=".FichaPuntosInteres"
             android:label="@string/title_activity_ficha_puntos_interes"
-            android:theme="@style/noactionbar">
+            android:theme="@style/noactionbar"
             android:parentActivityName=".ListPuntosInteres" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -80,7 +80,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyD9c3ZGaH7rT_CXhGAZqmfiINLrM8BnAcU" />
+            android:value="AIzaSyBNC7zNdFMp1mVzh4bJMALLEYb-ulrqVsM" />
 
         <activity
             android:name=".VistaMapa"
