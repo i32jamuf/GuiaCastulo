@@ -1,0 +1,108 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:background="@drawable/fondo"
+    android:id="@+id/root"
+    tools:context="es.aplicacion.guiacastulo.FichaPuntosInteres">
+
+    <Gallery xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/gallery"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <ImageButton
+            android:layout_width="150dp"
+            android:layout_height="75dp"
+            android:src="@drawable/imgbtaudio"
+            android:onClick="baudioClick"
+            android:id="@+id/b_audio"
+            android:scaleType="centerInside"
+            android:background="@null"/>
+        <ImageButton
+            android:layout_width="150dp"
+            android:layout_height="75dp"
+            android:src="@drawable/imgbtvideo"
+            android:onClick="bvideoClick"
+            android:id="@+id/b_video"
+            android:scaleType="centerInside"
+            android:background="@null"/>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:textColor="#ffffff"
+            android:src="@drawable/imgflechaanterior"
+            android:background="@null"
+            android:id="@+id/b_anterior"
+            android:onClick="onButtonAnteriorClicked"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+        <ImageButton
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:textColor="#ffffff"
+            android:src="@drawable/imgflechasiguiente"
+            android:background="@null"
+            android:id="@+id/b_siguiente"
+            android:onClick="onButtonSiguienteClicked"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:id="@+id/tvnombre"
+        android:text="Nombre"
+        android:textColor="#ffffff"
+        android:typeface="sans"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbarSize="@dimen/abc_action_bar_default_height_material"
+        android:layout_marginTop="20dp"
+        >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:id="@+id/infotext"
+            android:textColor="#ffffff"
+            android:typeface="sans"
+            android:text="scroll"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+    </ScrollView>
+
+
+</LinearLayout>

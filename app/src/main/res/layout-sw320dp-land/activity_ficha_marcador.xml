@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:id="@+id/root"
@@ -16,11 +17,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="1sp"/>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center">
         <ImageButton
             android:layout_width="125dp"
             android:layout_height="50dp"
@@ -38,83 +40,26 @@
             android:background="@null"
             android:onClick="onButtonVideoClicked"/>
     </LinearLayout>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ir al recorrido"
+        android:layout_marginTop="30dp"
+        android:text="Más información"
         style="@style/button_text"
         android:background="@drawable/red_button"
-        android:id="@+id/b_mapa"
+        android:id="@+id/b_mas_info"
         android:textColor="#ffffff"
-        android:onClick="bmapaClick"
+        android:onClick="bMasInfoClick"
         android:layout_gravity="center_horizontal" />
-
+   </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:gravity="center"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+
         >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:textSize="16dp"
-            android:id="@+id/tvduracionfija"
-            android:text="Duración:"
-            android:textStyle="bold"
-            android:textColor="#ffffff"
-            android:typeface="sans"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:textSize="16dp"
-            android:id="@+id/tvduracion"
-            android:text="Duracion del camino"
-            android:textColor="#ffffff"
-            android:typeface="sans"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
-    </LinearLayout>
 
-
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:textColor="#ffffff"
-                android:textSize="16dp"
-                android:id="@+id/tvdistanciafija"
-                android:text="Distancia:"
-                android:textStyle="bold"
-                android:typeface="sans"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:id="@+id/tvdistancia"
-                android:textSize="16dp"
-                android:text="Distancia del camino"
-                android:textColor="#ffffff"
-                android:typeface="sans"
-                />
-        </LinearLayout>
-
-    </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:orientation="vertical"
-
-           >
         <TextView
             android:layout_marginTop="20dp"
             android:layout_marginLeft="30dp"
@@ -128,10 +73,7 @@
             android:typeface="sans"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
-
-
     <ScrollView
-
         android:layout_weight="80"
         android:layout_height="fill_parent"
         android:layout_width="300dp"
@@ -145,7 +87,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
-            android:textSize="15dp"
             android:id="@+id/infotext"
             android:textColor="#ffffff"
             android:typeface="sans"
@@ -153,6 +94,5 @@
             android:layout_centerHorizontal="true" />
     </ScrollView>
 
-
-    </LinearLayout>
+</LinearLayout>
 </LinearLayout>

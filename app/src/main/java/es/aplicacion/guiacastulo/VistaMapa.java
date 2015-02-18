@@ -181,10 +181,7 @@ boolean alertCreated=false;
                 TextView tvTitle = ((TextView) myContentView
                         .findViewById(R.id.titulo));
                 tvTitle.setText(marker.getTitle());
-                //descripcion
-                TextView tvSnippet = ((TextView) myContentView
-                        .findViewById(R.id.subtitulo));
-                tvSnippet.setText(marker.getSnippet());
+
                 //imagen
                 ImageView image = (ImageView) myContentView.findViewById(R.id.imagen_marcador);
                 Bitmap ThumbImage = ThumbnailUtils.extractThumbnail(BitmapFactory.decodeFile((markerMap.get(marker.getId()).getUriImagen()[0])), thumbWidth, thumbHeight);
