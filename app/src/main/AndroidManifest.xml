@@ -111,6 +111,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:theme="@style/noactionbar"
+            android:name=".Info"
+            android:label="Informacion" >
+
+        </activity>
     </application>
 
 </manifest>

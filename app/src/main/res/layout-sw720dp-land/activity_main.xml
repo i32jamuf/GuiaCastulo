@@ -17,8 +17,8 @@
 
 
     <ImageButton
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/imgbtajustes"
         android:onClick="bajustesClick"
         android:id="@+id/bajustes"
@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:text="Ajustes"
         android:id="@+id/textView1"
+        android:layout_marginTop="5dp"
         android:singleLine="false"
         android:textColor="#ffffff"
         android:textSize="@dimen/abc_text_size_large_material"
@@ -40,27 +41,27 @@
 
 
     <ImageButton
-        android:layout_width="167.5dp"
-        android:layout_height="125dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/imgbtrecorridos"
         android:onClick="brecorridoClick"
         android:id="@+id/brecorrido"
         android:scaleType="centerInside"
-        android:background="@null"
+
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="83dp"/>
 
 
     <ImageButton
-        android:layout_width="167.5dp"
-        android:layout_height="125dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:scaleType="centerInside"
         android:src="@drawable/imgbtpuntosinteres"
         android:onClick="bptointeresClick"
         android:id="@+id/bptointeres"
         android:layout_alignTop="@+id/brecorrido"
-        android:background="@null"
+
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 

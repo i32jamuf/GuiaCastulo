@@ -45,7 +45,7 @@ public class dBTest {
        // database = new Database();
         database.open();
 
-        crearInfo(database,"Calle los pinchos", "Tlf: 98733221, Fax: 99882", "9:40-17:30", "www.castulo.es", "Visitas concertadas");
+        crearInfo(database,"Calle los pinchos", "98733221,99882", "9:40-17:30", "www.castulo.es", "Visitas concertadas");
 
         for(int k =0;k < n_recor;k++) {
             long[] id_markers = new long[n_mark];
@@ -243,8 +243,8 @@ public class dBTest {
         info.setMasInfo(mas_info);
         //  Log.d("Info_Pre_DB", info.toString());
         //para primera informacion crea
-        //return database.addInformacion(info);
+        return database.addInformacion(info);
         //para las siguientes informaciones edita
-        return database.editInformacion(info);
+       // return database.editInformacion(info);
     }
 }

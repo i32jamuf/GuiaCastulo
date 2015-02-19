@@ -62,7 +62,7 @@ public class ListPuntosInteres extends Activity {
         public void onItemClick(AdapterView parent, View v, int position,
                                 long id) {
 
-            Intent intent = new Intent(ListPuntosInteres.this, FichaPuntosInteres.class);
+            Intent intent = new Intent(ListPuntosInteres.this, FichaMarcador.class);
             Bundle b = new Bundle();
             b.putLong("ID_MARCADOR",obtenerItems().get(position).getId());
             intent.putExtras(b);
