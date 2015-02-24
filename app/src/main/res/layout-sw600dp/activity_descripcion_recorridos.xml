@@ -97,7 +97,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="120dp"
             android:textSize="25dp"
             android:id="@+id/tvduracionfija"
             android:text="Duración:"
@@ -108,7 +108,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="120dp"
             android:textSize="25dp"
             android:id="@+id/tvduracion"
             android:text="Duracion del camino"

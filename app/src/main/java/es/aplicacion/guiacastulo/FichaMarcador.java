@@ -121,8 +121,8 @@ public class FichaMarcador  extends Activity implements
      * @param marcador
      */
     private void cargarDescripcion(Marcador marcador){
-        TextView tvnombre =(TextView) findViewById(R.id.tvnombre);
-        tvnombre.setText(marcador.getNombre());
+        TextView nombre =(TextView) findViewById(R.id.tvnombre);
+        nombre.setText(marcador.getNombre());
         TextView infoText =(TextView) findViewById(R.id.infotext);
         infoText.setText(marcador.getDescripcion());
     }

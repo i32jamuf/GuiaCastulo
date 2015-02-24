@@ -8,11 +8,19 @@
     <string name="title_activity_descripcion_recorridos">Tour Description</string>
     <string name="title_activity_vista_mapa">Map</string>
     <string name="db_ok">terminado</string>
-    <string name="title_activity_preference">PreferenceActivity</string>
+    <string name="title_activity_preference">Settings</string>
     <string name="title_activity_image_dialog">ImageDialog</string>
     <string name="botonrecorridos">Tours</string>
     <string name="botonajustes">Settings</string>
-    <string name="botonquever">Points of interest</string>
+    <string name="botonquever">Visit Castulo</string>
+
+    <string name="irmapa">Go to walk</string>
+    <string name="duracion">Duration:</string>
+    <string name="distancia">Distance:</string>
+
+
+    <string name="masinformacion">More information</string>
+
 
     <string name="ajustes_idioma">Locate settings</string>
     <string name="idioma">Language</string>
@@ -23,4 +31,6 @@
     <string name="map_summary">Change the type of map to show</string>
     <string name="gps_on_summary">Open the nearest marker from your position. Drain more battery.</string>
     <string name="gps_on">Enable GPS</string>
+
+
 </resources>

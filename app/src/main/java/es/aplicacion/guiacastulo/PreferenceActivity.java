@@ -30,7 +30,10 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
       //  setContentView(R.layout.activity_preference);
+
+
         addPreferencesFromResource(R.xml.ajustes);
+
         Database database= new Database(getApplicationContext());
         dBTest.llenarDB(database,3, 3, 3);
       //  dBTest.leerDb(database);

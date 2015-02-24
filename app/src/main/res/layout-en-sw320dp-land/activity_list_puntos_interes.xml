@@ -3,8 +3,7 @@
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
-tools:context="es.aplicacion.guiacastulo.ListPuntosInteres"
-android:background="@drawable/fondo">
+tools:context="es.aplicacion.guiacastulo.ListPuntosInteres">
 
 
 
@@ -12,7 +11,7 @@ android:background="@drawable/fondo">
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textColor="#000000"
-    android:textSize="20dp"
+    android:textSize="20dip"
     android:id="@+id/listpuntosinteres"
     android:divider="@drawable/list_divider"
     android:clickable="true"

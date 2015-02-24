@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+   android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:id="@+id/root"
@@ -16,9 +16,9 @@
     <Gallery xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/gallery"
         android:layout_width="fill_parent"
-
         android:layout_height="wrap_content"
         android:layout_marginTop="1sp"/>
+
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -26,16 +26,16 @@
             android:orientation="horizontal"
             android:gravity="center">
         <ImageButton
-            android:layout_width="150dp"
-            android:layout_height="75dp"
+            android:layout_width="125dp"
+            android:layout_height="50dp"
             android:src="@drawable/imgbtaudio"
             android:onClick="onButtonAudioClicked"
             android:id="@+id/b_audio"
             android:scaleType="centerInside"
             android:background="@null"/>
         <ImageButton
-            android:layout_width="150dp"
-            android:layout_height="75dp"
+            android:layout_width="125dp"
+            android:layout_height="50dp"
             android:src="@drawable/imgbtvideo"
             android:id="@+id/b_video"
             android:scaleType="centerInside"
@@ -45,30 +45,30 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Ir al recorrido"
-        style="@style/button_text600"
+        android:text="@string/irmapa"
+        style="@style/button_text"
         android:background="@drawable/red_button"
         android:id="@+id/b_mapa"
         android:textColor="#ffffff"
         android:onClick="bmapaClick"
         android:layout_gravity="center_horizontal" />
 
+
+
+
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:gravity="center"
         >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25dp"
+            android:layout_marginLeft="15dp"
+            android:textSize="16dp"
             android:id="@+id/tvduracionfija"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="15dp"
-            android:text="Duración:"
+            android:text="@string/duracion"
             android:textStyle="bold"
             android:textColor="#ffffff"
             android:typeface="sans"
@@ -77,8 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            android:textSize="25dp"
+            android:textSize="16dp"
             android:id="@+id/tvduracion"
             android:text="Duracion del camino"
             android:textColor="#ffffff"
@@ -90,20 +89,16 @@
 
 
         <LinearLayout
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
                 android:textColor="#ffffff"
-                android:textSize="25dp"
+                android:textSize="16dp"
                 android:id="@+id/tvdistanciafija"
-                android:text="Distancia:"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
+                android:text="@string/distancia"
                 android:textStyle="bold"
                 android:typeface="sans"
                 />
@@ -112,9 +107,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
                 android:id="@+id/tvdistancia"
-                android:textSize="25dp"
+                android:textSize="16dp"
                 android:text="Distancia del camino"
                 android:textColor="#ffffff"
                 android:typeface="sans"
@@ -133,10 +127,10 @@
             android:layout_marginLeft="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
+            android:textSize="20dp"
             android:textStyle="bold"
             android:id="@+id/tvnombre"
-            android:text="Nombre"
+
             android:textColor="#ffffff"
             android:typeface="sans"
             android:layout_centerVertical="true"
@@ -147,7 +141,7 @@
 
         android:layout_weight="80"
         android:layout_height="fill_parent"
-        android:layout_width="600dp"
+        android:layout_width="300dp"
         android:fillViewport="true"
         android:scrollbarStyle="outsideOverlay"
         android:scrollbarSize="@dimen/abc_action_bar_default_height_material"
@@ -158,7 +152,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="marquee"
-            android:textSize="25dp"
+            android:textSize="15dp"
             android:id="@+id/infotext"
             android:textColor="#ffffff"
             android:typeface="sans"

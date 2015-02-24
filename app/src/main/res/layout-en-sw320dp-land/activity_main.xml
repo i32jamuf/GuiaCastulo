@@ -63,7 +63,6 @@
         android:src="@drawable/imgbtpuntosinteres"
         android:onClick="bptointeresClick"
         android:id="@+id/bptointeres"
-
         android:layout_alignTop="@+id/brecorrido"
         android:background="@null"
         android:layout_alignParentRight="true"
@@ -79,7 +78,7 @@
         android:layout_below="@+id/bptointeres"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="45dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginStart="47dp"
         android:singleLine="false"
         android:textColor="#ffffff"
@@ -93,7 +92,7 @@
         android:layout_below="@+id/bptointeres"
         android:layout_alignRight="@+id/bptointeres"
         android:layout_alignEnd="@+id/bptointeres"
-        android:layout_marginRight="15dp"
+        android:layout_marginRight="2dp"
         android:singleLine="false"
         android:textColor="#ffffff"
         android:textSize="@dimen/abc_text_size_large_material"/>

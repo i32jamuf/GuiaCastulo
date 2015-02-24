@@ -12,5 +12,9 @@
             android:key="gps_on_key"
             android:summary="@string/gps_on_summary"
             android:title="@string/gps_on" />
+
+
     </PreferenceCategory>
 </PreferenceScreen>
+
+

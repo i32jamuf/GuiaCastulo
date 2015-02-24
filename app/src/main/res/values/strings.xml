@@ -11,11 +11,21 @@
     <string name="title_activity_descripcion_recorridos">DescripcionRecorridos</string>
     <string name="title_activity_vista_mapa">Mapa</string>
     <string name="db_ok">terminado</string>
-    <string name="title_activity_preference">PreferenceActivity</string>
+    <string name="title_activity_preference">Preferencias</string>
     <string name="title_activity_image_dialog">ImageDialog</string>
     <string name="botonrecorridos">Recorridos</string>
     <string name="botonajustes">Ajustes</string>
     <string name="botonquever">Que ver</string>
+
+    <string name="irmapa"> Ir al recorrido</string>
+    <string name="duracion">Duracion:</string>
+    <string name="distancia">Distancia:</string>
+
+
+
+    <string name="masinformacion">Más información</string>
+
+
     <string name="ajustes_idioma">Ajustes de localización</string>
     <string name="idioma">Idioma</string>
     <string name="idioma_summary">Cambia el idioma de la aplicación</string>
