@@ -11,6 +11,7 @@ import es.aplicacion.guiacastulo.db.model.Informacion;
 import es.aplicacion.guiacastulo.db.model.Marcador;
 import es.aplicacion.guiacastulo.db.model.PuntoInteres;
 import es.aplicacion.guiacastulo.db.model.Recorrido;
+import es.aplicacion.guiacastulo.db.model.Update;
 import es.aplicacion.guiacastulo.db.schema.Database;
 
 /**
@@ -44,7 +45,7 @@ public class dBTest {
         }
        // database = new Database();
         database.open();
-
+        Log.d("Informacion",database.getInformacion().toString());
         crearInfo(database,"Calle los pinchos", "98733221,99882", "9:40-17:30", "www.castulo.es", "Visitas concertadas");
 
         for(int k =0;k < n_recor;k++) {
@@ -68,8 +69,7 @@ public class dBTest {
                     //   Log.d("PrefActivi_LLenar DB")database.getPuntoInteres(id_pois[i]).toString();
                 }
                 //creamos tantos marcadores como diga n_mark
-                /**
-                 * //marcadores en castulo
+                //marcadores en castulo
                 switch (j) {
                     case 0:
                         id_markers[j] = crearMarcador(database,"Mosaico de los Amores", "La ciudad iberorromana de Cástulo se encuentra localizada en " +
@@ -103,7 +103,7 @@ public class dBTest {
                         break;
                     default:     id_markers[j] = crearMarcador(database,"marcador_" + j+"rec_"+k, "descrp_" + j+"rec_"+k, 0 + (j), 0 + j, id_pois, uri_img+"marcador_0"+(j)+".jpg");
                 }
-                **/
+                /**
             //marcadores en linares
                 switch (j) {
                     case 0:
@@ -138,6 +138,7 @@ public class dBTest {
                         break;
                     default:     id_markers[j] = crearMarcador(database,"marcador_" + j+"rec_"+k, "descrp_" + j+"rec_"+k, 0 + (j), 0 + j, id_pois, uri_img+"marcador_0"+(j)+".jpg");
                 }
+                **/
                 //  id_markers[j] = crearMarcador("marcador_" + j+"rec_"+k, "descrp_" + j+"rec_"+k, 0 + (j), 0 + j, id_pois, uri_img+"marcador_0"+(j)+".jpg");
             }
             database.setCoords(listCoord, crearRecorrido(database,"Recorrido_" + k, "La ciudad iberorromana de Cástulo se encuentra localizada en " +
@@ -150,6 +151,12 @@ public class dBTest {
                             "extenso que domina la vega del río." + k, "20 min" + k, "200 metros" + k, uri_img + "recorrido_0" + (k) + ".jpg",
                     id_markers));
         }
+        Log.d("Informacion",database.getInformacion().toString());
+        List<Update> updates=database.getAllUpdates();
+        for(Update upd : updates ){
+            Log.d("Updates",upd.toString());
+        }
+
     }
 
 
@@ -243,8 +250,8 @@ public class dBTest {
         info.setMasInfo(mas_info);
         //  Log.d("Info_Pre_DB", info.toString());
         //para primera informacion crea
-        return database.addInformacion(info);
+        //return database.addInformacion(info);
         //para las siguientes informaciones edita
-       // return database.editInformacion(info);
+        return database.editInformacion(info);
     }
 }

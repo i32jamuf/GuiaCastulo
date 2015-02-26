@@ -37,10 +37,9 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
         Database database= new Database(getApplicationContext());
         dBTest.llenarDB(database,3, 3, 3);
       //  dBTest.leerDb(database);
-        database.open();
-        dBTest.crearInfo(database,"Calle cieza", "Tlf: 98733221, Fax: 99882", "9:40-17:30", "www.castulo.es", "Visitas concertadas");
+      //  database.open();
+     //   dBTest.crearInfo(database,"Calle cieza", "Tlf: 98733221, Fax: 99882", "9:40-17:30", "www.castulo.es", "Visitas concertadas");
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -56,10 +55,6 @@ public class PreferenceActivity extends android.preference.PreferenceActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
         if (id == R.id.action_info) {
             startActivity(new Intent(PreferenceActivity.this, Info.class));
             return true;

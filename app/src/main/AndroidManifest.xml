@@ -34,7 +34,6 @@
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -80,7 +79,7 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBNC7zNdFMp1mVzh4bJMALLEYb-ulrqVsM" />
+            android:value="AIzaSyD9c3ZGaH7rT_CXhGAZqmfiINLrM8BnAcU" />
 
         <activity
             android:name=".VistaMapa"
@@ -103,12 +102,13 @@
         <activity
             android:theme="@style/noactionbar"
             android:name=".Utilidades.Video"/>
+
         <activity
             android:theme="@style/noactionbar"
             android:name=".FichaMarcador"
             android:label="@string/title_activity_ficha_marcador" >
             <intent-filter >
-                <action android:name="es.aplicacion.guiacastulo.activity.fichamarcador"/>
+                <action android:name="es.aplicacion.guiacastulo.proximityalert"/>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

@@ -77,15 +77,16 @@ public class VistaMapa extends FragmentActivity  {
     private static final int NORMAL = 2;
     private static final int HYBRID = 3;
     private static final int TERRAIN = 4;
+    LinkedList<PendingIntent> pendingIntentsList= new LinkedList<PendingIntent>();
     //PendingIntent pendingIntent;
-boolean alertCreated=false;
+    boolean alertCreated=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // setupActionBar();
         setContentView(R.layout.activity_vista_mapa);
         Bundle bundle = this.getIntent().getExtras();
-
         //sacamos las ids de los marcadores que tiene este recorrido
         long [] ids_marcadores = Utils.separarStringComasALong(bundle.getString("IDS_MARCADORES"));
         long id_recorrido = bundle.getLong("ID_RECORRIDO");
@@ -96,7 +97,7 @@ boolean alertCreated=false;
             markers.add(marker);
         }
         coords = database.getCoords(id_recorrido);
-        // Getting Google Play availability status
+
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
 
         // Showing status
@@ -111,71 +112,112 @@ boolean alertCreated=false;
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences pref = PreferenceManager
+                .getDefaultSharedPreferences(getApplicationContext());
+        gps_on= pref.getBoolean("gps_on_key", true);
+        int tipoMapa = Integer.parseInt(pref.getString("map_key", "1"));
+// Getting Google Play availability status
+
+        switch (tipoMapa) {// Inicializa el tipo de mapa segun las preferencias
+            case NORMAL:
+                mMap.setMapType(MAP_TYPE_NORMAL);
+
+                break;
+            case SATELLITE:
+                mMap.setMapType(MAP_TYPE_SATELLITE);
+
+                break;
+            case HYBRID:
+                mMap.setMapType(MAP_TYPE_HYBRID);
+
+                break;
+            case TERRAIN:
+                mMap.setMapType(MAP_TYPE_TERRAIN);
+
+                break;
+        }
+        //registrar y desregistrar a alertproximity, pero salta siempre la alerta de donde estas ty
+        // no te deja ver el mapa. cambio a poner una extincion a las 2h
+        if(gps_on) {
+            Log.d("setUpMap_VistaMapa", "gps_on");
+            mMap.setMyLocationEnabled(true);
+
+            locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+            // mMap.setMyLocationEnabled(true);
+            for (Marcador marcador : markers) {
+                //Intent proximityIntent = new Intent(getApplicationContext(), FichaMarcador.class);
+                Intent proximityIntent = new Intent("es.aplicacion.guiacastulo.proximityalert");
+                proximityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                proximityIntent.putExtra("ID_MARCADOR", marcador.getId());
+                //TODO PendingIntent
+
+                PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(), nMarcadores,
+                        proximityIntent, PendingIntent.FLAG_CANCEL_CURRENT);//FLAG_CANCEL_CURRENT
+                nMarcadores++;
+                Log.d("addPendigIntent_VistaMapa", pendingIntent.toString());
+                locationManager.addProximityAlert(marcador.getLatitud(), marcador.getLongitud(), 10, -1, pendingIntent);
+                pendingIntentsList.add(pendingIntent);
+            }
+        }else{
+            mMap.setMyLocationEnabled(false);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+//TODO desregistrarse al LocationManager o proximitys
+
+        for(int i=0;i< pendingIntentsList.size();i++){
+            locationManager.removeProximityAlert(pendingIntentsList.get(i));
+            Log.d("removePendigIntent_VistaMapa", pendingIntentsList.get(i).toString());
+        }
+        pendingIntentsList.clear();
+    }
+
     private void setUpMapIfNeeded() {
+        Log.d("setUpMapIfNeeded_VistaMapa", "setUpMapIfNeeded");
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
+            Log.d("setUpMapIfNeeded_VistaMapa", "mMap == null");
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
+                Log.d("setUpMapIfNeeded_VistaMapa", "mMap != null");
                 //mMap.setMyLocationEnabled(true);
-               // mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+                // mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
                 setUpMap();
             }
         }
     }
-
 
     private void setUpMap() {
         //pintamos los marcadores al inicializar el mapa
         int i=0;
         mCamera = CameraUpdateFactory.newLatLngZoom(new LatLng(markers.getFirst().getLatitud(), markers.getFirst().getLongitud()), 15);
         mMap.animateCamera(mCamera);
+        Log.d("setUpMap_VistaMapa", "setUpMap");
 
-        if(gps_on) {
-            nMarcadores=0;
-            locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-            mMap.setMyLocationEnabled(true);
-            for (Marcador marcador : markers) {
-                //si el gps esta activado, montamos los marcadores y las alertas de proximidad
-                Marker marker = mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(marcador.getLatitud(), marcador.getLongitud()))
-                        .title(marcador.getNombre()));
-                markerMap.put(marker.getId(), marcador);
-//if(!alertCreated) {
-    Intent proximityIntent = new Intent(getApplicationContext(),FichaMarcador.class);
-                proximityIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    //Bundle b = new Bundle();
-    //sacamos el valor, mapeado con este marcador de google, del id de la base de datos
-    //   b.putString("NOMBRE_MARCADOR", marcador.getNombre());
-    // b.putString("DESCR_MARCADOR", marcador.getDescripcion());
-    //  b.putString("URI_IMG_MARCADOR", marcador.getUriImagen());
-   // b.putLong("ID_MARCADOR", marcador.getId());
-    //proximityIntent.putExtras(b);
-                proximityIntent.putExtra("ID_MARCADOR", marcador.getId());
-    //TODO PendingIntent
+        Log.d("setUpMap_VistaMapa", "gps_off");
+        // mMap.setMyLocationEnabled(false);
+        for(Marcador marcador : markers){
+            //si no esta activo el GPS ponemos los marcadores en el mapa de google y
+            // mapeamos el id del marcador de google con
+            // el id del marcador en la base de datos
 
-                PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(),nMarcadores,
-                        proximityIntent,PendingIntent.FLAG_CANCEL_CURRENT );
-                nMarcadores++;
-    //Log.d("PendigIntent_VistaMapa", pendingIntent.toString());
-    locationManager.addProximityAlert(marcador.getLatitud(), marcador.getLongitud(), 20, -1, pendingIntent);
-//}
-            }alertCreated=true;
-        }else{
-            for(Marcador marcador : markers){
-                //si no esta activo el GPS ponemos los marcadores en el mapa de google y
-                // mapeamos el id del marcador de google con
-                // el id del marcador en la base de datos
-
-                Marker marker =mMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(marcador.getLatitud(),marcador.getLongitud()))
-                        .title(marcador.getNombre()));
-                markerMap.put(marker.getId(),marcador);
-                Log.d("VistaMapa","Mapeo G: "+marker.getId()+" M: "+marcador.getId());
-            }
-
+            Marker marker =mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(marcador.getLatitud(),marcador.getLongitud()))
+                    .title(marcador.getNombre()));
+            markerMap.put(marker.getId(),marcador);
+            nMarcadores++;
+            Log.d("VistaMapa","Mapeo G: "+marker.getId()+" M: "+marcador.getId());
         }
 
 
@@ -204,7 +246,6 @@ boolean alertCreated=false;
         //al clickar en el marcador
         mMap.setOnInfoWindowClickListener(new OnInfoWindowClickListener() {
 
-
             @Override
             public void onInfoWindowClick(Marker marker) {
 
@@ -215,7 +256,6 @@ boolean alertCreated=false;
                 b.putLong("ID_MARCADOR",markerMap.get(marker.getId()).getId());
                 intent.putExtras(b);
                 startActivity(intent);
-
             }
         });
 
@@ -229,83 +269,5 @@ boolean alertCreated=false;
         PolylineOptions lineOptions = new PolylineOptions();
         lineOptions.addAll(latlong);
         mMap.addPolyline(lineOptions);
-    }
-
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater=getMenuInflater();
-        inflater.inflate(R.menu.menu_mapa, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        SharedPreferences pref = PreferenceManager
-                .getDefaultSharedPreferences(getApplicationContext());
-        gps_on= pref.getBoolean("gps_on_key", true);
-        int tipoMapa = Integer.parseInt(pref.getString("map_key", "1"));
-        int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getApplicationContext());
-
-        switch (tipoMapa) {// Inicializa el tipo de mapa segun las preferencias
-            case NORMAL:
-                mMap.setMapType(MAP_TYPE_NORMAL);
-
-                break;
-            case SATELLITE:
-                mMap.setMapType(MAP_TYPE_SATELLITE);
-
-                break;
-            case HYBRID:
-                mMap.setMapType(MAP_TYPE_HYBRID);
-
-                break;
-            case TERRAIN:
-                mMap.setMapType(MAP_TYPE_TERRAIN);
-
-                break;
-        }
-        if (resultCode == ConnectionResult.SUCCESS){
-            //  Toast.makeText(getApplicationContext(),"isGooglePlayServicesAvailable SUCCESS",Toast.LENGTH_LONG).show();
-        }else{
-            GooglePlayServicesUtil.getErrorDialog(resultCode, this, RQS_GooglePlayServices);
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-//TODO desregistrarse al LocationManager o proximitys
-/**
-        Intent proximityIntent = new Intent(getApplicationContext(),FichaMarcador.class);
-        for(int i=0;i<nMarcadores;i++){
-            PendingIntent pendingIntent = PendingIntent.getActivity(getBaseContext(),i,
-                    proximityIntent,PendingIntent.FLAG_CANCEL_CURRENT );
-            locationManager.removeProximityAlert(pendingIntent);
-        }
-**/
-    }
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.MenuOpcion1:
-                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL); // Establecemos el mapa normal
-                return true;
-
-            case R.id.MenuOpcion2:
-                mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE); // Establecemos el mapa satelite
-                return true;
-
-            case R.id.MenuOpcion3:
-                mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN); // Establecemos el mapa terrestre
-                return true;
-
-            case R.id.MenuOpcion4:
-                mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID); // Establecemos el mapa hibrido
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 }

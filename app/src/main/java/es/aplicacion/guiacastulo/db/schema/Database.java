@@ -24,9 +24,13 @@ import es.aplicacion.guiacastulo.db.model.Update;
  * Created by Enmanuel on 21/01/2015.
  */
 public class Database {
-    private static final String DATABASE_NAME = "Castulo_DB.db";//
+    private static final String DATABASE_NAME = "CastuloDB.db";//
     private static final int DATABASE_VERSION = 1;
-
+    private static final int RECORRIDOS=0;
+    private static final int COORDENADAS=1;
+    private static final int MARCADORES=2;
+    private static final int PUNTOS_INTERES=3;
+    private static final int INFORMACION=4;
     private SQLiteDatabase db;
     private final Context context;
     private final DatabaseHelper dbHelper;
@@ -51,7 +55,7 @@ public class Database {
         try {
             db = dbHelper.getWritableDatabase();
         } catch (SQLiteException ex) {
-            Log.v("Open database exception caught", ex.getMessage());
+            //Log.v("Open database exception caught", ex.getMessage());
             db = dbHelper.getReadableDatabase();
         }
     }
@@ -82,7 +86,8 @@ public class Database {
             db.execSQL(ColumnasPuntosInteres.CREAR_TABLA);
             db.execSQL(ColumnasRecorridos.CREAR_TABLA);
             db.execSQL(ColumnasInformacion.CREAR_TABLA);
-
+            createInformacion(db);
+            createUpdates(db);
         }
 
         /**
@@ -770,29 +775,25 @@ public class Database {
     }
     //TODO informacion
 
-    public long addInformacion(Informacion informacion) {
-        long id=-1;
-        if (informacion.equals(null))
-            return id;
-
+    private static void createInformacion(SQLiteDatabase db) {
         ContentValues cv = new ContentValues();
         db.beginTransaction();
 
         try {
-            cv.put(ColumnasInformacion.HORARIO, informacion.getHorario());
-            cv.put(ColumnasInformacion.TELEFONO, informacion.getTelefono());
-            cv.put(ColumnasInformacion.DIRECCION, informacion.getDireccion());
-            cv.put(ColumnasInformacion.WEB, informacion.getWeb());
-            cv.put(ColumnasInformacion.MAS_INFO, informacion.getMasInfo());
-            cv.put(ColumnasInformacion.ID_SERVIDOR, informacion.getIdServidor());
-            cv.put(ColumnasInformacion.VERSION, informacion.getVersion());
-            id= db.insert(ColumnasInformacion.NOMBRE_TABLA, null, cv);
+            cv.put(ColumnasInformacion.HORARIO, "");
+            cv.put(ColumnasInformacion.TELEFONO, "");
+            cv.put(ColumnasInformacion.DIRECCION, "");
+            cv.put(ColumnasInformacion.WEB, "");
+            cv.put(ColumnasInformacion.MAS_INFO, "");
+            cv.put(ColumnasInformacion.ID_SERVIDOR, -1);
+            cv.put(ColumnasInformacion.VERSION, -1);
+            db.insert(ColumnasInformacion.NOMBRE_TABLA, null, cv);
 
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
         }
-        return id;
+       // return id;
     }
 
     /**
@@ -963,7 +964,7 @@ public class Database {
 
 
     //TODO Updates
-
+/**
     public long addUpdate(Update update) {
         long id=-1;
         if (update==null)
@@ -981,25 +982,47 @@ public class Database {
         }
         return id;
     }
-    public boolean addUpdates(List<Update> lstUpdate) {
-        if (lstUpdate.isEmpty())
-            return false;
+ **/
+    private static void createUpdates(SQLiteDatabase db) {
 
         ContentValues cv = new ContentValues();
         db.beginTransaction();
 
         try {
-            for (Update update : lstUpdate) {
-                cv.put(ColumnasUpdates.NOMBRE, update.getNombre());
-                cv.put(ColumnasUpdates.VERSION, update.getVersion());
-                db.insert(ColumnasUpdates.NOMBRE_TABLA, null, cv);
+            for (int i=0;i<5;i++) {
+                switch (i) {
+                    case RECORRIDOS:
+                    cv.put(ColumnasUpdates.NOMBRE, "recorridos");
+                    cv.put(ColumnasUpdates.VERSION, -1);
+                    db.insert(ColumnasUpdates.NOMBRE_TABLA, null, cv);
+                        break;
+                    case COORDENADAS:
+                        cv.put(ColumnasUpdates.NOMBRE, "coordenadas");
+                        cv.put(ColumnasUpdates.VERSION, -1);
+                        db.insert(ColumnasUpdates.NOMBRE_TABLA, null, cv);
+                        break;
+                    case MARCADORES:
+                        cv.put(ColumnasUpdates.NOMBRE, "marcadores");
+                        cv.put(ColumnasUpdates.VERSION, -1);
+                        db.insert(ColumnasUpdates.NOMBRE_TABLA, null, cv);
+                        break;
+                    case PUNTOS_INTERES:
+                        cv.put(ColumnasUpdates.NOMBRE, "puntos_interes");
+                        cv.put(ColumnasUpdates.VERSION, -1);
+                        db.insert(ColumnasUpdates.NOMBRE_TABLA, null, cv);
+                        break;
+                    case INFORMACION:
+                        cv.put(ColumnasUpdates.NOMBRE, "informacion");
+                        cv.put(ColumnasUpdates.VERSION, -1);
+                        db.insert(ColumnasUpdates.NOMBRE_TABLA, null, cv);
+                        break;
+                }
             }
 
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
         }
-        return true;
     }
 
     public Update getUpdate(String nombre) {
